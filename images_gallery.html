@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerie des Images - Projet Mariam</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f5f0;
+            color: #2c2523;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #800020;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+            border: 1px solid #e8e2d5;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .img-container {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fdfcfa;
+            border-bottom: 1px solid #e8e2d5;
+            padding: 10px;
+        }
+        .img-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .info {
+            padding: 10px;
+            font-size: 12px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .name {
+            font-weight: 600;
+            word-break: break-all;
+            margin-bottom: 5px;
+        }
+        .size {
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <h1>Galerie des Images - Projet Mariam (Public)</h1>
+    <div class="gallery">
+
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/073d7b3a32fb7078dcbd4e43fcc4c168.png" alt="073d7b3a32fb7078dcbd4e43fcc4c168.png" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">073d7b3a32fb7078dcbd4e43fcc4c168.png</div>
+                <div class="size">5.86 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/326d8de95cee4093862f9bc91ebca562.png" alt="326d8de95cee4093862f9bc91ebca562.png" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">326d8de95cee4093862f9bc91ebca562.png</div>
+                <div class="size">5.25 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/4252cb2b3c24ae77ab680db1aacefabe.png" alt="4252cb2b3c24ae77ab680db1aacefabe.png" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">4252cb2b3c24ae77ab680db1aacefabe.png</div>
+                <div class="size">6.94 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/9455eef385bd6f09fce6e82a65d09805.png" alt="9455eef385bd6f09fce6e82a65d09805.png" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">9455eef385bd6f09fce6e82a65d09805.png</div>
+                <div class="size">6.81 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/Capture d&#x27;écran 2026-06-06 004538.png" alt="Capture d&#x27;écran 2026-06-06 004538.png" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">Capture d&#x27;écran 2026-06-06 004538.png</div>
+                <div class="size">0.11 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/Download premium png of Moon astronomy fireworks outdoors_ about moon, gold, stars png, shiny glitter light, and shine 15454336.jpg" alt="Download premium png of Moon astronomy fireworks outdoors_ about moon, gold, stars png, shiny glitter light, and shine 15454336.jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">Download premium png of Moon astronomy fireworks outdoors_ about moon, gold, stars png, shiny glitter light, and shine 15454336.jpg</div>
+                <div class="size">0.12 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/OM.jpg" alt="OM.jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">OM.jpg</div>
+                <div class="size">0.06 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/c89409083675d94b3b17036bb943cfb8.png" alt="c89409083675d94b3b17036bb943cfb8.png" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">c89409083675d94b3b17036bb943cfb8.png</div>
+                <div class="size">9.62 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/card_frame.png" alt="card_frame.png" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">card_frame.png</div>
+                <div class="size">0.26 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/f8757a312dc2e62de5f52cafee56b414.png" alt="f8757a312dc2e62de5f52cafee56b414.png" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">f8757a312dc2e62de5f52cafee56b414.png</div>
+                <div class="size">7.23 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/green_french_frame.jpg" alt="green_french_frame.jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">green_french_frame.jpg</div>
+                <div class="size">0.06 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/heart_frame.png" alt="heart_frame.png" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">heart_frame.png</div>
+                <div class="size">7.25 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/moon_stars.jpg" alt="moon_stars.jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">moon_stars.jpg</div>
+                <div class="size">0.12 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/pexels_couple.jpg" alt="pexels_couple.jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">pexels_couple.jpg</div>
+                <div class="size">0.36 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/red_butterfly.jpg" alt="red_butterfly.jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">red_butterfly.jpg</div>
+                <div class="size">0.03 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/sello_cera_roja.jpg" alt="sello_cera_roja.jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">sello_cera_roja.jpg</div>
+                <div class="size">0.04 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/silver_wax_stamp.jpg" alt="silver_wax_stamp.jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">silver_wax_stamp.jpg</div>
+                <div class="size">0.06 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (1).jpg" alt="téléchargement (1).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (1).jpg</div>
+                <div class="size">0.04 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (10).jpg" alt="téléchargement (10).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (10).jpg</div>
+                <div class="size">0.12 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (11).jpg" alt="téléchargement (11).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (11).jpg</div>
+                <div class="size">0.13 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (12).jpg" alt="téléchargement (12).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (12).jpg</div>
+                <div class="size">0.11 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (13).jpg" alt="téléchargement (13).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (13).jpg</div>
+                <div class="size">0.14 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (14).jpg" alt="téléchargement (14).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (14).jpg</div>
+                <div class="size">0.05 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (17).jpg" alt="téléchargement (17).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (17).jpg</div>
+                <div class="size">0.02 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (2).jpg" alt="téléchargement (2).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (2).jpg</div>
+                <div class="size">0.05 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (20).jpg" alt="téléchargement (20).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (20).jpg</div>
+                <div class="size">0.06 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (21).jpg" alt="téléchargement (21).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (21).jpg</div>
+                <div class="size">0.05 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (22).jpg" alt="téléchargement (22).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (22).jpg</div>
+                <div class="size">0.06 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (23).jpg" alt="téléchargement (23).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (23).jpg</div>
+                <div class="size">0.08 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (24).jpg" alt="téléchargement (24).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (24).jpg</div>
+                <div class="size">0.06 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (25).jpg" alt="téléchargement (25).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (25).jpg</div>
+                <div class="size">0.16 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (28).jpg" alt="téléchargement (28).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (28).jpg</div>
+                <div class="size">0.02 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (29).jpg" alt="téléchargement (29).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (29).jpg</div>
+                <div class="size">0.01 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (3).jpg" alt="téléchargement (3).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (3).jpg</div>
+                <div class="size">0.02 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (32).jpg" alt="téléchargement (32).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (32).jpg</div>
+                <div class="size">0.12 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (33).jpg" alt="téléchargement (33).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (33).jpg</div>
+                <div class="size">0.07 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (34).jpg" alt="téléchargement (34).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (34).jpg</div>
+                <div class="size">0.11 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (35).jpg" alt="téléchargement (35).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (35).jpg</div>
+                <div class="size">0.10 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (36).jpg" alt="téléchargement (36).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (36).jpg</div>
+                <div class="size">0.13 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (4).jpg" alt="téléchargement (4).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (4).jpg</div>
+                <div class="size">0.07 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (41).jpg" alt="téléchargement (41).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (41).jpg</div>
+                <div class="size">0.02 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (42).jpg" alt="téléchargement (42).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (42).jpg</div>
+                <div class="size">0.01 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (44).jpg" alt="téléchargement (44).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (44).jpg</div>
+                <div class="size">0.04 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (45).jpg" alt="téléchargement (45).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (45).jpg</div>
+                <div class="size">0.08 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (47).jpg" alt="téléchargement (47).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (47).jpg</div>
+                <div class="size">0.01 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (5).jpg" alt="téléchargement (5).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (5).jpg</div>
+                <div class="size">0.09 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (6).jpg" alt="téléchargement (6).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (6).jpg</div>
+                <div class="size">0.02 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (7).jpg" alt="téléchargement (7).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (7).jpg</div>
+                <div class="size">0.03 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (8).jpg" alt="téléchargement (8).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (8).jpg</div>
+                <div class="size">0.04 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement (9).jpg" alt="téléchargement (9).jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement (9).jpg</div>
+                <div class="size">0.04 MB</div>
+            </div>
+        </div>
+    
+        <div class="card">
+            <div class="img-container">
+                <img src="public/images/téléchargement.jpg" alt="téléchargement.jpg" loading="lazy">
+            </div>
+            <div class="info">
+                <div class="name">téléchargement.jpg</div>
+                <div class="size">0.09 MB</div>
+            </div>
+        </div>
+    
+    </div>
+</body>
+</html>
