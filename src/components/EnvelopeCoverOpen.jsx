@@ -3,8 +3,11 @@ import { useEffect, useState } from "react";
 export default function EnvelopeCoverOpen({ open }) {
   const [pulled, setPulled] = useState(false);
 
-  useEffect(() => {
-    if (!open) { setPulled(false); return; }
+ useEffect(() => {
+    if (!open) {
+      const t = setTimeout(() => setPulled(false), 0);
+      return () => clearTimeout(t);
+    }
     const t = setTimeout(() => setPulled(true), 600);
     return () => clearTimeout(t);
   }, [open]);
@@ -76,7 +79,7 @@ export default function EnvelopeCoverOpen({ open }) {
               />
 
               {/* Content texte - responsive */}
-              <div className="absolute top-0 left-0 right-0 px-2 sm:px-4 py-16 sm:py-20 md:py-16 w-full h-full flex flex-col items-center gap-0.5 sm:gap-1">
+              <div className="absolute top-0 left-0 right-0 px-2 sm:px-4 py-[16%] sm:py-20 md:py-16 w-full h-full flex flex-col items-center gap-0.5 sm:gap-1">
                 <p className="text-olive text-xl sm:text-2xl md:text-3xl lg:text-3xl font-medium font-bogue capitalize font-title py-1 sm:py-2 md:py-4">
                   Le mariage de 
                 </p>

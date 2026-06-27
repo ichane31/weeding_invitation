@@ -93,8 +93,8 @@ export default function InvitationCard({ animateCard = false }) {
                   loading="lazy"
                 />
 
-                <div className="absolute top-0 pt-24 md:pt-32 w-full h-full flex flex-col gap-1 px-20 sm:px-32 md:px-36 lg:px-40">
-                  <p className="text-olive m-0 text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-medium font-script leading-2xl">
+                <div className="absolute top-0 pt-[23%] md:pt-32 w-full h-full flex flex-col gap-1 px-[18%] sm:px-28 md:px-32">
+                  <p className="text-olive m-0 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium font-script leading-2xl">
                     The Beginning of Ferever starts here
                   </p>
                 </div>
