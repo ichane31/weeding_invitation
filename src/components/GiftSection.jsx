@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Butterflies from "./Butterflies";
 
 export default function GiftSection() {

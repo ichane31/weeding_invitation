@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function ContactInfo() {
   const CONTACTS = [
     { name: "Mairama", family: "Famille de la Mariée", phone: "+212600000001" },

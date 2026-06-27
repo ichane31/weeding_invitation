@@ -7,24 +7,22 @@ export default function InvitationCard({ animateCard = false }) {
   const [pulled, setPulled] = useState(false);
   const [cardVisible, setCardVisible] = useState(false);
 
-  // Animation de l'enveloppe
   useEffect(() => {
     if (!animateCard) {
-      setPulled(false);
-      return;
+      const t = setTimeout(() => setPulled(false), 0);
+      return () => clearTimeout(t);
     }
     const t = setTimeout(() => setPulled(true), 600);
     return () => clearTimeout(t);
   }, [animateCard]);
 
-  // Animation d'apparition de la carte principale
   useEffect(() => {
     if (animateCard) {
       const t = setTimeout(() => setCardVisible(true), 800);
       return () => clearTimeout(t);
-    } else {
-      setCardVisible(false);
     }
+    const t = setTimeout(() => setCardVisible(false), 0);
+    return () => clearTimeout(t);
   }, [animateCard]);
 
   return (

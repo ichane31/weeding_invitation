@@ -3,7 +3,6 @@ import { useState, useEffect, useMemo } from "react";
 export default function Guestbook({ refreshTrigger }) {
   const [messages, setMessages] = useState([]);
 
-  // Mock messages to display initially - mémorisé pour éviter les re-créations
   const defaultMessages = useMemo(() => [
     {
       id: "default-1",
@@ -31,31 +30,28 @@ export default function Guestbook({ refreshTrigger }) {
     },
   ], []);
 
-  // Fonction pour récupérer les messages - définie en dehors de l'effet
-  const fetchMessages = () => {
+  const getMessages = (defaults) => {
     try {
       const localResponses = JSON.parse(
-        localStorage.getItem("rsvp_responses") || "[]",
+        localStorage.getItem("rsvp_responses") || "[]"
       );
-      // Only display responses that have a message
       const customMessages = localResponses.filter(
-        (resp) => resp.message && resp.message.trim() !== "",
+        (resp) => resp.message && resp.message.trim() !== ""
       );
-
-      // Combine custom and default messages
-      return [...customMessages, ...defaultMessages];
-    } catch (error) {
-      console.error("Error fetching messages:", error);
-      return defaultMessages;
+      return [...customMessages, ...defaults];
+    } catch {
+      return defaults;
     }
   };
 
-  // Effet pour charger les messages initialement et au refresh
+  // Only re-fetch when refreshTrigger changes
   useEffect(() => {
-    // Récupération immédiate des messages
-    const loadedMessages = fetchMessages();
-    setMessages(loadedMessages);
-  }, [refreshTrigger]); // Dépendance correcte
+    const t = setTimeout(() => {
+      setMessages(getMessages(defaultMessages));
+    }, 0);
+    return () => clearTimeout(t);
+  }, [refreshTrigger]);
+
 
 
   return (
