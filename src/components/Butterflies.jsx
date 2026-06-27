@@ -189,6 +189,7 @@ function ButterflyItem({ data, wingSpeed, opacity }) {
           filter:          "drop-shadow(0 2px 4px rgba(0,0,0,0.12))",
           userSelect:      "none",
         }}
+        loading="lazy"
       />
     </div>
   );

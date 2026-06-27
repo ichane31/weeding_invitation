@@ -35,7 +35,7 @@ export default function InvitationCard({ animateCard = false }) {
       }}
     >
       <Butterflies count={4} size={{ min: 25, max: 40 }} />
-      
+
       <div
         className={`w-full flex items-center justify-center bg-[#fdfbf7] py-10 transition-all duration-100 ease-in-out opacity-100`}
         style={{
@@ -43,21 +43,23 @@ export default function InvitationCard({ animateCard = false }) {
         }}
       >
         {/* Main Envelope and Flower Wrapper */}
-        <div className="relative flex flex-col items-center px-4 max-w-2xl w-full text-center">
+        <div className="relative flex flex-col items-center px-4 max-w-xl md:max-w-2xl w-full text-center">
           {/* Envelope Container */}
           <div className="relative w-full aspect-[1.55] flex items-center justify-center select-none">
             {/* Decorative Floral Bouquet Left */}
             <img
               src="/images/rose_primary.png"
               alt="Roses gauche"
-              className="absolute rotate-[-40deg] left-[-25%] top-[20%] w-[80%] object-contain opacity-95 pointer-events-none z-30"
+              className="absolute rotate-[-40deg] left-[-15%] sm:left-[-20%] md:left-[-25%] top-[25%] sm:top-[20%] md:top-[20%] w-[60%] sm:w-[65%] md:w-[80%]] object-contain opacity-95 pointer-events-none z-30"
+              loading="lazy"
             />
 
             {/* Decorative Floral Bouquet Right */}
             <img
               src="/images/rose_secondary.png"
               alt="Roses droite"
-              className="absolute right-[-20%] bottom-[-5%] w-[50%] scale-x-[-1] object-contain opacity-95 pointer-events-none z-30"
+              className="absolute right-[-12%] sm:right-[-16%] md:right-[-20%] bottom-[-10%] sm:bottom-[-8%] md:bottom-[-5%] w-[40%] sm:w-[45%] md:w-[50%] scale-x-[-1] object-contain opacity-95 pointer-events-none z-30"
+              loading="lazy"
             />
 
             {/* Envelope shadow */}
@@ -68,14 +70,14 @@ export default function InvitationCard({ animateCard = false }) {
               src="/images/envelop_open1.png"
               alt="Enveloppe fermée"
               className="w-full h-full object-contain relative z-0"
+              loading="lazy"
             />
 
             {/* Envelope content */}
             <div
-              className="absolute left-1/2 -translate-x-1/2 z-20 overflow-hidden"
+              className="absolute w-[80%] md:w-[90%] lg:w-[95%] left-1/2 -translate-x-1/2 z-20 overflow-hidden"
               style={{
                 bottom: "8%",
-                width: "95%",
                 height: "95%",
               }}
             >
@@ -88,10 +90,11 @@ export default function InvitationCard({ animateCard = false }) {
                   src="/images/cadre41.png"
                   alt="Contenu enveloppe"
                   className="w-full h-auto object-contain relative"
+                  loading="lazy"
                 />
 
-                <div className="absolute top-0 pt-32 w-full h-full flex flex-col gap-1 px-24 md:px-36 lg:px-40">
-                  <p className="text-olive m-0 text-4xl md:text-6xl lg:text-7xl font-medium font-script leading-2xl">
+                <div className="absolute top-0 pt-24 md:pt-32 w-full h-full flex flex-col gap-1 px-20 sm:px-32 md:px-36 lg:px-40">
+                  <p className="text-olive m-0 text-5xl sm:text-5xl md:text-6xl lg:text-7xl font-medium font-script leading-2xl">
                     The Beginning of Ferever starts here
                   </p>
                 </div>
@@ -103,15 +106,17 @@ export default function InvitationCard({ animateCard = false }) {
               alt=""
               className="absolute left-0 right-0 bottom-0 w-full h-auto object-contain z-20 pointer-events-none select-none"
               style={{ filter: "drop-shadow(0 6px 10px rgba(0,0,0,0.08))" }}
+              loading="lazy"
             />
 
             {/* Green Wax Seal */}
-            <div className="absolute top-[72%] left-[49%] transform -translate-x-1/2 -translate-y-1/2 w-28 h-28 md:w-40 md:h-40 rounded-full flex items-center justify-center z-40 group transition-transform duration-300 focus:outline-none">
+            <div className="absolute top-[72%] left-[49%] transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-full flex items-center justify-center z-40 group transition-transform duration-300 focus:outline-none">
               <div className="absolute inset-[-4px] rounded-full border border-olive/30 animate-ping opacity-45 group-hover:animate-none"></div>
               <img
                 src="/images/sceau1.png"
                 alt="Sceau de cire OM"
                 className="w-full h-full rounded-full object-cover group-hover:scale-115 transition-transform duration-300"
+                loading="lazy"
               />
             </div>
 
@@ -121,6 +126,7 @@ export default function InvitationCard({ animateCard = false }) {
                 src="/images/disque.png"
                 alt="Disque vinyle"
                 className="w-full relative z-0 transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
               />
 
               <div className="absolute inset-0 flex items-center justify-center z-10">
@@ -157,129 +163,146 @@ export default function InvitationCard({ animateCard = false }) {
 
       {/* Main Content Layout Container - avec animation d'apparition */}
       <div
-        className={`relative w-full flex flex-col lg:flex-row items-center lg:items-start justify-center gap-2 py-2 transition-all duration-1000 ease-out`}
+        className={`relative w-full flex flex-col lg:flex-row items-center lg:items-start justify-center gap-4 lg:gap-2 py-4 lg:py-8 transition-all duration-1000 ease-out bg-no-repeat`}
         style={{
           backgroundImage: "url(/images/bg_primary.jpg)",
         }}
       >
         <Butterflies count={8} size={{ min: 25, max: 40 }} />
-        {/* LEFT/CENTER: The Main Invitation Card - z-50 pour être au-dessus de tout */}
+
+        {/* LEFT/CENTER: The Main Invitation Card */}
         <div
-          className={`relative w-full max-w-[800px] aspect-[1/1.3] rounded-xl flex items-center justify-center px-8 bg-cover bg-center z-50 transition-all duration-1000 ease-out ${
+          className={`relative w-full max-w-[90%] sm:max-w-[85%] md:max-w-[80%] lg:max-w-[800px] aspect-[1/1.5] sm:aspect-[1/1.4] rounded-xl flex items-center justify-center px-4 sm:px-6 md:px-8 bg-cover bg-center z-50 transition-all duration-1000 ease-out ${
             cardVisible
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-20"
           }`}
         >
+          {/* Background Image */}
           <img
             src="/images/bg_5.png"
-            alt="Fleurs bas"
-            className="w-full h-full pointer-events-none z-10 relative"
+            alt="Fleurs fond"
+            className="absolute inset-0 w-full h-full pointer-events-none z-0"
+            loading="lazy"
           />
 
           {/* Invitation Text Content */}
-          <div className="absolute z-10 w-full max-w-[70%] h-[70%] flex flex-col gap-4 items-center text-center py-4">
-            <div className="w-full flex flex-col text-center gap-4">
-              <span className="font-script text-base md:text-3xl xl:text-5xl text-olive tracking-widest font-semibold block mb-1">
+          <div className="relative z-10 w-full max-w-[75%] sm:max-w-[73%] md:max-w-[75%] lg:max-w-[70%] h-[85%] sm:h-[80%] md:h-[75%] lg:h-[70%] flex flex-col gap-2 sm:gap-3 md:gap-4 items-center justify-center text-center py-2 sm:py-3 md:py-4">
+            {/* Header Section */}
+            <div className="w-full flex flex-col text-center gap-1 sm:gap-2">
+              <span className="font-script text-md sm:text-base md:text-2xl lg:text-3xl xl:text-5xl text-olive tracking-widest font-semibold block mb-0.5 sm:mb-1">
                 بِسْماللَّهِالرَّحْمَٰنِالرَّحِيمِ
               </span>
-              <span className="text-md font-title md:text-base text-olive/80 tracking-wide">
-                Au nom d'Allah SWT, <br />
-                le Très Miséricordieux, le Tout Miséricordieux
+              <span className="text-xs sm:text-sm lg:text-base font-title text-olive/80 tracking-wide">
+                Au nom d'Allah SWT, <br className="sm:hidden" />
+                <span className="hidden sm:inline">—</span> le Très
+                Miséricordieux, le Tout Miséricordieux
               </span>
             </div>
 
-            <p className="font-title text-md md:text-base text-olive/80 tracking-wide leading-relaxed max-w-[280px] my-2">
+            <p className="font-title text-[10px] sm:text-xs md:text-sm lg:text-base text-olive/80 tracking-wide leading-relaxed max-w-[200px] sm:max-w-[240px] md:max-w-[280px] my-1 sm:my-2">
               Nous avons l'honneur de vous inviter à célébrer le mariage de
             </p>
 
-            <div className="flex flex-col items-center font-title gap-2">
-              <h2 className="font-script text-3xl md:text-5xl text-olive-dark leading-none">
+            {/* Groom Section */}
+            <div className="flex flex-col items-center font-title gap-1 sm:gap-2">
+              <h2 className="font-script text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-olive-dark leading-none">
                 Ousmanou SALIHOU
               </h2>
-              <p className="text-md flex flex-col md:text-base text-olive font-medium mt-1 tracking-wider gap-2">
-                Fils de
-                <span className="text-md md:text-base text-olive font-medium uppercase">
+              <p className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm flex flex-col items-center text-olive font-medium tracking-wider gap-0.5 sm:gap-1">
+                <span>Fils de</span>
+                <span className="text-[10px] sm:text-[12px] md:text-[13px] lg:text-sm font-medium uppercase">
                   salihou Ousmanou sambo
                 </span>
-                <span>&</span>
-                <span className="text-md md:text-base text-olive font-medium uppercase">
+                <span className="text-[11px] sm:text-xs md:text-sm">❀</span>
+                <span className="text-[10px] sm:text-[12px] md:text-[13px] lg:text-sm font-medium uppercase">
                   salihou Ousmanou sambo
                 </span>
               </p>
             </div>
 
-            <span className="font-roundhand font-thin text-6xl text-gold-dark my-1">
+            {/* Separator */}
+            <span className="font-roundhand font-thin text-xl sm:text-2xl md:text-3xl lg:text-5xl text-gold-dark my-0 sm:my-1">
               &
             </span>
 
-            <div className="flex flex-col items-center font-title gap-2">
-              <h2 className="font-script text-3xl md:text-5xl text-olive-dark leading-none">
+            {/* Bride Section */}
+            <div className="flex flex-col items-center font-title gap-1 sm:gap-2">
+              <h2 className="font-script text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-olive-dark leading-none">
                 Mairama SOUAIBOU
               </h2>
-              <p className="text-md flex flex-col md:text-base text-olive font-medium mt-1 tracking-wider gap-2">
-                Fille de
-                <span className="text-md md:text-base text-olive font-medium uppercase">
+              <p className="text-[9px] sm:text-[10px] md:text-xs lg:text-sm flex flex-col items-center text-olive font-medium tracking-wider gap-0.5 sm:gap-1">
+                <span>Fille de</span>
+                <span className="text-[10px] sm:text-[12px] md:text-[13px] lg:text-sm font-medium uppercase">
                   SOUAIBOU Idrissou
                 </span>
-                <span>&</span>
-                <span className="text-md md:text-base text-olive font-medium uppercase">
+                <span className="text-[10px] sm:text-xs md:text-sm">❀</span>
+                <span className="text-[10px] sm:text-[12px] md:text-[13px] lg:text-sm font-medium uppercase">
                   SOUAIBOU Idrissou
                 </span>
               </p>
             </div>
 
-            <p className="font-sans text-[9px] text-gray-400 tracking-widest uppercase mt-3">
+            {/* Footer */}
+            <p className="font-sans text-[7px] sm:text-[8px] md:text-[9px] text-gray-400 tracking-widest uppercase mt-1 sm:mt-2">
               — Union Sacrée —
             </p>
           </div>
 
+          {/* Decorative Rose */}
           <img
             src="/images/rose_primary.png"
-            alt="Fleurs bas"
-            className="absolute left-[10px] rotate-[315deg] bottom-[-2%] w-[40%] lg:w-[50%] pointer-events-none z-10"
+            alt="Fleurs décoratives"
+            className="absolute left-[5px] sm:left-[10px] rotate-[315deg] bottom-[-2%] w-[40%] sm:w-[45%] lg:w-[50%] pointer-events-none z-10"
+            loading="lazy"
           />
         </div>
 
-        {/* RIGHT: Separate Date Card - z-50 aussi */}
+        {/* RIGHT: Separate Date Card */}
         <div
-          className={`relative w-full max-w-[320px] aspect-[0.72] lg:mt-[15%] lg:ml-[-8%] z-50 transition-all duration-1000 ease-out ${
+          className={`relative w-full max-w-[280px] sm:max-w-[300px] md:max-w-[320px] aspect-[0.72] mb-[5%] md:mb-[2%] lg:mb-0 lg:mt-[15%] lg:ml-[-8%] z-50 transition-all duration-1000 ease-out ${
             cardVisible
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-20"
           }`}
         >
-          <div className="absolute w-[80%] lg:w-[100%] -top-[60%] left-[20%] z-40 rotate-[-90deg] pointer-events-none flex items-center justify-center">
+          {/* Decorative Roses for Date Card */}
+          <div className="absolute w-[70%] sm:w-[75%] lg:w-[90%] -top-[30%] sm:-top-[38%] lg:-top-[58%] left-[25%] sm:left-[20%] z-40 rotate-[-90deg] pointer-events-none flex items-center justify-center">
             <img
               src="/images/rose_secondary1.png"
-              alt="Fleurs date"
+              alt="Fleurs décoratives"
               className="w-full h-full object-contain"
+              loading="lazy"
             />
           </div>
 
-          <div className="absolute w-[80%] lg:w-[100%] left-[10%] rotate-[230deg] -bottom-[55%] lg:bottom-[-75%] z-40 pointer-events-none flex items-center justify-center">
+          <div className="absolute w-[70%] sm:w-[75%] lg:w-[90%] left-[-25%] sm:left-[30%] rotate-[-40deg] sm:rotate-[230deg] -bottom-[20%] sm:-bottom-[40%] lg:bottom-[-70%] z-40 pointer-events-none flex items-center justify-center">
             <img
               src="/images/rose_secondary1.png"
-              alt="Fleurs date"
+              alt="Fleurs décoratives"
               className="w-full h-full object-contain"
+              loading="lazy"
             />
           </div>
 
+          {/* Date Card Content */}
           <div className="relative bg-[#fdfbf7] border-2 rounded-sm shadow-lg flex flex-col items-center text-center h-full overflow-hidden">
             <img
               src="/images/cadre2.png"
-              alt="Fleurs date"
-              className="absolute inset-0 w-full h-full object-contain"
+              alt="Cadre décoratif"
+              className="absolute inset-0 w-full h-full object-contain pointer-events-none"
+              loading="lazy"
             />
-            <div className="absolute inset-0 bg-[#fdfbf7]/50"></div>
-            <div className="relative z-10 w-full h-full flex flex-col items-center justify-center gap-4 py-4 px-4">
-              <span className="font-script font-medium text-xl md:text-3xl xl:text-6xl text-olive tracking-widest mb-1">
+            {/* <div className="absolute inset-0 bg-[#fdfbf7]/30 backdrop-blur-[1px]"></div> */}
+
+            <div className="relative z-10 w-full h-full flex flex-col items-center justify-center gap-2 sm:gap-3 md:gap-4 py-3 sm:py-4 px-3 sm:px-4">
+              <span className="font-script font-medium text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-olive tracking-widest">
                 Vendredi
               </span>
-              <span className="font-script text-4xl md:text-5xl xl:text-6xl text-olive-dark font-semibold">
+              <span className="font-script text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-olive-dark font-semibold leading-none">
                 21
               </span>
-              <span className="font-script font-medium text-xl md:text-3xl xl:text-6xl text-olive tracking-widest mb-1">
+              <span className="font-script font-medium text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-olive tracking-widest">
                 Août 2026
               </span>
             </div>
