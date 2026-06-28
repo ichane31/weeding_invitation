@@ -166,7 +166,7 @@ export default function EnvelopeCoverOpen({ open }) {
               left: '49%',
               transform: 'translate(-50%, -50%)',
               width: 'clamp(80px, 22%, 130px)',
-              height: 'clamp(80px, 22%, 130px)',
+              aspectRatio: '1'
             }}
           >
             <div

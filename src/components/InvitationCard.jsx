@@ -7,11 +7,9 @@ export default function InvitationCard({ animateCard = false }) {
   const [pulled, setPulled] = useState(false);
   const [cardVisible, setCardVisible] = useState(false);
   const audioRef = useRef(null);
-  const [showTooltip, setShowTooltip] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
-  
-  const musicUrl = "https://assets.mixkit.co/music/preview/mixkit-wedding-piano-1224.mp3";
 
+  const musicUrl = "https://assets.mixkit.co/music/preview/mixkit-wedding-piano-1224.mp3";
 
   useEffect(() => {
     if (!animateCard) {
@@ -31,29 +29,38 @@ export default function InvitationCard({ animateCard = false }) {
     return () => clearTimeout(t);
   }, [animateCard]);
 
+  // Lance la musique dès que animateCard passe à true (l'utilisateur vient de cliquer sur l'enveloppe)
   useEffect(() => {
-      if (audioRef.current) {
-        if (isPlaying) {
-          audioRef.current.play().catch(err => {
-            console.log("Autoplay blocked by browser. User interaction required:", err);
-            setIsPlaying(false);
-          });
-        } else {
-          audioRef.current.pause();
-        }
-      }
-    }, [isPlaying, setIsPlaying]);
-  
-    const togglePlay = () => {
-      setIsPlaying(!isPlaying);
-      setShowTooltip(false);
-    };
+    if (!animateCard || !audioRef.current) return;
+    audioRef.current.play()
+      .then(() => setIsPlaying(true))
+      .catch(() => {
+        // Toujours bloqué — l'utilisateur devra cliquer sur le disque
+        setIsPlaying(false);
+      });
+  }, [animateCard]);
+
+  // Sync play/pause quand l'utilisateur clique sur le disque
+  useEffect(() => {
+    if (!audioRef.current) return;
+    if (isPlaying) {
+      audioRef.current.play().catch(() => setIsPlaying(false));
+    } else {
+      audioRef.current.pause();
+    }
+  }, [isPlaying]);
+
+  const togglePlay = () => setIsPlaying((prev) => !prev);
+
+  console.log(isPlaying)
 
   return (
     <div
       className="relative flex flex-col items-center w-full select-none"
       style={{ backgroundImage: "url(/images/bg_primary.jpg)" }}
     >
+      <audio ref={audioRef} src={musicUrl} loop preload="auto" />
+
       <Butterflies count={4} size={{ min: 20, max: 30 }} />
 
       {/* ── Enveloppe ouverte ── */}
@@ -171,7 +178,7 @@ export default function InvitationCard({ animateCard = false }) {
                 top: "72%", left: "49%",
                 transform: "translate(-50%, -50%)",
                 width: "clamp(80px, 22%, 130px)",
-                height: "clamp(80px, 22%, 130px)",
+                aspectRatio: '1'
               }}
             >
               <div className="absolute inset-[-3px] rounded-full border border-olive/30 animate-ping opacity-45" />
@@ -183,17 +190,17 @@ export default function InvitationCard({ animateCard = false }) {
               />
             </div>
 
-            {/* Disque vinyle — z-10 pour passer SOUS bg_5 (z-20) */}
+            {/* Disque vinyle */}
             <button
-              className="absolute pointer-events-auto z-30 cursor-pointer group"
+              className="absolute pointer-events-auto z-30 cursor-pointer group bg-transparent border-0 p-0"
               style={{
                 left: "clamp(-5%, -10%, -15%)",
                 bottom: "clamp(-10%, -15%, -20%)",
                 width: "clamp(100px, 30%, 180px)",
               }}
               onClick={togglePlay}
+              aria-label={isPlaying ? "Pause" : "Play"}
             >
-              <audio ref={audioRef} src={musicUrl} loop />
               <img
                 src="/images/disque.png"
                 alt="Disque vinyle"
@@ -202,7 +209,10 @@ export default function InvitationCard({ animateCard = false }) {
               />
               <div className="absolute inset-0 flex items-center justify-center z-10">
                 <div className="bg-black/80 rounded-full p-3 backdrop-blur-sm group-hover:scale-110 transition-all duration-300">
-                  {isPlaying ? <Pause size={32} color="white" fill="white"/> : <Play size={32} color="white" fill="white" />}
+                  {isPlaying
+                    ? <Pause size={32} color="white" fill="white" />
+                    : <Play  size={32} color="white" fill="white" />
+                  }
                 </div>
               </div>
               <svg
@@ -218,7 +228,7 @@ export default function InvitationCard({ animateCard = false }) {
                 </defs>
                 <text style={{ fontSize: 13 }} className="tracking-wider fill-white">
                   <textPath href="#curved-text-path" startOffset="20%" textAnchor="middle">
-                    Cliquez pour jouer
+                    {isPlaying ? "En lecture..." : "Cliquez pour jouer"}
                   </textPath>
                 </text>
               </svg>
@@ -234,7 +244,7 @@ export default function InvitationCard({ animateCard = false }) {
       >
         <Butterflies count={8} size={{ min: 20, max: 30 }} />
 
-        {/* Carte invitation principale — z-10 */}
+        {/* Carte invitation */}
         <div
           className={`relative w-full flex items-center justify-center transition-all duration-1000 ease-out z-30 ${
             cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
@@ -245,7 +255,6 @@ export default function InvitationCard({ animateCard = false }) {
             className="relative w-full flex items-center justify-center"
             style={{ aspectRatio: "1 / 1.45" }}
           >
-            {/* bg_5 — z-20 : au dessus du disque (z-10), en dessous du texte (z-30) */}
             <img
               src="/images/bg_5.png"
               alt="Fleurs fond"
@@ -253,7 +262,6 @@ export default function InvitationCard({ animateCard = false }) {
               loading="lazy"
             />
 
-            {/* Texte invitation — z-30 */}
             <div
               className="relative z-30 flex flex-col items-center justify-center text-center gap-2"
               style={{ width: "70%", height: "75%" }}
@@ -281,16 +289,10 @@ export default function InvitationCard({ animateCard = false }) {
               </p>
 
               <div className="flex flex-col items-center font-title gap-1">
-                <h2
-                  className="font-script text-olive-dark leading-none"
-                  style={{ fontSize: "clamp(18px, 4.5vw, 36px)" }}
-                >
+                <h2 className="font-script text-olive-dark leading-none" style={{ fontSize: "clamp(18px, 4.5vw, 36px)" }}>
                   Ousmanou SALIHOU
                 </h2>
-                <p
-                  className="text-olive font-medium tracking-wider flex flex-col items-center gap-0.5"
-                  style={{ fontSize: "clamp(8px, 1.6vw, 12px)" }}
-                >
+                <p className="text-olive font-medium tracking-wider flex flex-col items-center gap-0.5" style={{ fontSize: "clamp(8px, 1.6vw, 12px)" }}>
                   <span>Fils de</span>
                   <span className="uppercase">Salihou Ousmanou Sambo</span>
                   <span>❀</span>
@@ -298,24 +300,15 @@ export default function InvitationCard({ animateCard = false }) {
                 </p>
               </div>
 
-              <span
-                className="font-roundhand font-thin text-gold-dark"
-                style={{ fontSize: "clamp(20px, 4vw, 36px)" }}
-              >
+              <span className="font-roundhand font-thin text-gold-dark" style={{ fontSize: "clamp(20px, 4vw, 36px)" }}>
                 &amp;
               </span>
 
               <div className="flex flex-col items-center font-title gap-1">
-                <h2
-                  className="font-script text-olive-dark leading-none"
-                  style={{ fontSize: "clamp(18px, 4.5vw, 36px)" }}
-                >
+                <h2 className="font-script text-olive-dark leading-none" style={{ fontSize: "clamp(18px, 4.5vw, 36px)" }}>
                   Mairama SOUAIBOU
                 </h2>
-                <p
-                  className="text-olive font-medium tracking-wider flex flex-col items-center gap-0.5"
-                  style={{ fontSize: "clamp(8px, 1.6vw, 12px)" }}
-                >
+                <p className="text-olive font-medium tracking-wider flex flex-col items-center gap-0.5" style={{ fontSize: "clamp(8px, 1.6vw, 12px)" }}>
                   <span>Fille de</span>
                   <span className="uppercase">SOUAIBOU Idrissou</span>
                   <span>❀</span>
@@ -324,7 +317,6 @@ export default function InvitationCard({ animateCard = false }) {
               </div>
             </div>
 
-            {/* Rose déco bas gauche — z-40 */}
             <img
               src="/images/rose_primary.png"
               alt="Fleurs décoratives"
@@ -340,17 +332,14 @@ export default function InvitationCard({ animateCard = false }) {
           </div>
         </div>
 
-        {/* Carte date — z-20, chevauche la carte gauche en lg */}
+        {/* Carte date */}
         <div
           className={`relative transition-all duration-1000 ease-out z-30 lg:ml-[-50px] ${
             cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
           }`}
           style={{ width: "clamp(200px, 55vw, 280px)" }}
         >
-          {/* margin-top uniquement en lg pour l'effet de superposition décalée */}
           <div className="lg:mt-[34%]">
-
-            {/* Rose haut */}
             <div
               className="absolute pointer-events-none z-40 flex items-center justify-center"
               style={{
@@ -363,7 +352,6 @@ export default function InvitationCard({ animateCard = false }) {
               <img src="/images/rose_secondary1.png" alt="" className="w-full h-full object-contain" loading="lazy" />
             </div>
 
-            {/* Rose bas */}
             <div
               className="absolute pointer-events-none z-40 flex items-center justify-center"
               style={{
@@ -376,7 +364,6 @@ export default function InvitationCard({ animateCard = false }) {
               <img src="/images/rose_secondary1.png" alt="" className="w-full h-full object-contain" loading="lazy" />
             </div>
 
-            {/* Contenu carte date */}
             <div
               className="relative bg-[#fdfbf7] border-2 rounded-sm shadow-lg flex flex-col items-center text-center overflow-hidden"
               style={{ aspectRatio: "0.72" }}
@@ -388,22 +375,13 @@ export default function InvitationCard({ animateCard = false }) {
                 loading="lazy"
               />
               <div className="relative z-10 w-full h-full flex flex-col items-center justify-center gap-2 py-3 px-3">
-                <span
-                  className="font-script font-medium text-olive tracking-widest"
-                  style={{ fontSize: "clamp(20px, 5vw, 36px)" }}
-                >
+                <span className="font-script font-medium text-olive tracking-widest" style={{ fontSize: "clamp(20px, 5vw, 36px)" }}>
                   Vendredi
                 </span>
-                <span
-                  className="font-script text-olive-dark font-semibold leading-none"
-                  style={{ fontSize: "clamp(30px, 7vw, 50px)" }}
-                >
+                <span className="font-script text-olive-dark font-semibold leading-none" style={{ fontSize: "clamp(30px, 7vw, 50px)" }}>
                   21
                 </span>
-                <span
-                  className="font-script font-medium text-olive tracking-widest"
-                  style={{ fontSize: "clamp(20px, 5vw, 36px)" }}
-                >
+                <span className="font-script font-medium text-olive tracking-widest" style={{ fontSize: "clamp(20px, 5vw, 36px)" }}>
                   Août 2026
                 </span>
               </div>
