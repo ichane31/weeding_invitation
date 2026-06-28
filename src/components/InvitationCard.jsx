@@ -1,11 +1,17 @@
-import { useEffect, useState } from "react";
-import { Play } from "lucide-react";
+import { useEffect, useState, useRef } from "react";
+import { Pause, Play } from "lucide-react";
 import Countdown from "./Countdown";
 import Butterflies from "./Butterflies";
 
 export default function InvitationCard({ animateCard = false }) {
   const [pulled, setPulled] = useState(false);
   const [cardVisible, setCardVisible] = useState(false);
+  const audioRef = useRef(null);
+  const [showTooltip, setShowTooltip] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
+  
+  const musicUrl = "https://assets.mixkit.co/music/preview/mixkit-wedding-piano-1224.mp3";
+
 
   useEffect(() => {
     if (!animateCard) {
@@ -25,16 +31,34 @@ export default function InvitationCard({ animateCard = false }) {
     return () => clearTimeout(t);
   }, [animateCard]);
 
+  useEffect(() => {
+      if (audioRef.current) {
+        if (isPlaying) {
+          audioRef.current.play().catch(err => {
+            console.log("Autoplay blocked by browser. User interaction required:", err);
+            setIsPlaying(false);
+          });
+        } else {
+          audioRef.current.pause();
+        }
+      }
+    }, [isPlaying, setIsPlaying]);
+  
+    const togglePlay = () => {
+      setIsPlaying(!isPlaying);
+      setShowTooltip(false);
+    };
+
   return (
     <div
       className="relative flex flex-col items-center w-full select-none"
       style={{ backgroundImage: "url(/images/bg_primary.jpg)" }}
     >
-      <Butterflies count={4} size={{ min: 25, max: 40 }} />
+      <Butterflies count={4} size={{ min: 20, max: 30 }} />
 
       {/* ── Enveloppe ouverte ── */}
       <div
-        className="w-full flex items-center justify-center !pb-4"
+        className="w-full flex items-center justify-center !pb-6"
         style={{
           backgroundImage: "url(/images/bg_primary.jpg)",
           padding: "clamp(32px, 6vw, 64px) 0",
@@ -42,7 +66,7 @@ export default function InvitationCard({ animateCard = false }) {
       >
         <div
           className="relative flex flex-col items-center text-center w-full"
-          style={{ maxWidth: "min(90vw, 480px)" }}
+          style={{ maxWidth: "min(80vw, 400px)" }}
         >
           <div
             className="relative w-full flex items-center justify-center select-none"
@@ -55,7 +79,7 @@ export default function InvitationCard({ animateCard = false }) {
               className="absolute pointer-events-none z-30 object-contain opacity-95"
               style={{
                 width: "clamp(180px, 65%, 340px)",
-                top: "clamp(-10px, 22%, 70px)",
+                top: "clamp(-10px, 20%, 90px)",
                 left: "clamp(-90px, -30%, -60px)",
                 transform: "rotate(-40deg)",
               }}
@@ -98,7 +122,7 @@ export default function InvitationCard({ animateCard = false }) {
 
             {/* Carte qui sort */}
             <div
-              className="absolute left-1/2 h-[90%] sm:h-[92%] md:h-[92%] -translate-x-1/2 z-20 overflow-hidden"
+              className="absolute left-1/2 h-[96%] sm:h-[92%] -translate-x-1/2 z-20 overflow-hidden"
               style={{ bottom: "8%", width: "80%" }}
             >
               <div
@@ -116,11 +140,11 @@ export default function InvitationCard({ animateCard = false }) {
                 />
                 <div
                   className="absolute top-0 w-full h-full flex flex-col items-center justify-start"
-                  style={{ paddingTop: "23%", paddingLeft: "18%", paddingRight: "18%" }}
+                  style={{ paddingTop: "20%", paddingLeft: "18%", paddingRight: "18%" }}
                 >
                   <p
                     className="text-olive font-script leading-tight"
-                    style={{ fontSize: "clamp(24px, 8vw, 42px)", margin: 0 }}
+                    style={{ fontSize: "clamp(24px, 7.5vw, 40px)", margin: 0 }}
                   >
                     The Beginning of Forever starts here
                   </p>
@@ -159,15 +183,17 @@ export default function InvitationCard({ animateCard = false }) {
               />
             </div>
 
-            {/* Disque vinyle */}
-            <div
+            {/* Disque vinyle — z-10 pour passer SOUS bg_5 (z-20) */}
+            <button
               className="absolute pointer-events-auto z-30 cursor-pointer group"
               style={{
                 left: "clamp(-5%, -10%, -15%)",
                 bottom: "clamp(-10%, -15%, -20%)",
                 width: "clamp(100px, 30%, 180px)",
               }}
+              onClick={togglePlay}
             >
+              <audio ref={audioRef} src={musicUrl} loop />
               <img
                 src="/images/disque.png"
                 alt="Disque vinyle"
@@ -176,7 +202,7 @@ export default function InvitationCard({ animateCard = false }) {
               />
               <div className="absolute inset-0 flex items-center justify-center z-10">
                 <div className="bg-black/80 rounded-full p-3 backdrop-blur-sm group-hover:scale-110 transition-all duration-300">
-                  <Play size={32} color="white" fill="white" />
+                  {isPlaying ? <Pause size={32} color="white" fill="white"/> : <Play size={32} color="white" fill="white" />}
                 </div>
               </div>
               <svg
@@ -196,45 +222,42 @@ export default function InvitationCard({ animateCard = false }) {
                   </textPath>
                 </text>
               </svg>
-            </div>
+            </button>
           </div>
         </div>
       </div>
 
       {/* ── Cartes invitation + date ── */}
       <div
-        className="relative w-full flex flex-col lg:flex-row items-center lg:items-start justify-center gap-6 lg:gap-2 pb-8 -pt-16 lg:pb-12"
+        className="relative w-full flex flex-col lg:flex-row items-center lg:items-start justify-center gap-6 lg:gap-0 pb-8 lg:pb-16 overflow-visible"
         style={{ backgroundImage: "url(/images/bg_primary.jpg)" }}
       >
-        <Butterflies count={8} size={{ min: 25, max: 40 }} />
+        <Butterflies count={8} size={{ min: 20, max: 30 }} />
 
-        {/* Carte invitation principale */}
+        {/* Carte invitation principale — z-10 */}
         <div
-          className={`relative w-full flex items-center justify-center transition-all duration-1000 ease-out ${
+          className={`relative w-full flex items-center justify-center transition-all duration-1000 ease-out z-30 ${
             cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
           }`}
-          style={{ maxWidth: "clamp(280px, 85vw, 500px)" }}
+          style={{ maxWidth: "clamp(280px, 85vw, 480px)" }}
         >
           <div
             className="relative w-full flex items-center justify-center"
             style={{ aspectRatio: "1 / 1.45" }}
           >
+            {/* bg_5 — z-20 : au dessus du disque (z-10), en dessous du texte (z-30) */}
             <img
               src="/images/bg_5.png"
               alt="Fleurs fond"
-              className="absolute inset-0 w-full h-full pointer-events-none z-0"
+              className="absolute inset-0 w-full h-full pointer-events-none z-20"
               loading="lazy"
             />
 
-            {/* Texte invitation */}
+            {/* Texte invitation — z-30 */}
             <div
-              className="relative z-10 flex flex-col items-center justify-center text-center gap-2"
-              style={{
-                width: "70%",
-                height: "75%",
-              }}
+              className="relative z-30 flex flex-col items-center justify-center text-center gap-2"
+              style={{ width: "70%", height: "75%" }}
             >
-              {/* Basmala */}
               <div className="w-full flex flex-col items-center gap-1">
                 <span
                   className="font-script text-olive tracking-widest font-semibold block"
@@ -257,7 +280,6 @@ export default function InvitationCard({ animateCard = false }) {
                 Nous avons l'honneur de vous inviter à célébrer le mariage de
               </p>
 
-              {/* Marié */}
               <div className="flex flex-col items-center font-title gap-1">
                 <h2
                   className="font-script text-olive-dark leading-none"
@@ -276,7 +298,6 @@ export default function InvitationCard({ animateCard = false }) {
                 </p>
               </div>
 
-              {/* Séparateur */}
               <span
                 className="font-roundhand font-thin text-gold-dark"
                 style={{ fontSize: "clamp(20px, 4vw, 36px)" }}
@@ -284,7 +305,6 @@ export default function InvitationCard({ animateCard = false }) {
                 &amp;
               </span>
 
-              {/* Mariée */}
               <div className="flex flex-col items-center font-title gap-1">
                 <h2
                   className="font-script text-olive-dark leading-none"
@@ -304,87 +324,89 @@ export default function InvitationCard({ animateCard = false }) {
               </div>
             </div>
 
-            {/* Rose déco bas gauche */}
+            {/* Rose déco bas gauche — z-40 */}
             <img
               src="/images/rose_primary.png"
               alt="Fleurs décoratives"
-              className="absolute pointer-events-none z-10"
+              className="absolute pointer-events-none z-40"
               style={{
                 left: "clamp(2px, 1%, 10px)",
                 bottom: "-2%",
-                width: "clamp(80px, 38%, 200px)",
-                transform: "rotate(315deg)",
+                width: "clamp(80px, 45%, 210px)",
+                transform: "rotate(300deg)",
               }}
               loading="lazy"
             />
           </div>
         </div>
 
-        {/* Carte date */}
+        {/* Carte date — z-20, chevauche la carte gauche en lg */}
         <div
-          className={`relative transition-all duration-1000 ease-out ${
+          className={`relative transition-all duration-1000 ease-out z-30 lg:ml-[-50px] ${
             cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
           }`}
-          style={{
-            width: "clamp(200px, 55vw, 300px)",
-            marginTop: "clamp(50px, 3vw, 100px)",
-          }}
+          style={{ width: "clamp(200px, 55vw, 280px)" }}
         >
-          {/* Roses décoratives date card */}
-          <div
-            className="absolute pointer-events-none z-40 flex items-center justify-center"
-            style={{
-              width: "clamp(100px, 70%, 200px)",
-              top: "clamp(-80px, -35%, -50px)",
-              left: "20%",
-              transform: "rotate(-90deg)",
-            }}
-          >
-            <img src="/images/rose_secondary1.png" alt="" className="w-full h-full object-contain" loading="lazy" />
-          </div>
+          {/* margin-top uniquement en lg pour l'effet de superposition décalée */}
+          <div className="lg:mt-[34%]">
 
-          <div
-            className="absolute pointer-events-none z-40 flex items-center justify-center"
-            style={{
-              width: "clamp(100px, 70%, 200px)",
-              bottom: "clamp(-60px, -30%, -40px)",
-              left: "-20%",
-              transform: "rotate(-40deg)",
-            }}
-          >
-            <img src="/images/rose_secondary1.png" alt="" className="w-full h-full object-contain" loading="lazy" />
-          </div>
+            {/* Rose haut */}
+            <div
+              className="absolute pointer-events-none z-40 flex items-center justify-center"
+              style={{
+                width: "clamp(100px, 70%, 180px)",
+                top: "clamp(-70px, -30%, -45px)",
+                left: "20%",
+                transform: "rotate(-90deg)",
+              }}
+            >
+              <img src="/images/rose_secondary1.png" alt="" className="w-full h-full object-contain" loading="lazy" />
+            </div>
 
-          {/* Contenu carte date */}
-          <div
-            className="relative bg-[#fdfbf7] border-2 rounded-sm shadow-lg flex flex-col items-center text-center overflow-hidden"
-            style={{ aspectRatio: "0.72" }}
-          >
-            <img
-              src="/images/cadre2.png"
-              alt="Cadre décoratif"
-              className="absolute inset-0 w-full h-full object-contain pointer-events-none"
-              loading="lazy"
-            />
-            <div className="relative z-10 w-full h-full flex flex-col items-center justify-center gap-2 py-3 px-3">
-              <span
-                className="font-script font-medium text-olive tracking-widest"
-                style={{ fontSize: "clamp(20px, 5vw, 40px)" }}
-              >
-                Vendredi
-              </span>
-              <span
-                className="font-script text-olive-dark font-semibold leading-none"
-                style={{ fontSize: "clamp(30px, 7vw, 56px)" }}
-              >
-                21
-              </span>
-              <span
-                className="font-script font-medium text-olive tracking-widest"
-                style={{ fontSize: "clamp(20px, 5vw, 40px)" }}
-              >
-                Août 2026
-              </span>
+            {/* Rose bas */}
+            <div
+              className="absolute pointer-events-none z-40 flex items-center justify-center"
+              style={{
+                width: "clamp(100px, 70%, 180px)",
+                bottom: "clamp(-85px, -30%, -65px)",
+                left: "-20%",
+                transform: "rotate(-40deg)",
+              }}
+            >
+              <img src="/images/rose_secondary1.png" alt="" className="w-full h-full object-contain" loading="lazy" />
+            </div>
+
+            {/* Contenu carte date */}
+            <div
+              className="relative bg-[#fdfbf7] border-2 rounded-sm shadow-lg flex flex-col items-center text-center overflow-hidden"
+              style={{ aspectRatio: "0.72" }}
+            >
+              <img
+                src="/images/cadre2.png"
+                alt="Cadre décoratif"
+                className="absolute inset-0 w-full h-full object-contain pointer-events-none"
+                loading="lazy"
+              />
+              <div className="relative z-10 w-full h-full flex flex-col items-center justify-center gap-2 py-3 px-3">
+                <span
+                  className="font-script font-medium text-olive tracking-widest"
+                  style={{ fontSize: "clamp(20px, 5vw, 36px)" }}
+                >
+                  Vendredi
+                </span>
+                <span
+                  className="font-script text-olive-dark font-semibold leading-none"
+                  style={{ fontSize: "clamp(30px, 7vw, 50px)" }}
+                >
+                  21
+                </span>
+                <span
+                  className="font-script font-medium text-olive tracking-widest"
+                  style={{ fontSize: "clamp(20px, 5vw, 36px)" }}
+                >
+                  Août 2026
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -395,7 +417,7 @@ export default function InvitationCard({ animateCard = false }) {
         className="relative w-full flex items-center justify-center py-2"
         style={{ backgroundImage: "url(/images/bg_4.jpg)" }}
       >
-        <div className="w-[90%] max-w-4xl">
+        <div className="w-[90%] max-w-3xl">
           <Countdown />
         </div>
       </div>

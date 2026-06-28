@@ -15,14 +15,14 @@ export default function GiftSection() {
 
   return (
     <section
-      className="relative w-full overflow-visible flex flex-col items-center py-6 sm:py-8 md:py-10 lg:py-12 px-3 sm:px-4 mb-10 sm:mb-3 md:mb-0"
+      className="relative w-full overflow-visible flex flex-col items-center"
       style={{
         backgroundImage: "url(/images/bg_primary.jpg)",
+        padding: "clamp(24px, 6vw, 56px) clamp(12px, 4vw, 32px)",
       }}
     >
-      {/* Papillons */}
       <Butterflies
-        count={5}
+        count={8}
         size={{ min: 20, max: 32 }}
         speed={{ min: 16, max: 26 }}
         opacity={0.85}
@@ -31,69 +31,114 @@ export default function GiftSection() {
       />
 
       {/* Titre */}
-      <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-olive-dark font-script text-center mb-2 sm:mb-4 relative z-10">
+      <h2
+        className="text-olive-dark font-script text-center relative z-10"
+        style={{
+          fontSize: "clamp(28px, 7vw, 64px)",
+          marginBottom: "clamp(8px, 2vw, 20px)",
+        }}
+      >
         Gift for the newlyweds!
       </h2>
 
-      {/* Section Carte cadeau */}
-      <div className="relative w-full max-w-2xl mx-auto flex flex-col items-center mb-4 sm:mb-6 md:mb-8">
-        {/* Roses décoratives - version responsive */}
+      {/* ── Carte cadeau ── */}
+      <div
+        className="relative w-full mx-auto flex flex-col items-center"
+        style={{
+          maxWidth: "clamp(280px, 85vw, 640px)",
+          marginBottom: "clamp(16px, 4vw, 40px)",
+        }}
+      >
+        {/* Rose gauche */}
         <img
           src="/images/rose1.png"
           alt=""
-          className="pointer-events-none absolute -top-28 sm:-top-40 md:-top-44 left-0 sm:-left-2 md:-left-16 w-[30%] sm:w-[35%] md:w-[40%] z-10 rotate-[120deg]"
+          className="pointer-events-none absolute z-10"
+          style={{
+            width: "clamp(80px, 32%, 200px)",
+            top: "clamp(-80px, -28%, -40px)",
+            left: 0,
+            transform: "rotate(120deg)",
+          }}
           loading="lazy"
         />
+        {/* Rose droite */}
         <img
           src="/images/rose1.png"
           alt=""
-          className="pointer-events-none absolute -top-4 sm:-top-2 right-5 sm:-right-2 md:-right-16 w-[30%] sm:w-[35%] md:w-[40%] z-10 scale-x-[-1] rotate-[-40deg]"
+          className="pointer-events-none absolute z-10"
+          style={{
+            width: "clamp(80px, 32%, 200px)",
+            top: "clamp(-16px, -4%, -4px)",
+            right: "clamp(8px, 2%, 16px)",
+            transform: "scaleX(-1) rotate(40deg)",
+          }}
           loading="lazy"
         />
 
-        {/* Carte cadeau */}
-        <div className="relative text-center mt-4 sm:mt-6 md:mt-8">
-          <a
-            href={GIFT_LINK}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative flex flex-col items-center group"
-            onMouseEnter={() => setGiftHovered(true)}
-            onMouseLeave={() => setGiftHovered(false)}
+        {/* Lien carte */}
+        <a
+          href={GIFT_LINK}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="relative flex flex-col items-center group"
+          style={{ marginTop: "clamp(16px, 4vw, 36px)" }}
+          onMouseEnter={() => setGiftHovered(true)}
+          onMouseLeave={() => setGiftHovered(false)}
+        >
+          <img
+            src="/images/carte_olive.png"
+            alt="Carte cadeau"
+            className="pointer-events-none transition-transform duration-300 group-hover:scale-101"
+            style={{ width: "clamp(160px, 68%, 380px)", aspectRatio: "1.45" }}
+            loading="lazy"
+          />
+          <p
+            className="absolute text-olive font-script transition-all duration-300"
+            style={{
+              bottom: "clamp(-50px, -20%, -24px)",
+              fontSize: "clamp(18px, 4.5vw, 40px)",
+              opacity: giftHovered ? 0.6 : 1,
+              transform: giftHovered ? "scale(0.95)" : "scale(1)",
+            }}
           >
-            <img
-              src="/images/carte_olive.png"
-              alt="Carte cadeau"
-              className="pointer-events-none aspect-[1.45] w-[65%] sm:w-[70%] md:w-[75%] lg:w-[80%] transition-transform duration-300 group-hover:scale-105"
-              loading="lazy"
-            />
-            <p
-              className="absolute bottom-[-22%] sm:bottom-[-18%] md:bottom-[-15%] text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-olive font-script transition-all duration-300"
-              style={{
-                opacity: giftHovered ? 0.6 : 1,
-                transform: giftHovered ? 'scale(0.95)' : 'scale(1)',
-              }}
-            >
-              click here
-            </p>
-          </a>
-        </div>
+            click here
+          </p>
+        </a>
       </div>
 
-      {/* Section enveloppe + lettre */}
-      <div className="relative w-full max-w-2xl mx-auto mt-6 sm:mt-8 md:mt-10">
-        {/* Roses décoratives */}
+      {/* ── Enveloppe + lettre ── */}
+      <div
+        className="relative w-full mx-auto"
+        style={{
+          maxWidth: "clamp(280px, 85vw, 640px)",
+          marginTop: "clamp(32px, 8vw, 64px)",
+        }}
+      >
+        {/* Rose gauche enveloppe */}
         <img
           src="/images/rose3.png"
           alt=""
-          className="pointer-events-none absolute -left-12 sm:-left-16 md:-left-20 -top-8 sm:-top-10 md:-top-14 lg:-top-8 w-[35%] sm:w-[40%] md:w-[45%] lg:w-[48%] z-10"
-          style={{ transform: "rotate(10deg)" }}
+          className="pointer-events-none absolute z-10"
+          style={{
+            width: "clamp(110px, 38%, 220px)",
+            left: "clamp(-40px, -12%, -20px)",
+            top: "clamp(-30px, -10%, -16px)",
+            transform: "rotate(10deg)",
+          }}
           loading="lazy"
         />
+        {/* Rose droite enveloppe */}
         <img
           src="/images/rose2.png"
           alt=""
-          className="pointer-events-none absolute rotate-[-7deg] right-2 sm:right-4 md:right-6 top-16 sm:top-20 md:top-28 lg:top-32 w-[40%] sm:w-[45%] md:w-[50%] lg:w-[56%] z-20"
+          className="pointer-events-none absolute z-20"
+          style={{
+            width: "clamp(130px, 44%, 260px)",
+            right: "clamp(30px, 12%, 80px)",
+            top: "clamp(70px, 27%, 130px)",
+            transform: "rotate(-7deg)",
+          }}
           loading="lazy"
         />
 
@@ -102,43 +147,50 @@ export default function GiftSection() {
           <img
             src="/images/envelop_close2.png"
             alt="Enveloppe"
-            className="w-[68%] sm:w-[70%] md:w-[72%] lg:w-[75%] rotate-[3deg] sm:rotate-[4deg] md:rotate-[5deg]"
+            className="relative"
             style={{
+              width: "clamp(190px, 80%, 420px)",
+              transform: "rotate(4deg)",
               filter: "drop-shadow(0 8px 20px rgba(0,0,0,0.15))",
             }}
             loading="lazy"
           />
         </div>
 
-        {/* Lettre / Dua'a - repositionnée pour mobile */}
+        {/* Lettre / Dua'a */}
         <div
-          className="absolute top-[30%] sm:top-[35%] md:top-[42%] lg:top-[50%] left-[10%] sm:left-[8%] md:left-[-6%] lg:left-[-20%] bg-cream-light w-[65%] sm:w-[60%] md:w-[70%] lg:w-[75%] rotate-[-4deg] sm:rotate-[-3deg] md:rotate-[-4deg] z-10 rounded-2xl sm:rounded-3xl px-4 sm:px-5 md:px-6 py-3 sm:py-4 md:py-5"
+          className="absolute z-10 bg-cream-light rounded-2xl"
           style={{
-            boxShadow:
-              "0 12px 40px rgba(0,0,0,0.14), 0 4px 12px rgba(0,0,0,0.08)",
+            width: "clamp(200px, 62%, 420px)",
+            top: "clamp(28%, 38%, 46%)",
+            left: "clamp(-20px, -5%, 30px)",
+            transform: "rotate(-4deg)",
+            padding: "clamp(10px, 3vw, 24px) clamp(12px, 3.5vw, 28px)",
+            boxShadow: "0 12px 40px rgba(0,0,0,0.14), 0 4px 12px rgba(0,0,0,0.08)",
             border: "0.5px solid rgba(180,160,120,0.3)",
           }}
         >
           {/* Bismillah */}
-          <div className="flex items-center justify-center gap-2 mb-2 sm:mb-3">
-            <p
-              className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-olive-dark text-center w-full"
-              style={{
-                direction: "rtl",
-              }}
-            >
-              بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-            </p>
-          </div>
+          <p
+            className="text-olive-dark text-center w-full"
+            style={{
+              direction: "rtl",
+              fontSize: "clamp(14px, 3.5vw, 28px)",
+              marginBottom: "clamp(3px, 1vw, 6px)",
+            }}
+          >
+            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+          </p>
 
-          {/* Paragraphes Dua'a */}
-          <div className="space-y-2 sm:space-y-2.5 md:space-y-3">
+          {/* Paragraphes */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "clamp(4px, 1vw, 6px)" }}>
             {DUA_PARAGRAPHS.map((p, i) => (
               <p
                 key={i}
-                className={`font-title text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg text-olive-dark font-medium leading-relaxed text-center ${
-                  i === DUA_PARAGRAPHS.length - 1 ? 'font-semibold' : ''
+                className={`font-title text-olive-dark leading-relaxed text-center ${
+                  i === DUA_PARAGRAPHS.length - 1 ? "font-semibold" : "font-medium"
                 }`}
+                style={{ fontSize: "clamp(8px, 1.8vw, 14px)", margin: 0 }}
               >
                 {p}
               </p>

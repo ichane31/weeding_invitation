@@ -28,6 +28,9 @@ export default {
           dark: '#aa8c2c',
         }
       },
+      spacing: {
+        'rsvp-offset': 'clamp(-100px, -8vw, -80px)'
+      },
       fontFamily: {
         script: ['"Pinyon Script"', 'cursive'],
         title: ['"Playfair Display"', 'serif'],

@@ -1,26 +1,20 @@
 import { useState, useEffect } from "react";
 
 export default function Countdown() {
-  // Target date: August 21, 2026 at 15:30:00
   const targetDate = new Date("2026-08-21T15:30:00").getTime();
 
   const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
+    days: 0, hours: 0, minutes: 0, seconds: 0,
   });
 
   useEffect(() => {
     const calculateTimeLeft = () => {
       const now = new Date().getTime();
       const difference = targetDate - now;
-
       if (difference <= 0) {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
         return;
       }
-
       setTimeLeft({
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
         hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
@@ -28,108 +22,116 @@ export default function Countdown() {
         seconds: Math.floor((difference / 1000) % 60),
       });
     };
-
     calculateTimeLeft();
     const timer = setInterval(calculateTimeLeft, 1000);
-
     return () => clearInterval(timer);
   }, [targetDate]);
 
-  // Format single digits with a leading zero
   const formatNum = (num) => (num < 10 ? `0${num}` : num);
 
+  const units = [
+    { value: timeLeft.days,    label: "Jours" },
+    { value: timeLeft.hours,   label: "Heures" },
+    { value: timeLeft.minutes, label: "Minutes" },
+    { value: timeLeft.seconds, label: "Secondes" },
+  ];
+
   return (
-    <div className="w-full flex flex-col items-center text-center px-3 sm:px-4 md:px-6 select-none relative">
-      {/* Title */}
-      <h3 className="font-script w-full text-center sm:text-start text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-olive-dark mb-2 sm:mb-3 md:mb-4">
+    <div className="w-full flex flex-col items-center text-center select-none relative"
+      style={{ padding: "0 clamp(12px, 4vw, 48px)" }}
+    >
+      {/* Titre */}
+      <h3
+        className="font-script text-olive-dark max-w-2xl w-full text-start"
+        style={{ fontSize: "clamp(36px, 8vw, 80px)", marginBottom: "clamp(-25px, -3vw, -20px)" }}
+      >
         Counting Days
       </h3>
 
-      {/* Countdown Grid */}
-      <div className="w-full max-w-4xl mx-auto flex justify-center items-center gap-1 sm:gap-2 md:gap-3 px-2 sm:px-4 md:px-6">
-        {/* Days */}
-        <div className="flex flex-col items-center gap-1 sm:gap-2">
-          <span className="font-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-semibold text-burgundy-dark leading-none">
-            {formatNum(timeLeft.days)}
-          </span>
-          <span className="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs text-olive font-semibold tracking-widest uppercase">
-            Jours
-          </span>
-        </div>
-
-        <span className="font-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl text-burgundy-dark leading-none px-0.5 sm:px-1">
-          :
-        </span>
-
-        {/* Hours */}
-        <div className="flex flex-col items-center gap-1 sm:gap-2">
-          <span className="font-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-semibold text-burgundy-dark leading-none">
-            {formatNum(timeLeft.hours)}
-          </span>
-          <span className="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs text-olive font-semibold tracking-widest uppercase">
-            Heures
-          </span>
-        </div>
-
-        <span className="font-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl text-burgundy-dark leading-none px-0.5 sm:px-1">
-          :
-        </span>
-
-        {/* Minutes */}
-        <div className="flex flex-col items-center gap-1 sm:gap-2">
-          <span className="font-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-semibold text-burgundy-dark leading-none">
-            {formatNum(timeLeft.minutes)}
-          </span>
-          <span className="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs text-olive font-semibold tracking-widest uppercase">
-            Minutes
-          </span>
-        </div>
-
-        <span className="font-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl text-burgundy-dark leading-none px-0.5 sm:px-1">
-          :
-        </span>
-
-        {/* Seconds */}
-        <div className="flex flex-col items-center gap-1 sm:gap-2">
-          <span className="font-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-7xl font-semibold text-burgundy-dark leading-none">
-            {formatNum(timeLeft.seconds)}
-          </span>
-          <span className="text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs text-olive font-semibold tracking-widest uppercase">
-            Secondes
-          </span>
-        </div>
+      {/* Chiffres */}
+      <div className="w-full max-w-2xl flex items-center"
+        style={{ gap: "clamp(4px, 2vw, 24px)" }}
+      >
+        {units.map((unit, i) => (
+          <>
+            <div key={unit.label} className="flex flex-col items-center" style={{ gap: "clamp(4px, 1vw, 8px)" }}>
+              <span
+                className="font-title font-semibold text-burgundy-dark leading-none"
+                style={{ fontSize: "clamp(28px, 8vw, 62px)" }}
+              >
+                {formatNum(unit.value)}
+              </span>
+              <span
+                className="text-olive font-semibold tracking-widest uppercase"
+                style={{ fontSize: "clamp(7px, 1.5vw, 11px)" }}
+              >
+                {unit.label}
+              </span>
+            </div>
+            {i < units.length - 1 && (
+              <span
+                key={`sep-${i}`}
+                className="font-title text-burgundy-dark leading-none"
+                style={{ fontSize: "clamp(32px, 9vw, 72px)", padding: "0 clamp(2px, 0.5vw, 6px)" }}
+              >
+                :
+              </span>
+            )}
+          </>
+        ))}
       </div>
 
-      {/* Location Card with Frame */}
-      <div className="relative w-[90%] sm:w-[85%] md:w-[80%] lg:w-[77%] mt-4 sm:mt-6 md:mt-8">
+      {/* Carte lieu */}
+      <div
+        className="relative"
+        style={{
+          width: "clamp(280px, 88%, 620px)",
+          marginTop: "clamp(4px, 2vw, 10px)",
+        }}
+      >
         <img
           src="/images/cadre10.png"
           alt="Cadre décoratif"
-          className="w-full aspect-[1.6] pointer-events-none z-10"
+          className="w-full pointer-events-none z-10"
+          style={{ aspectRatio: "1.6" }}
           loading="lazy"
         />
-        
-        <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:py-8 lg:py-12 xl:py-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-script text-olive-dark mb-1 sm:mb-3 md:mb-4 lg:mb-6">
+
+        <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center"
+          style={{ padding: "clamp(16px, 6%, 56px) clamp(16px, 5%, 40px)" }}
+        >
+          <h2
+            className="font-script text-olive-dark"
+            style={{ fontSize: "clamp(20px, 4.5vw, 48px)", marginBottom: "clamp(4px, 1.5vw, 20px)" }}
+          >
             Lieu de la Réception
           </h2>
-          
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold tracking-wide font-title uppercase text-olive-dark mb-1 sm:mb-3">
+
+          <p
+            className="font-title font-semibold tracking-wide uppercase text-olive-dark"
+            style={{ fontSize: "clamp(10px, 2.2vw, 20px)", marginBottom: "clamp(4px, 1vw, 12px)" }}
+          >
             VILLA RIMBA FLORA GOMBAK
           </p>
 
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed font-title text-olive-dark">
-            9381, Jalan Gombak, Ulu Gombak,
-            <br className="hidden xs:block" />
-            <span className="block xs:inline">53100 Selangor</span>
+          <p
+            className="font-title text-olive-dark leading-relaxed"
+            style={{ fontSize: "clamp(9px, 2vw, 18px)" }}
+          >
+            9381, Jalan Gombak, Ulu Gombak,{" "}
+            <span className="block">53100 Selangor</span>
           </p>
 
-          <div className="flex flex-wrap gap-2 sm:gap-3 justify-center mt-2 sm:mt-3 md:mt-5 lg:mt-6 relative z-10">
+          <div
+            className="flex flex-wrap justify-center relative z-10"
+            style={{ gap: "clamp(6px, 2vw, 12px)", marginTop: "clamp(8px, 2.5vw, 24px)" }}
+          >
             <a
               href="https://maps.google.com/?q=9381+Jalan+Gombak+Ulu+Gombak+53100+Selangor"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 sm:px-5 py-1.5 sm:py-2 rounded-full border-2 border-olive-dark text-sm sm:text-base italic transition-all duration-300 hover:bg-olive-dark hover:text-cream hover:scale-105"
+              className="rounded-full border-2 border-olive-dark italic transition-all duration-300 hover:bg-olive-dark hover:text-cream hover:scale-105"
+              style={{ fontSize: "clamp(9px, 2vw, 15px)", padding: "clamp(4px, 1vw, 8px) clamp(12px, 3vw, 20px)" }}
             >
               Google Maps
             </a>
@@ -137,28 +139,44 @@ export default function Countdown() {
               href="https://waze.com/ul?q=9381+Jalan+Gombak+Ulu+Gombak+53100+Selangor"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 sm:px-5 py-1.5 sm:py-2 rounded-full border-2 border-olive-dark text-sm sm:text-base italic transition-all duration-300 hover:bg-olive-dark hover:text-cream hover:scale-105"
+              className="rounded-full border-2 border-olive-dark italic transition-all duration-300 hover:bg-olive-dark hover:text-cream hover:scale-105"
+              style={{ fontSize: "clamp(9px, 2vw, 15px)", padding: "clamp(4px, 1vw, 8px) clamp(12px, 3vw, 20px)" }}
             >
               Waze
             </a>
           </div>
         </div>
-      </div>
 
-      {/* Decorative Roses */}
+        {/* Rose droite haut */}
       <img
         src="/images/rose_secondary1.png"
         alt="Rose décorative"
-        className="absolute right-[-8%] sm:right-[-6%] md:right-[-5%] rotate-[320deg] top-[8%] sm:top-[-3%] md:top-[-4%] w-[33%] sm:w-[35%] md:w-[38%] pointer-events-none z-10"
+        className="absolute pointer-events-none z-10"
+        style={{
+          right: "clamp(-40px, -6%, -10px)",
+          top: "clamp(-140px, -36%, -80px)",
+          width: "clamp(90px, 38%, 220px)",
+          transform: "rotate(320deg)",
+        }}
         loading="lazy"
       />
 
+      {/* Rose gauche bas */}
       <img
         src="/images/rose_secondary2.png"
         alt="Rose décorative"
-        className="absolute left-[-5%] sm:left-[-3%] md:left-0 rotate-[-10deg] bottom-[-12%] sm:bottom-[-15%] md:bottom-[-18%] w-[28%] sm:w-[30%] md:w-[32%] pointer-events-none z-10"
+        className="absolute pointer-events-none z-10"
+        style={{
+          left: "clamp(-20px, -5%, 0px)",
+          bottom: "clamp(-60px, -16%, -20px)",
+          width: "clamp(80px, 30%, 180px)",
+          transform: "rotate(-10deg)",
+        }}
         loading="lazy"
       />
+      </div>
+
+      
     </div>
   );
 }

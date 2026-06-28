@@ -17,15 +17,13 @@ export default function EnvelopeCoverOpen({ open }) {
       className="flex items-center justify-center min-h-screen"
       style={{
         backgroundImage: 'url(/images/bg_primary.jpg)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
         padding: 'clamp(48px, 10vw, 80px) 0',
       }}
     >
       {/* Wrapper centré — même max-width que EnvelopeCover */}
       <div
         className="relative flex flex-col items-center text-center w-full"
-        style={{ maxWidth: 'min(90vw, 480px)' }}
+        style={{ maxWidth: 'min(80vw, 400px)' }}
       >
 
         {/* Envelope Container */}
@@ -41,7 +39,7 @@ export default function EnvelopeCoverOpen({ open }) {
             className="absolute pointer-events-none z-40 object-contain opacity-95"
             style={{
               width: 'clamp(180px, 65%, 340px)',
-              top: 'clamp(-10px, 22%, 70px)',
+              top: 'clamp(-10px, 20%, 90px)',
               left: 'clamp(-90px, -28%, -60px)',
               transform: 'rotate(-40deg)',
             }}
@@ -122,25 +120,25 @@ export default function EnvelopeCoverOpen({ open }) {
                 </p>
                 <p
                   className="text-olive font-script leading-tight"
-                  style={{ fontSize: 'clamp(26px, 7vw, 52px)', margin: 0 }}
+                  style={{ fontSize: 'clamp(26px, 7vw, 44px)', margin: 0 }}
                 >
                   Mairama
                 </p>
                 <p
                   className="text-olive font-roundhand"
-                  style={{ fontSize: 'clamp(18px, 4.5vw, 36px)', margin: 'clamp(-8px, -0.6vw, -6px) 0' }}
+                  style={{ fontSize: 'clamp(18px, 4.5vw, 32px)', margin: 'clamp(-16px, -1.2vw, -10px) 0' }}
                 >
                   &amp;
                 </p>
                 <p
                   className="text-olive font-script leading-tight"
-                  style={{ fontSize: 'clamp(26px, 7vw, 52px)', margin: 0 }}
+                  style={{ fontSize: 'clamp(26px, 7vw, 44px)', margin: 0 }}
                 >
                   Ousmanou
                 </p>
                 <p
                   className="text-olive font-bogue font-semibold"
-                  style={{ fontSize: 'clamp(14px, 3.5vw, 28px)', margin: 0, paddingTop: '0.3em' }}
+                  style={{ fontSize: 'clamp(14px, 3.5vw, 28px)', margin: 0, paddingTop: '0.1em' }}
                 >
                   <time dateTime="2026-08-21">21 . 08 . 2026</time>
                 </p>

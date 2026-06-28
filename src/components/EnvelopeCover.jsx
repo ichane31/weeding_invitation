@@ -17,7 +17,7 @@ export default function EnvelopeCover({ onOpen }) {
       }`}
       style={{ backgroundImage: 'url(/images/bg_primary.jpg)' }}
     >
-      <div className="relative flex flex-col items-center w-full max-w-[min(90vw,480px)] px-0 text-center">
+      <div className="relative flex flex-col items-center w-full max-w-[min(80vw,400px)] px-0 text-center">
 
         {/* Envelope Container */}
         <div className="relative w-full aspect-[1.55] flex items-center justify-center select-none">

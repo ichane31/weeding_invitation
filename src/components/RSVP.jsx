@@ -16,23 +16,16 @@ export default function RSVP({ onResponseSubmitted }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleAttendanceChange = (status) => {
-    setFormData((prev) => ({
-      ...prev,
-      attendance: status,
-    }));
+    setFormData((prev) => ({ ...prev, attendance: status }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.name.trim()) return;
-
     setLoading(true);
 
     setTimeout(() => {
@@ -40,194 +33,196 @@ export default function RSVP({ onResponseSubmitted }) {
         id: Date.now().toString(),
         name: formData.name,
         attendance: formData.attendance,
-        companions:
-          formData.attendance === "yes"
-            ? parseInt(formData.companions) || 1
-            : 0,
+        companions: formData.attendance === "yes" ? parseInt(formData.companions) || 1 : 0,
         message: formData.message,
-        date: new Date().toLocaleDateString("fr-FR", {
-          day: "numeric",
-          month: "long",
-          year: "numeric",
-        }),
+        date: new Date().toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" }),
       };
 
-      const existingResponses = JSON.parse(
-        localStorage.getItem("rsvp_responses") || "[]"
-      );
+      const existingResponses = JSON.parse(localStorage.getItem("rsvp_responses") || "[]");
       existingResponses.unshift(newResponse);
       localStorage.setItem("rsvp_responses", JSON.stringify(existingResponses));
 
       if (formData.attendance === "yes") {
-        confetti({
-          particleCount: 150,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: ["#800020", "#556b2f", "#d4af37"],
-        });
+        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ["#800020", "#556b2f", "#d4af37"] });
       }
 
       setIsSubmitted(true);
       setLoading(false);
-
-      if (onResponseSubmitted) {
-        onResponseSubmitted();
-      }
+      if (onResponseSubmitted) onResponseSubmitted();
     }, 800);
   };
 
   return (
     <div
-      className="relative flex flex-col items-center w-full pb-8 sm:pb-12 bg-cover bg-center bg-no-repeat overflow-visible"
+      className="relative flex flex-col items-center w-full overflow-visible"
       style={{
         backgroundImage: "url(/images/bg_primary.jpg)",
+        paddingBottom: "clamp(20px, 6vw, 30px)",
       }}
     >
       {/* Header */}
-      <div className="max-w-[92%] sm:max-w-[85%] md:max-w-[80%] lg:max-w-[75%] flex flex-col items-center gap-2 sm:gap-3 pb-4 sm:pb-5 md:pb-6 px-3 sm:px-4">
-        <h2 className="font-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-olive-dark font-medium mb-1">
+      <div
+        className="flex flex-col items-center text-center"
+        style={{
+          maxWidth: "clamp(280px, 88%, 720px)",
+          gap: "clamp(6px, 1.5vw, 14px)",
+          padding: "clamp(24px, 5vw, 48px) clamp(12px, 4vw, 32px) clamp(12px, 3vw, 28px)",
+        }}
+      >
+        <h2
+          className="font-title text-olive-dark font-medium"
+          style={{ fontSize: "clamp(28px, 6vw, 64px)" }}
+        >
           RSVP
         </h2>
-        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-olive font-title text-center max-w-3xl">
+        <p
+          className="font-title text-olive text-center"
+          style={{ fontSize: "clamp(11px, 2.2vw, 16px)", }}
+        >
           Votre présence à notre mariage nous ferait un immense honneur.
-          <br className="hidden sm:block" />
-          <span className="block sm:inline">
-            En raison de la capacité du lieu, nous avons réservé une place
-            spécialement pour vous.
-          </span>
+          <br />
+          En raison de la capacité du lieu, nous avons réservé une place spécialement pour vous.
         </p>
       </div>
 
-      <div className="relative w-full flex flex-col lg:flex-row items-center lg:items-start justify-center gap-4 lg:gap-2 py-2 px-3 sm:px-4">
-        {/* Left - Form Card */}
-        <div className="relative w-full max-w-[90%] sm:max-w-xl lg:max-w-[500px] flex p-5 sm:p-7 md:p-8 bg-white/95 backdrop-blur-sm rounded-lg shadow-xl z-30">
+      {/* Formulaire + déco */}
+      <div
+        className="relative w-full flex flex-col lg:flex-row items-center lg:items-start justify-center"
+        style={{
+          gap: "clamp(16px, 3vw, 24px)",
+          padding: "clamp(8px, 2vw, 16px) clamp(12px, 4vw, 32px)",
+        }}
+      >
+        {/* Carte formulaire */}
+        <div
+          className="relative w-full bg-white/95 backdrop-blur-sm rounded-lg shadow-xl z-30"
+          style={{
+            maxWidth: "clamp(280px, 90vw, 500px)",
+            padding: "clamp(20px, 5vw, 30px)",
+          }}
+        >
           {isSubmitted ? (
-            <div className="text-center w-full py-6 sm:py-8 flex flex-col items-center justify-center animate-fade-in-up">
-              <CheckCircle2 className="w-14 h-14 sm:w-16 sm:h-16 text-olive mb-3 sm:mb-4 animate-bounce" />
-              <h4 className="font-title text-xl sm:text-2xl text-burgundy-dark font-semibold mb-2">
+            <div className="text-center w-full flex flex-col items-center justify-center animate-fade-in-up"
+              style={{ padding: "clamp(20px, 5vw, 40px) 0" }}
+            >
+              <CheckCircle2 style={{ width: "clamp(48px, 10vw, 64px)", height: "clamp(48px, 10vw, 64px)" }} className="text-olive animate-bounce" style2={{ marginBottom: "clamp(10px, 2vw, 18px)" }} />
+              <h4
+                className="font-title text-burgundy-dark font-semibold"
+                style={{ fontSize: "clamp(16px, 3.5vw, 24px)", marginBottom: "clamp(6px, 1.5vw, 10px)" }}
+              >
                 Merci pour votre réponse !
               </h4>
-              <div className="h-[1px] w-10 sm:w-12 bg-gold mb-3 sm:mb-4"></div>
-              <p className="text-xs sm:text-sm text-gray-600 max-w-[280px] px-2">
+              <div className="bg-gold" style={{ height: "1px", width: "clamp(32px, 6vw, 48px)", margin: "0 auto clamp(10px, 2vw, 18px)" }} />
+              <p
+                className="text-gray-600"
+                style={{ fontSize: "clamp(10px, 2vw, 13px)", maxWidth: "280px" }}
+              >
                 {formData.attendance === "yes"
                   ? "Nous sommes impatients de célébrer ce moment magique avec vous !"
                   : "Nous vous remercions d'avoir pris le temps de nous répondre. Vos pensées nous touchent beaucoup."}
               </p>
               <button
                 onClick={() => setIsSubmitted(false)}
-                className="mt-5 sm:mt-6 text-[10px] sm:text-xs text-olive font-title uppercase tracking-widest hover:text-burgundy transition-colors duration-300 border-b border-transparent hover:border-burgundy pb-1"
+                className="font-title uppercase tracking-widest text-olive hover:text-burgundy transition-colors duration-300 border-b border-transparent hover:border-burgundy"
+                style={{ fontSize: "clamp(9px, 1.8vw, 12px)", marginTop: "clamp(16px, 4vw, 28px)", paddingBottom: "2px" }}
               >
                 Modifier la réponse
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4.5 sm:space-y-5 md:space-y-6 w-full">
-              <div className="space-y-3 sm:space-y-4 text-left">
-                {/* Full Name */}
-                <div className="space-y-1.5 sm:space-y-2">
-                  <label className="block text-xs sm:text-sm font-title tracking-wider text-olive-dark font-medium">
+            <form onSubmit={handleSubmit} className="w-full" style={{ display: "flex", flexDirection: "column", gap: "clamp(12px, 3vw, 24px)" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "clamp(10px, 2.5vw, 20px)" }}>
+
+                {/* Nom */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "clamp(4px, 1vw, 8px)" }}>
+                  <label className="font-title tracking-wider text-olive-dark font-medium text-left"
+                    style={{ fontSize: "clamp(10px, 2vw, 14px)" }}>
                     Nom Complet <span className="text-burgundy">*</span>
                   </label>
                   <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
+                    type="text" name="name" value={formData.name} onChange={handleChange} required
                     placeholder="M. et Mme. Dupont"
-                    className="w-full bg-[#fdfbf7] border border-cream-dark focus:border-burgundy rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm outline-none transition-all duration-300 shadow-inner focus:shadow-lg"
+                    className="w-full bg-[#fdfbf7] border border-cream-dark focus:border-burgundy rounded-lg outline-none transition-all duration-300 shadow-inner focus:shadow-lg"
+                    style={{ fontSize: "clamp(10px, 2vw, 14px)", padding: "clamp(8px, 1.5vw, 12px) clamp(10px, 2vw, 16px)" }}
                   />
                 </div>
 
-                {/* Phone */}
-                <div className="space-y-1.5 sm:space-y-2">
-                  <label className="block text-xs sm:text-sm font-title tracking-wider text-olive-dark font-medium">
+                {/* Téléphone */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "clamp(4px, 1vw, 8px)" }}>
+                  <label className="font-title tracking-wider text-olive-dark font-medium text-left"
+                    style={{ fontSize: "clamp(10px, 2vw, 14px)" }}>
                     Numéro de Téléphone <span className="text-burgundy">*</span>
                   </label>
                   <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    required
+                    type="tel" name="phone" value={formData.phone} onChange={handleChange} required
                     placeholder="06 12 34 56 78"
-                    className="w-full bg-[#fdfbf7] border border-cream-dark focus:border-burgundy rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm outline-none transition-all duration-300 shadow-inner focus:shadow-lg"
+                    className="w-full bg-[#fdfbf7] border border-cream-dark focus:border-burgundy rounded-lg outline-none transition-all duration-300 shadow-inner focus:shadow-lg"
+                    style={{ fontSize: "clamp(10px, 2vw, 14px)", padding: "clamp(8px, 1.5vw, 12px) clamp(10px, 2vw, 16px)" }}
                   />
                 </div>
 
-                {/* Attendance Button Toggle */}
-                <div className="space-y-1.5 sm:space-y-2">
-                  <label className="block text-xs sm:text-sm font-title tracking-wider text-olive-dark font-medium">
+                {/* Présence */}
+                <div style={{ display: "flex", flexDirection: "column", gap: "clamp(4px, 1vw, 8px)" }}>
+                  <label className="font-title tracking-wider text-olive-dark font-medium text-left"
+                    style={{ fontSize: "clamp(10px, 2vw, 14px)" }}>
                     Serez-vous présent(e) ?
                   </label>
-                  <div className="grid grid-cols-2 gap-2 sm:gap-3 md:gap-4">
-                    <button
-                      type="button"
-                      onClick={() => handleAttendanceChange("yes")}
-                      className={`py-2.5 sm:py-3 rounded-lg font-title text-[10px] sm:text-xs uppercase tracking-widest border transition-all duration-300 ${
-                        formData.attendance === "yes"
-                          ? "bg-burgundy text-cream border-burgundy shadow-lg shadow-burgundy/20"
-                          : "bg-transparent text-gray-500 border-cream-dark hover:border-burgundy hover:text-burgundy hover:bg-burgundy/5"
-                      }`}
-                    >
-                      Oui, Présent(e)
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleAttendanceChange("no")}
-                      className={`py-2.5 sm:py-3 rounded-lg font-title text-[10px] sm:text-xs uppercase tracking-widest border transition-all duration-300 ${
-                        formData.attendance === "no"
-                          ? "bg-burgundy text-cream border-burgundy shadow-lg shadow-burgundy/20"
-                          : "bg-transparent text-gray-500 border-cream-dark hover:border-burgundy hover:text-burgundy hover:bg-burgundy/5"
-                      }`}
-                    >
-                      Non, Absent(e)
-                    </button>
+                  <div className="grid grid-cols-2" style={{ gap: "clamp(6px, 1.5vw, 16px)" }}>
+                    {["yes", "no"].map((val) => (
+                      <button
+                        key={val}
+                        type="button"
+                        onClick={() => handleAttendanceChange(val)}
+                        className={`rounded-lg font-title uppercase tracking-widest border transition-all duration-300 ${
+                          formData.attendance === val
+                            ? "bg-burgundy text-cream border-burgundy shadow-lg shadow-burgundy/20"
+                            : "bg-transparent text-gray-500 border-cream-dark hover:border-burgundy hover:text-burgundy hover:bg-burgundy/5"
+                        }`}
+                        style={{ fontSize: "clamp(9px, 1.8vw, 12px)", padding: "clamp(8px, 1.5vw, 12px)" }}
+                      >
+                        {val === "yes" ? "Oui, Présent(e)" : "Non, Absent(e)"}
+                      </button>
+                    ))}
                   </div>
                 </div>
 
-                {/* Companions Count */}
+                {/* Nombre */}
                 {formData.attendance === "yes" && (
-                  <div className="animate-fade-in-up space-y-1.5 sm:space-y-2">
-                    <label className="block text-xs sm:text-sm font-title tracking-wider text-olive-dark font-medium">
+                  <div className="animate-fade-in-up" style={{ display: "flex", flexDirection: "column", gap: "clamp(4px, 1vw, 8px)" }}>
+                    <label className="font-title tracking-wider text-olive-dark font-medium text-left"
+                      style={{ fontSize: "clamp(10px, 2vw, 14px)" }}>
                       Nombre de personnes (vous inclus)
                     </label>
                     <select
-                      name="companions"
-                      value={formData.companions}
-                      onChange={handleChange}
-                      className="w-full bg-[#fdfbf7] border border-cream-dark focus:border-burgundy rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm outline-none transition-all duration-300 focus:shadow-lg"
+                      name="companions" value={formData.companions} onChange={handleChange}
+                      className="w-full bg-[#fdfbf7] border border-cream-dark focus:border-burgundy rounded-lg outline-none transition-all duration-300 focus:shadow-lg"
+                      style={{ fontSize: "clamp(10px, 2vw, 14px)", padding: "clamp(8px, 1.5vw, 12px) clamp(10px, 2vw, 16px)" }}
                     >
-                      <option value="1">1 Personne</option>
-                      <option value="2">2 Personnes</option>
-                      <option value="3">3 Personnes</option>
-                      <option value="4">4 Personnes</option>
-                      <option value="5">5 Personnes</option>
+                      {[1,2,3,4,5].map(n => <option key={n} value={n}>{n} Personne{n > 1 ? "s" : ""}</option>)}
                     </select>
                   </div>
                 )}
 
                 {/* Message */}
-                <div className="space-y-1.5 sm:space-y-2">
-                  <label className="block text-xs sm:text-sm font-title tracking-wider text-olive-dark font-medium">
+                <div style={{ display: "flex", flexDirection: "column", gap: "clamp(4px, 1vw, 8px)" }}>
+                  <label className="font-title tracking-wider text-olive-dark font-medium text-left"
+                    style={{ fontSize: "clamp(10px, 2vw, 14px)" }}>
                     Message pour les mariés
                   </label>
                   <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    rows="3"
+                    name="message" value={formData.message} onChange={handleChange} rows="3"
                     placeholder="Félicitations pour votre mariage..."
-                    className="w-full bg-[#fdfbf7] border border-cream-dark focus:border-burgundy rounded-lg px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm outline-none transition-all duration-300 shadow-inner resize-none focus:shadow-lg"
+                    className="w-full bg-[#fdfbf7] border border-cream-dark focus:border-burgundy rounded-lg outline-none transition-all duration-300 shadow-inner resize-none focus:shadow-lg"
+                    style={{ fontSize: "clamp(10px, 2vw, 14px)", padding: "clamp(8px, 1.5vw, 12px) clamp(10px, 2vw, 16px)" }}
                   />
                 </div>
               </div>
 
-              {/* Submit Button */}
+              {/* Bouton submit */}
               <button
-                type="submit"
-                disabled={loading}
-                className="w-full bg-olive text-cream-light font-title text-xs sm:text-sm tracking-widest py-2.5 sm:py-3 rounded-lg hover:bg-olive-dark transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-olive/20 hover:shadow-xl hover:shadow-olive/30 transform hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed"
+                type="submit" disabled={loading}
+                className="w-full bg-olive text-cream-light font-title tracking-widest rounded-lg hover:bg-olive-dark transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-olive/20 hover:shadow-xl hover:shadow-olive/30 transform hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed"
+                style={{ fontSize: "clamp(10px, 2vw, 14px)", padding: "clamp(10px, 2vw, 14px)" }}
               >
                 {loading ? (
                   <span className="flex items-center gap-2">
@@ -239,7 +234,7 @@ export default function RSVP({ onResponseSubmitted }) {
                   </span>
                 ) : (
                   <>
-                    <Send className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                    <Send style={{ width: "clamp(12px, 2vw, 16px)", height: "clamp(12px, 2vw, 16px)" }} />
                     <span>Envoyer la Réponse</span>
                   </>
                 )}
@@ -248,45 +243,73 @@ export default function RSVP({ onResponseSubmitted }) {
           )}
         </div>
 
-        {/* Right - Decorative Side - MAINTENANT VISIBLE SUR TOUS LES ÉCRANS */}
-        <div className="relative w-full max-w-[400px] sm:max-w-[380px] md:max-w-[370px] lg:max-w-[320px] lg:mt-[5%] md:ml-[-9%] z-30 mt-2 sm:mt-0">
-          {/* Conteneur avec hauteur fixe pour garantir la visibilité sur mobile */}
-          <div className="relative w-full h-[370px] md:h-[350px] lg:h-[300px]">
-            
-            {/* Roses décoratives - adaptées pour mobile */}
-            <div className="absolute w-[80%] sm:w-[70%] md:w-[80%] lg:w-[100%] -top-[2%] sm:-top-[5%] md:-top-[10%] lg:top-[3%] left-[20%] sm:left-[25%] md:left-[28%] lg:left-[20%] rotate-[-20deg] pointer-events-none flex items-center justify-center">
-              <img
-                src="/images/rose_primary.png"
-                alt="Décoration florale"
-                className="w-full h-full object-contain"
-                loading="lazy"
-              />
-            </div>
+        {/* Déco droite */}
+        <div
+          className="relative z-30 lg:ml-[-5%]"
+          style={{
+            width: "clamp(200px, 60vw, 360px)",
+            marginTop: "clamp(0px, 2vw, 0px)",
+          }}
+        >
+          <div className="lg:mt-[32%]">
+            <div
+              className="relative w-full pointer-events-none lg:ml-rsvp-offset"
+              style={{ height: "clamp(260px, 45vw, 360px)"}}
+            >
+              {/* Rose haut */}
+              <div
+                className="absolute lg:left-[20%] pointer-events-none flex items-center justify-center"
+                style={{
+                  width: "clamp(200px, 75%, 290px)",
+                  top: "clamp(-16px, -4%, -8px)",
+                  transform: "rotate(-20deg)",
+                }}
+              >
+                <img src="/images/rose_primary.png" alt="" className="w-full h-full object-contain" loading="lazy" />
+              </div>
 
-            <div className="absolute w-[80%] sm:w-[70%] md:w-[80%] lg:w-[100%] -top-[0%] sm:-top-[0%] md:-top-[5%] lg:-top-[2%] left-[18%] sm:left-[22%] md:left-[26%] lg:left-[18%] rotate-[190deg] pointer-events-none flex items-center justify-center">
-              <img
-                src="/images/rose_primary.png"
-                alt="Décoration florale"
-                className="w-full h-full object-contain"
-                loading="lazy"
-              />
-            </div>
+              {/* Rose bas inversée */}
+              <div
+                className="absolute lg:left-[18%] pointer-events-none flex items-center justify-center"
+                style={{
+                  width: "clamp(200px, 75%, 290px)",
+                  top: "clamp(10px, 4%, 20px)",
+                  transform: "rotate(190deg)",
+                }}
+              >
+                <img src="/images/rose_primary.png" alt="" className="w-full h-full object-contain" loading="lazy" />
+              </div>
 
-            {/* Sceau - adapté pour mobile */}
-            <div className="absolute w-[60px] sm:w-[65px] md:w-[75px] lg:w-[90px] z-40 top-[18%] sm:top-[17%] md:top-[10%] lg:top-[18%] left-[33%] sm:left-[35%] md:left-[42%] rotate-[10deg]">
-              <img
-                src="/images/sceau1.png"
-                alt="Sceau"
-                className="w-full h-full object-contain"
-                loading="lazy"
-              />
-            </div>
+              {/* Sceau */}
+              <div
+                className="absolute z-40 left-[13%] lg:left-[33%]"
+                style={{
+                  width: "clamp(45px, 17%, 80px)",
+                  top: "18%",
+                  transform: "rotate(10deg)",
+                }}
+              >
+                <img src="/images/sceau1.png" alt="Sceau" className="w-full h-full object-contain" loading="lazy" />
+              </div>
 
-            {/* Message Card - adapté pour mobile */}
-            <div className="absolute flex items-center justify-center w-[45%] sm:w-[50%] md:w-[58%] lg:w-[67%] aspect-[1.4] top-[30%] sm:top-[28%] md:top-[25%] lg:top-[42%] left-[35%] sm:left-[35%] md:left-[40%] lg:left-[40%] rotate-[12deg] md:rotate-[15deg] lg:rotate-[20deg] z-20 pointer-events-none bg-cream py-2 sm:py-3 md:py-4 px-2 sm:px-3 md:px-4 rounded-lg shadow-lg border border-olive/10">
-              <p className="text-[11px] sm:text-xs md:text-[13px] lg:text-sm font-title text-center leading-tight text-olive-dark">
-                Afin de vous réserver le meilleur accueil, merci de nous contacter pour toute demande d'invité supplémentaire
-              </p>
+              {/* Carte message */}
+              <div
+                className="absolute left-[15%] md:left-[15%] lg:left-[35%] flex items-center justify-center z-20 pointer-events-none bg-cream rounded-lg shadow-lg border border-olive/10"
+                style={{
+                  width: "clamp(120px, 44%, 200px)",
+                  aspectRatio: "1.4",
+                  top: "30%",
+                  transform: "rotate(15deg)",
+                  padding: "clamp(8px, 2vw, 16px)",
+                }}
+              >
+                <p
+                  className="font-title text-center leading-tight text-olive-dark"
+                  style={{ fontSize: "clamp(9px, 1.2vw, 13px)" }}
+                >
+                  Afin de vous réserver le meilleur accueil, merci de nous contacter pour toute demande d'invité supplémentaire
+                </p>
+              </div>
             </div>
           </div>
         </div>

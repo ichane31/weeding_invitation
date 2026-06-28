@@ -84,7 +84,7 @@ export default function App() {
           <EnvelopeCoverOpen open={isEnvelopeOpen} />
 
           {/* Tab content viewports */}
-          <main className="flex-grow flex flex-col items-center justify-start pb-20 relative">
+          <main className="flex-grow flex flex-col items-center justify-start pb-2 relative">
             {activeTab === "invitation" && (
               /* Invitation View */
               <div className="w-full flex flex-col items-center">
