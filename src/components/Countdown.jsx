@@ -39,13 +39,13 @@ export default function Countdown() {
 
   return (
     <div className="w-full flex flex-col items-center text-center select-none relative"
-      style={{ padding: "0 clamp(12px, 4vw, 48px)" }}
+      style={{ padding: "0 clamp(12px, 4vw, 48px)", paddingTop: "clamp(20px, 6vw, 50px)" }}
     >
       <Butterflies size={{ min: 20, max: 30 }}/>
       {/* Titre */}
       <h3
         className="font-script text-olive-dark max-w-2xl w-full text-start"
-        style={{ fontSize: "clamp(32px, 7vw, 72px)", marginBottom: "clamp(-25px, -3vw, -20px)" }}
+        style={{ fontSize: "clamp(32px, 7vw, 72px)", marginBottom: "clamp(-16px, -2vw, -10px)" }}
       >
         Le compte à rebours
       </h3>
@@ -156,9 +156,9 @@ export default function Countdown() {
         className="absolute pointer-events-none z-10"
         style={{
           right: "clamp(-40px, -6%, -10px)",
-          top: "clamp(-140px, -36%, -80px)",
+          top: "clamp(-120px, -34%, -60px)",
           width: "clamp(90px, 38%, 220px)",
-          transform: "rotate(320deg)",
+          transform: "rotate(325deg)",
         }}
         loading="lazy"
       />
