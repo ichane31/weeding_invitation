@@ -9,7 +9,7 @@ export default function InvitationCard({ animateCard = false }) {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const musicUrl = "https://assets.mixkit.co/music/preview/mixkit-wedding-piano-1224.mp3";
+const musicUrl = "/music/music1.mp3";
 
   useEffect(() => {
     if (!animateCard) {
@@ -29,39 +29,48 @@ export default function InvitationCard({ animateCard = false }) {
     return () => clearTimeout(t);
   }, [animateCard]);
 
-  // Lance la musique dès que animateCard passe à true (l'utilisateur vient de cliquer sur l'enveloppe)
+  // Lance la musique dès que animateCard passe à true
   useEffect(() => {
-    if (!animateCard || !audioRef.current) return;
-    audioRef.current.play()
-      .then(() => setIsPlaying(true))
-      .catch(() => {
-        // Toujours bloqué — l'utilisateur devra cliquer sur le disque
+  if (!animateCard || !audioRef.current) return;
+  audioRef.current.play()
+    .then(() => setIsPlaying(true))
+    .catch(() => setIsPlaying(false));
+}, [animateCard]);
+
+  // Gestion play/pause directe sans useEffect
+  const togglePlay = () => {
+  const audio = audioRef.current;
+  if (!audio) {
+    console.log("pas d'audio ref");
+    return;
+  }
+
+
+  if (!audio.paused) {
+    audio.pause();
+    setIsPlaying(false);
+  } else {
+    audio.play()
+      .then(() => {
+        console.log("play ok");
+        setIsPlaying(true);
+      })
+      .catch((e) => {
+        console.error("play error:", e);
         setIsPlaying(false);
       });
-  }, [animateCard]);
-
-  // Sync play/pause quand l'utilisateur clique sur le disque
-  useEffect(() => {
-    if (!audioRef.current) return;
-    if (isPlaying) {
-      audioRef.current.play().catch(() => setIsPlaying(false));
-    } else {
-      audioRef.current.pause();
-    }
-  }, [isPlaying]);
-
-  const togglePlay = () => setIsPlaying((prev) => !prev);
-
-  console.log(isPlaying)
+  }
+};
 
   return (
-    <div
+    <section 
+      id="invitation"
       className="relative flex flex-col items-center w-full select-none"
       style={{ backgroundImage: "url(/images/bg_primary.jpg)" }}
     >
       <audio ref={audioRef} src={musicUrl} loop preload="auto" />
 
-      <Butterflies count={4} size={{ min: 20, max: 30 }} />
+      <Butterflies count={6} size={{ min: 20, max: 30 }} />
 
       {/* ── Enveloppe ouverte ── */}
       <div
@@ -73,7 +82,7 @@ export default function InvitationCard({ animateCard = false }) {
       >
         <div
           className="relative flex flex-col items-center text-center w-full"
-          style={{ maxWidth: "min(80vw, 400px)" }}
+          style={{ maxWidth: "min(80vw, 380px)" }}
         >
           <div
             className="relative w-full flex items-center justify-center select-none"
@@ -153,7 +162,7 @@ export default function InvitationCard({ animateCard = false }) {
                     className="text-olive font-script leading-tight"
                     style={{ fontSize: "clamp(24px, 7.5vw, 40px)", margin: 0 }}
                   >
-                    The Beginning of Forever starts here
+                    Le début de l'éternité commence ici
                   </p>
                 </div>
               </div>
@@ -210,7 +219,7 @@ export default function InvitationCard({ animateCard = false }) {
               <div className="absolute inset-0 flex items-center justify-center z-10">
                 <div className="bg-black/80 rounded-full p-3 backdrop-blur-sm group-hover:scale-110 transition-all duration-300">
                   {isPlaying
-                    ? <Pause size={32} color="white" fill="white" />
+                    ? <Pause size={28} color="white" fill="white" />
                     : <Play  size={32} color="white" fill="white" />
                   }
                 </div>
@@ -399,6 +408,6 @@ export default function InvitationCard({ animateCard = false }) {
           <Countdown />
         </div>
       </div>
-    </div>
+    </section>
   );
 }

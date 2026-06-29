@@ -15,6 +15,7 @@ export default function GiftSection() {
 
   return (
     <section
+      id="gift"
       className="relative w-full overflow-visible flex flex-col items-center"
       style={{
         backgroundImage: "url(/images/bg_primary.jpg)",
