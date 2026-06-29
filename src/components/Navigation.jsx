@@ -7,7 +7,7 @@ export default function Navigation({ activeTab, setActiveTab, resetEnvelope }) {
 
   return (
     <nav
-      className="sticky top-0 z-40 bg-[#fdfbf7]/90 backdrop-blur-md border-b border-cream-dark shadow-sm"
+      className="sticky top-0 z-50 bg-[#fdfbf7]/90 backdrop-blur-md border-b border-cream-dark shadow-sm"
       style={{ padding: "clamp(10px, 2.5vw, 16px) clamp(16px, 5vw, 32px)" }}
     >
       <div className="flex items-center justify-between w-full">

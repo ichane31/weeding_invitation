@@ -82,7 +82,7 @@ export default function EnvelopeCover({ onOpen }) {
           className="mt-[clamp(12px,3vw,24px)] font-bogue text-olive-dark tracking-[0.25em] uppercase hover:text-burgundy transition-all duration-300 flex flex-col items-center gap-1.5 group focus:outline-none"
           style={{ fontSize: 'clamp(10px, 2vw, 14px)' }}
         >
-          <span>Open Invitation</span>
+          <span>Ouvrir l'invitation</span>
           <span className="h-[1px] w-8 bg-olive-dark group-hover:w-20 group-hover:bg-burgundy transition-all duration-300" />
         </button>
 

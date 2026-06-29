@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import PetalsRain from "./PetalsRain";
+// import PetalsRain from "./PetalsRain";
 
 export default function EnvelopeCoverOpen({ open }) {
   const [pulled, setPulled] = useState(false);
@@ -22,7 +22,7 @@ export default function EnvelopeCoverOpen({ open }) {
       }}
     >
 
-      <PetalsRain />
+      {/* <PetalsRain /> */}
 
       {/* Wrapper centré — même max-width que EnvelopeCover */}
       <div
