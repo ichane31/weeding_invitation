@@ -20,7 +20,7 @@ export default function ContactInfo() {
           marginBottom: "clamp(20px, 5vw, 48px)",
         }}
       >
-        Contact
+        Nous contacter
       </h2>
 
       {/* Contacts */}

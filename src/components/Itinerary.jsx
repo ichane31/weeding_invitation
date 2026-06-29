@@ -1,3 +1,5 @@
+import Butterflies from "./Butterflies";
+
 const EVENTS = [
   { title: "Accueil des invités", time: "18h00 – 19h00" },
   { title: "L'amour commence son merveilleux voyage", time: "19h30" },
@@ -15,6 +17,7 @@ export default function Itinerary() {
         padding: "clamp(40px, 6vw, 66px) clamp(12px, 4vw, 32px)",
       }}
     >
+      <Butterflies size={{ min: 20, max: 30 }}/>
       <div
         className="relative w-full"
         style={{ maxWidth: "clamp(280px, 89%, 520px)" }}

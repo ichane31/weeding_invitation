@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Butterflies from "./Butterflies";
 
 export default function Countdown() {
   const targetDate = new Date("2026-08-21T15:30:00").getTime();
@@ -40,12 +41,13 @@ export default function Countdown() {
     <div className="w-full flex flex-col items-center text-center select-none relative"
       style={{ padding: "0 clamp(12px, 4vw, 48px)" }}
     >
+      <Butterflies size={{ min: 20, max: 30 }}/>
       {/* Titre */}
       <h3
         className="font-script text-olive-dark max-w-2xl w-full text-start"
         style={{ fontSize: "clamp(36px, 8vw, 80px)", marginBottom: "clamp(-25px, -3vw, -20px)" }}
       >
-        Counting Days
+        Le grand jour approche
       </h3>
 
       {/* Chiffres */}

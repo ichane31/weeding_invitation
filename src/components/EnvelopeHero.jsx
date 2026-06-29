@@ -1,5 +1,6 @@
 import { useState } from "react";
-import PetalsRain from "./PetalsRain";
+// import PetalsRain from "./PetalsRain";
+import Butterflies from "./Butterflies";
 
 export default function EnvelopeHero({ onOpen }) {
   const [phase, setPhase] = useState("closed"); // "closed" | "opening" | "open"
@@ -20,13 +21,14 @@ export default function EnvelopeHero({ onOpen }) {
 
   return (
     <div
-      className="relative flex items-center justify-center min-h-screen w-full"
+      className="relative flex items-center justify-center h-screen w-full"
       style={{
         backgroundImage: "url(/images/bg_primary.jpg)",
         padding: "clamp(48px, 10vw, 80px) 0",
       }}
     >
-      {isOpen && <PetalsRain />}
+      {/* {isOpen && <PetalsRain />} */}
+      <Butterflies size={{ min: 20, max: 30 }}/>
 
       <div
         className="relative flex flex-col items-center text-center w-full"
@@ -219,7 +221,7 @@ export default function EnvelopeHero({ onOpen }) {
             className="font-bogue text-olive-dark tracking-[0.25em] uppercase hover:text-burgundy transition-all duration-300 flex flex-col items-center gap-1.5 group focus:outline-none"
             style={{ fontSize: "clamp(10px, 2vw, 14px)" }}
           >
-            <span>Open Invitation</span>
+            <span>Ouvrir l'invitation</span>
             <span className="h-[1px] w-8 bg-olive-dark group-hover:w-20 group-hover:bg-burgundy transition-all duration-300" />
           </button>
         </div>

@@ -39,7 +39,7 @@ export default function GiftSection() {
           marginBottom: "clamp(8px, 2vw, 20px)",
         }}
       >
-        Gift for the newlyweds!
+        Cadeau pour les mariés !
       </h2>
 
       {/* ── Carte cadeau ── */}
@@ -103,7 +103,7 @@ export default function GiftSection() {
               transform: giftHovered ? "scale(0.95)" : "scale(1)",
             }}
           >
-            click here
+            Cliquer ici
           </p>
         </a>
       </div>
