@@ -71,7 +71,7 @@ export default function RSVP({ onResponseSubmitted }) {
       >
         <h2
           className="font-title text-olive-dark font-medium"
-          style={{ fontSize: "clamp(28px, 6vw, 64px)" }}
+          style={{ fontSize: "clamp(32px, 7vw, 72px)", }}
         >
           RSVP
         </h2>

@@ -45,9 +45,9 @@ export default function Countdown() {
       {/* Titre */}
       <h3
         className="font-script text-olive-dark max-w-2xl w-full text-start"
-        style={{ fontSize: "clamp(36px, 8vw, 80px)", marginBottom: "clamp(-25px, -3vw, -20px)" }}
+        style={{ fontSize: "clamp(32px, 7vw, 72px)", marginBottom: "clamp(-25px, -3vw, -20px)" }}
       >
-        Le grand jour approche
+        Le compte à rebours
       </h3>
 
       {/* Chiffres */}

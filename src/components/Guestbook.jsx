@@ -61,7 +61,7 @@ export default function Guestbook({ refreshTrigger }) {
         <div className="text-center" style={{ marginBottom: "clamp(20px, 5vw, 44px)" }}>
           <h3
             className="font-script font-medium text-olive-dark"
-            style={{ fontSize: "clamp(30px, 7vw, 64px)", marginBottom: "clamp(2px, 0.5vw, 6px)" }}
+            style={{ fontSize: "clamp(32px, 7vw, 72px)", marginBottom: "clamp(2px, 0.5vw, 6px)" }}
           >
             Livre d'Or <span className="font-roundhand font-thin">&</span> Vœux
           </h3>

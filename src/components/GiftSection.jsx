@@ -35,7 +35,7 @@ export default function GiftSection() {
       <h2
         className="text-olive-dark font-script text-center relative z-10"
         style={{
-          fontSize: "clamp(28px, 7vw, 64px)",
+          fontSize: "clamp(32px, 7vw, 72px)",
           marginBottom: "clamp(8px, 2vw, 20px)",
         }}
       >

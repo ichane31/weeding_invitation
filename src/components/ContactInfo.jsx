@@ -16,7 +16,7 @@ export default function ContactInfo() {
       <h2
         className="text-olive-dark font-script text-center relative z-10"
         style={{
-          fontSize: "clamp(28px, 7vw, 64px)",
+          fontSize: "clamp(32px, 7vw, 72px)",
           marginBottom: "clamp(20px, 5vw, 48px)",
         }}
       >
