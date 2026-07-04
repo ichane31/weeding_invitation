@@ -2,6 +2,8 @@ import { useState } from "react";
 import confetti from "canvas-confetti";
 import { Send, CheckCircle2 } from "lucide-react";
 
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw9yPUp-p7RDtjItUIUkHL-9VZp_hw-t9ZKUMBJx41wK43N_rBNGweBZa6__6w6GWwy/exec";
+
 export default function RSVP({ onResponseSubmitted }) {
   const [formData, setFormData] = useState({
     name: "",
@@ -23,33 +25,45 @@ export default function RSVP({ onResponseSubmitted }) {
     setFormData((prev) => ({ ...prev, attendance: status }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name.trim()) return;
     setLoading(true);
 
-    setTimeout(() => {
-      const newResponse = {
-        id: Date.now().toString(),
-        name: formData.name,
-        attendance: formData.attendance,
-        companions: formData.attendance === "yes" ? parseInt(formData.companions) || 1 : 0,
-        message: formData.message,
-        date: new Date().toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" }),
-      };
+    const payload = {
+      name: formData.name,
+      phone: formData.phone,
+      attendance: formData.attendance,
+      companions:
+        formData.attendance === "yes" ? parseInt(formData.companions) || 1 : 0,
+      message: formData.message,
+    };
 
-      const existingResponses = JSON.parse(localStorage.getItem("rsvp_responses") || "[]");
-      existingResponses.unshift(newResponse);
-      localStorage.setItem("rsvp_responses", JSON.stringify(existingResponses));
+    try {
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors", // important avec Apps Script
+        headers: { "Content-Type": "text/plain" },
+        body: JSON.stringify(payload),
+      });
 
       if (formData.attendance === "yes") {
-        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ["#800020", "#556b2f", "#d4af37"] });
+        confetti({
+          particleCount: 150,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ["#800020", "#556b2f", "#d4af37"],
+        });
       }
 
       setIsSubmitted(true);
-      setLoading(false);
       if (onResponseSubmitted) onResponseSubmitted();
-    }, 800);
+    } catch (err) {
+      console.error("Erreur lors de l'envoi :", err);
+      alert("Une erreur est survenue, merci de réessayer.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -66,22 +80,24 @@ export default function RSVP({ onResponseSubmitted }) {
         style={{
           maxWidth: "clamp(280px, 88%, 720px)",
           gap: "clamp(6px, 1.5vw, 14px)",
-          padding: "clamp(24px, 5vw, 48px) clamp(12px, 4vw, 32px) clamp(12px, 3vw, 28px)",
+          padding:
+            "clamp(24px, 5vw, 48px) clamp(12px, 4vw, 32px) clamp(12px, 3vw, 28px)",
         }}
       >
         <h2
           className="font-title text-olive-dark font-medium"
-          style={{ fontSize: "clamp(32px, 7vw, 72px)", }}
+          style={{ fontSize: "clamp(32px, 7vw, 72px)" }}
         >
           RSVP
         </h2>
         <p
           className="font-title text-olive text-center"
-          style={{ fontSize: "clamp(11px, 2.2vw, 16px)", }}
+          style={{ fontSize: "clamp(11px, 2.2vw, 16px)" }}
         >
           Votre présence à notre mariage nous ferait un immense honneur.
           <br />
-          En raison de la capacité du lieu, nous avons réservé une place spécialement pour vous.
+          En raison de la capacité du lieu, nous avons réservé une place
+          spécialement pour vous.
         </p>
       </div>
 
@@ -102,20 +118,41 @@ export default function RSVP({ onResponseSubmitted }) {
           }}
         >
           {isSubmitted ? (
-            <div className="text-center w-full flex flex-col items-center justify-center animate-fade-in-up"
+            <div
+              className="text-center w-full flex flex-col items-center justify-center animate-fade-in-up"
               style={{ padding: "clamp(20px, 5vw, 40px) 0" }}
             >
-              <CheckCircle2 style={{ width: "clamp(48px, 10vw, 64px)", height: "clamp(48px, 10vw, 64px)" }} className="text-olive animate-bounce" style2={{ marginBottom: "clamp(10px, 2vw, 18px)" }} />
+              <CheckCircle2
+                style={{
+                  width: "clamp(48px, 10vw, 64px)",
+                  height: "clamp(48px, 10vw, 64px)",
+                }}
+                className="text-olive animate-bounce"
+                style2={{ marginBottom: "clamp(10px, 2vw, 18px)" }}
+              />
               <h4
                 className="font-title text-burgundy-dark font-semibold"
-                style={{ fontSize: "clamp(16px, 3.5vw, 24px)", marginBottom: "clamp(6px, 1.5vw, 10px)" }}
+                style={{
+                  fontSize: "clamp(16px, 3.5vw, 24px)",
+                  marginBottom: "clamp(6px, 1.5vw, 10px)",
+                }}
               >
                 Merci pour votre réponse !
               </h4>
-              <div className="bg-gold" style={{ height: "1px", width: "clamp(32px, 6vw, 48px)", margin: "0 auto clamp(10px, 2vw, 18px)" }} />
+              <div
+                className="bg-gold"
+                style={{
+                  height: "1px",
+                  width: "clamp(32px, 6vw, 48px)",
+                  margin: "0 auto clamp(10px, 2vw, 18px)",
+                }}
+              />
               <p
                 className="text-gray-600"
-                style={{ fontSize: "clamp(10px, 2vw, 13px)", maxWidth: "280px" }}
+                style={{
+                  fontSize: "clamp(10px, 2vw, 13px)",
+                  maxWidth: "280px",
+                }}
               >
                 {formData.attendance === "yes"
                   ? "Nous sommes impatients de célébrer ce moment magique avec vous !"
@@ -124,50 +161,108 @@ export default function RSVP({ onResponseSubmitted }) {
               <button
                 onClick={() => setIsSubmitted(false)}
                 className="font-title uppercase tracking-widest text-olive hover:text-burgundy transition-colors duration-300 border-b border-transparent hover:border-burgundy"
-                style={{ fontSize: "clamp(9px, 1.8vw, 12px)", marginTop: "clamp(16px, 4vw, 28px)", paddingBottom: "2px" }}
+                style={{
+                  fontSize: "clamp(9px, 1.8vw, 12px)",
+                  marginTop: "clamp(16px, 4vw, 28px)",
+                  paddingBottom: "2px",
+                }}
               >
                 Modifier la réponse
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="w-full" style={{ display: "flex", flexDirection: "column", gap: "clamp(12px, 3vw, 24px)" }}>
-              <div style={{ display: "flex", flexDirection: "column", gap: "clamp(10px, 2.5vw, 20px)" }}>
-
+            <form
+              onSubmit={handleSubmit}
+              className="w-full"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "clamp(12px, 3vw, 24px)",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "clamp(10px, 2.5vw, 20px)",
+                }}
+              >
                 {/* Nom */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "clamp(4px, 1vw, 8px)" }}>
-                  <label className="font-title tracking-wider text-olive-dark font-medium text-left"
-                    style={{ fontSize: "clamp(10px, 2vw, 14px)" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "clamp(4px, 1vw, 8px)",
+                  }}
+                >
+                  <label
+                    className="font-title tracking-wider text-olive-dark font-medium text-left"
+                    style={{ fontSize: "clamp(10px, 2vw, 14px)" }}
+                  >
                     Nom Complet <span className="text-burgundy">*</span>
                   </label>
                   <input
-                    type="text" name="name" value={formData.name} onChange={handleChange} required
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
                     placeholder="M. et Mme. Dupont"
                     className="w-full bg-[#fdfbf7] border border-cream-dark focus:border-burgundy rounded-lg outline-none transition-all duration-300 shadow-inner focus:shadow-lg"
-                    style={{ fontSize: "clamp(10px, 2vw, 14px)", padding: "clamp(8px, 1.5vw, 12px) clamp(10px, 2vw, 16px)" }}
+                    style={{
+                      fontSize: "clamp(10px, 2vw, 14px)",
+                      padding: "clamp(8px, 1.5vw, 12px) clamp(10px, 2vw, 16px)",
+                    }}
                   />
                 </div>
 
                 {/* Téléphone */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "clamp(4px, 1vw, 8px)" }}>
-                  <label className="font-title tracking-wider text-olive-dark font-medium text-left"
-                    style={{ fontSize: "clamp(10px, 2vw, 14px)" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "clamp(4px, 1vw, 8px)",
+                  }}
+                >
+                  <label
+                    className="font-title tracking-wider text-olive-dark font-medium text-left"
+                    style={{ fontSize: "clamp(10px, 2vw, 14px)" }}
+                  >
                     Numéro de Téléphone <span className="text-burgundy">*</span>
                   </label>
                   <input
-                    type="tel" name="phone" value={formData.phone} onChange={handleChange} required
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    required
                     placeholder="06 12 34 56 78"
                     className="w-full bg-[#fdfbf7] border border-cream-dark focus:border-burgundy rounded-lg outline-none transition-all duration-300 shadow-inner focus:shadow-lg"
-                    style={{ fontSize: "clamp(10px, 2vw, 14px)", padding: "clamp(8px, 1.5vw, 12px) clamp(10px, 2vw, 16px)" }}
+                    style={{
+                      fontSize: "clamp(10px, 2vw, 14px)",
+                      padding: "clamp(8px, 1.5vw, 12px) clamp(10px, 2vw, 16px)",
+                    }}
                   />
                 </div>
 
                 {/* Présence */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "clamp(4px, 1vw, 8px)" }}>
-                  <label className="font-title tracking-wider text-olive-dark font-medium text-left"
-                    style={{ fontSize: "clamp(10px, 2vw, 14px)" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "clamp(4px, 1vw, 8px)",
+                  }}
+                >
+                  <label
+                    className="font-title tracking-wider text-olive-dark font-medium text-left"
+                    style={{ fontSize: "clamp(10px, 2vw, 14px)" }}
+                  >
                     Serez-vous présent(e) ?
                   </label>
-                  <div className="grid grid-cols-2" style={{ gap: "clamp(6px, 1.5vw, 16px)" }}>
+                  <div
+                    className="grid grid-cols-2"
+                    style={{ gap: "clamp(6px, 1.5vw, 16px)" }}
+                  >
                     {["yes", "no"].map((val) => (
                       <button
                         key={val}
@@ -178,7 +273,10 @@ export default function RSVP({ onResponseSubmitted }) {
                             ? "bg-burgundy text-cream border-burgundy shadow-lg shadow-burgundy/20"
                             : "bg-transparent text-gray-500 border-cream-dark hover:border-burgundy hover:text-burgundy hover:bg-burgundy/5"
                         }`}
-                        style={{ fontSize: "clamp(9px, 1.8vw, 12px)", padding: "clamp(8px, 1.5vw, 12px)" }}
+                        style={{
+                          fontSize: "clamp(9px, 1.8vw, 12px)",
+                          padding: "clamp(8px, 1.5vw, 12px)",
+                        }}
                       >
                         {val === "yes" ? "Oui, Présent(e)" : "Non, Absent(e)"}
                       </button>
@@ -188,53 +286,107 @@ export default function RSVP({ onResponseSubmitted }) {
 
                 {/* Nombre */}
                 {formData.attendance === "yes" && (
-                  <div className="animate-fade-in-up" style={{ display: "flex", flexDirection: "column", gap: "clamp(4px, 1vw, 8px)" }}>
-                    <label className="font-title tracking-wider text-olive-dark font-medium text-left"
-                      style={{ fontSize: "clamp(10px, 2vw, 14px)" }}>
+                  <div
+                    className="animate-fade-in-up"
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "clamp(4px, 1vw, 8px)",
+                    }}
+                  >
+                    <label
+                      className="font-title tracking-wider text-olive-dark font-medium text-left"
+                      style={{ fontSize: "clamp(10px, 2vw, 14px)" }}
+                    >
                       Nombre de personnes (vous inclus)
                     </label>
                     <select
-                      name="companions" value={formData.companions} onChange={handleChange}
+                      name="companions"
+                      value={formData.companions}
+                      onChange={handleChange}
                       className="w-full bg-[#fdfbf7] border border-cream-dark focus:border-burgundy rounded-lg outline-none transition-all duration-300 focus:shadow-lg"
-                      style={{ fontSize: "clamp(10px, 2vw, 14px)", padding: "clamp(8px, 1.5vw, 12px) clamp(10px, 2vw, 16px)" }}
+                      style={{
+                        fontSize: "clamp(10px, 2vw, 14px)",
+                        padding:
+                          "clamp(8px, 1.5vw, 12px) clamp(10px, 2vw, 16px)",
+                      }}
                     >
-                      {[1,2,3,4,5].map(n => <option key={n} value={n}>{n} Personne{n > 1 ? "s" : ""}</option>)}
+                      {[1, 2, 3, 4, 5].map((n) => (
+                        <option key={n} value={n}>
+                          {n} Personne{n > 1 ? "s" : ""}
+                        </option>
+                      ))}
                     </select>
                   </div>
                 )}
 
                 {/* Message */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "clamp(4px, 1vw, 8px)" }}>
-                  <label className="font-title tracking-wider text-olive-dark font-medium text-left"
-                    style={{ fontSize: "clamp(10px, 2vw, 14px)" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "clamp(4px, 1vw, 8px)",
+                  }}
+                >
+                  <label
+                    className="font-title tracking-wider text-olive-dark font-medium text-left"
+                    style={{ fontSize: "clamp(10px, 2vw, 14px)" }}
+                  >
                     Message pour les mariés
                   </label>
                   <textarea
-                    name="message" value={formData.message} onChange={handleChange} rows="3"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    rows="3"
                     placeholder="Félicitations pour votre mariage..."
                     className="w-full bg-[#fdfbf7] border border-cream-dark focus:border-burgundy rounded-lg outline-none transition-all duration-300 shadow-inner resize-none focus:shadow-lg"
-                    style={{ fontSize: "clamp(10px, 2vw, 14px)", padding: "clamp(8px, 1.5vw, 12px) clamp(10px, 2vw, 16px)" }}
+                    style={{
+                      fontSize: "clamp(10px, 2vw, 14px)",
+                      padding: "clamp(8px, 1.5vw, 12px) clamp(10px, 2vw, 16px)",
+                    }}
                   />
                 </div>
               </div>
 
               {/* Bouton submit */}
               <button
-                type="submit" disabled={loading}
+                type="submit"
+                disabled={loading}
                 className="w-full bg-olive text-cream-light font-title tracking-widest rounded-lg hover:bg-olive-dark transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-olive/20 hover:shadow-xl hover:shadow-olive/30 transform hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed"
-                style={{ fontSize: "clamp(10px, 2vw, 14px)", padding: "clamp(10px, 2vw, 14px)" }}
+                style={{
+                  fontSize: "clamp(10px, 2vw, 14px)",
+                  padding: "clamp(10px, 2vw, 14px)",
+                }}
               >
                 {loading ? (
                   <span className="flex items-center gap-2">
                     <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                        fill="none"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      />
                     </svg>
                     Validation en cours...
                   </span>
                 ) : (
                   <>
-                    <Send style={{ width: "clamp(12px, 2vw, 16px)", height: "clamp(12px, 2vw, 16px)" }} />
+                    <Send
+                      style={{
+                        width: "clamp(12px, 2vw, 16px)",
+                        height: "clamp(12px, 2vw, 16px)",
+                      }}
+                    />
                     <span>Envoyer la Réponse</span>
                   </>
                 )}
@@ -254,7 +406,7 @@ export default function RSVP({ onResponseSubmitted }) {
           <div className="lg:mt-[32%]">
             <div
               className="relative w-full pointer-events-none lg:ml-rsvp-offset"
-              style={{ height: "clamp(260px, 45vw, 360px)"}}
+              style={{ height: "clamp(260px, 45vw, 360px)" }}
             >
               {/* Rose haut */}
               <div
@@ -265,7 +417,12 @@ export default function RSVP({ onResponseSubmitted }) {
                   transform: "rotate(-20deg)",
                 }}
               >
-                <img src="/images/rose_primary.png" alt="" className="w-full h-full object-contain" loading="lazy" />
+                <img
+                  src="/images/rose_primary.png"
+                  alt=""
+                  className="w-full h-full object-contain"
+                  loading="lazy"
+                />
               </div>
 
               {/* Rose bas inversée */}
@@ -277,7 +434,12 @@ export default function RSVP({ onResponseSubmitted }) {
                   transform: "rotate(190deg)",
                 }}
               >
-                <img src="/images/rose_primary.png" alt="" className="w-full h-full object-contain" loading="lazy" />
+                <img
+                  src="/images/rose_primary.png"
+                  alt=""
+                  className="w-full h-full object-contain"
+                  loading="lazy"
+                />
               </div>
 
               {/* Sceau */}
@@ -289,7 +451,12 @@ export default function RSVP({ onResponseSubmitted }) {
                   transform: "rotate(10deg)",
                 }}
               >
-                <img src="/images/sceau1.png" alt="Sceau" className="w-full h-full object-contain" loading="lazy" />
+                <img
+                  src="/images/sceau1.png"
+                  alt="Sceau"
+                  className="w-full h-full object-contain"
+                  loading="lazy"
+                />
               </div>
 
               {/* Carte message */}
@@ -307,7 +474,8 @@ export default function RSVP({ onResponseSubmitted }) {
                   className="font-title text-center leading-tight text-olive-dark"
                   style={{ fontSize: "clamp(9px, 1.2vw, 13px)" }}
                 >
-                  Afin de vous réserver le meilleur accueil, merci de nous contacter pour toute demande d'invité supplémentaire
+                  Afin de vous réserver le meilleur accueil, merci de nous
+                  contacter pour toute demande d'invité supplémentaire
                 </p>
               </div>
             </div>

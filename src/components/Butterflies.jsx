@@ -208,7 +208,7 @@ export default function Butterflies({
   const butterflies = buildButterflies(count, size, speed, zone);
 
   return (
-    <div className={className} style={{ zIndex: 30 }}>
+    <div className={className} style={{ zIndex: 70 }}>
       {butterflies.map((b) => (
         <ButterflyItem
           key={b.id}

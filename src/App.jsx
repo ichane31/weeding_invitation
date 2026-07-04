@@ -29,7 +29,7 @@ export default function App() {
         });
       }
       setShouldAnimateCard(true);
-    }, 2000);
+    }, 3300);
   };
 
   const handleResetEnvelope = () => {

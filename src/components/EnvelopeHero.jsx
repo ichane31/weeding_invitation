@@ -7,14 +7,14 @@ export default function EnvelopeHero({ onOpen }) {
   const [pulled, setPulled] = useState(false);
 
   const handleOpen = () => {
-    setPhase("opening");
-    setTimeout(() => {
-      setPhase("open");
-      setPulled(false);
-      setTimeout(() => setPulled(true), 600);
-      onOpen();
-    }, 500);
-  };
+  setPhase("opening");
+  setTimeout(() => {
+    setPhase("open");
+    setPulled(false);
+    setTimeout(() => setPulled(true), 1000); // ← 600 → 1300ms
+    onOpen();
+  }, 500);
+};
 
   const isOpen = phase === "open";
   const isOpening = phase === "opening";
@@ -56,7 +56,7 @@ export default function EnvelopeHero({ onOpen }) {
                 : "clamp(-80px, -30%, -40px)",
               left: "clamp(-90px, -28%, -60px)",
               transform: "rotate(-40deg)",
-              transition: "top 900ms cubic-bezier(0.22,1,0.36,1)",
+              // transition: "top 900ms cubic-bezier(0.22,1,0.36,1)",
             }}
             loading="lazy"
           />
@@ -99,20 +99,21 @@ export default function EnvelopeHero({ onOpen }) {
           {isOpen && (
             <div
               className="absolute h-[96%] sm:h-[98%] md:h-[100%] left-1/2 -translate-x-1/2 z-20 overflow-hidden"
-              style={{ bottom: "6%", width: "76%" }}
+              style={{ bottom: "6%", width: "78%" }}
             >
               <div
                 className="will-change-transform"
                 style={{
                   transition: "transform 1600ms cubic-bezier(0.22,1,0.36,1)",
-                  transform: pulled ? "translateY(15%)" : "translateY(150%)",
+                  transform: pulled ? "translateY(12%)" : "translateY(200%)",
                 }}
               >
                 <img
-                  src="/images/bg_5.png"
+                  // src="/images/bg_5.png"
+                  src="/images/cadre_dentelle2.png"
                   alt="Contenu de l'enveloppe"
-                  className="w-full h-auto object-contain relative"
-                  style={{ marginBottom: "-30%" }}
+                  className="w-full h-auto object-contain relative opacity-90"
+                  style={{ marginBottom: "-30%", opacity: pulled ? 1 : 0 }}
                   loading="lazy"
                 />
                 <div
@@ -120,6 +121,7 @@ export default function EnvelopeHero({ onOpen }) {
                   style={{
                     padding: "clamp(12%, 16%, 20%) clamp(6px, 4%, 14px) 0",
                     gap: "clamp(2px, 0.5vw, 6px)",
+                    opacity:  pulled ? 1 : 0
                   }}
                 >
                   <p
@@ -132,7 +134,7 @@ export default function EnvelopeHero({ onOpen }) {
                     className="text-olive font-script leading-tight"
                     style={{ fontSize: "clamp(26px, 7vw, 44px)", margin: 0 }}
                   >
-                    Mairama
+                    Ousmanou
                   </p>
                   <p
                     className="text-olive font-roundhand"
@@ -144,7 +146,7 @@ export default function EnvelopeHero({ onOpen }) {
                     className="text-olive font-script leading-tight"
                     style={{ fontSize: "clamp(26px, 7vw, 44px)", margin: 0 }}
                   >
-                    Ousmanou
+                    Mairama
                   </p>
                   <p
                     className="text-olive font-bogue font-semibold"
@@ -186,7 +188,7 @@ export default function EnvelopeHero({ onOpen }) {
               transform: "translate(-50%, -50%)",
               width: "clamp(80px, 22%, 130px)",
               aspectRatio: "1",
-              transition: "top 900ms cubic-bezier(0.22,1,0.36,1)",
+              // transition: "top 900ms cubic-bezier(0.22,1,0.36,1)",
             }}
           >
             <div

@@ -1,67 +1,73 @@
 import { useState, useEffect, useMemo } from "react";
 
+const GOOGLE_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbw9yPUp-p7RDtjItUIUkHL-9VZp_hw-t9ZKUMBJx41wK43N_rBNGweBZa6__6w6GWwy/exec";
+
 export default function Guestbook({ refreshTrigger }) {
   const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const defaultMessages = useMemo(() => [
-    {
-      id: "default-1",
-      name: "Sarah & Karim",
-      attendance: "yes",
-      message: "Toutes nos félicitations aux magnifiques mariés ! Que votre vie commune soit remplie de joie, d'amour et de paix divine. Nous avons tellement hâte d'être à vos côtés pour ce grand jour.",
-      date: "08 Juin 2026",
-    },
-    {
-      id: "default-2",
-      name: "La Famille Bennani",
-      attendance: "yes",
-      message: "Quelle immense joie de vous voir franchir cette belle étape ! Que cette union soit éternelle et bénie. Beaucoup de bonheur et d'amour.",
-      date: "07 Juin 2026",
-    },
-    {
-      id: "default-3",
-      name: "Amine & Yasmine",
-      attendance: "yes",
-      message: "Félicitations Mariam et Soufiane ! Que votre amour continue de briller et d'inspirer tous ceux qui vous entourent. Nous serons là pour faire la fête avec vous !",
-      date: "05 Juin 2026",
-    },
-  ], []);
-
-  const getMessages = (defaults) => {
-    try {
-      const localResponses = JSON.parse(localStorage.getItem("rsvp_responses") || "[]");
-      const customMessages = localResponses.filter((r) => r.message && r.message.trim() !== "");
-      return [...customMessages, ...defaults];
-    } catch {
-      return defaults;
-    }
-  };
+  const defaultMessages = useMemo(
+    () => [
+      {
+        id: "default-1",
+        name: "Amine & Yasmine",
+        attendance: "yes",
+        message:
+          "Félicitations Mairama et Ousmanou ! Que votre amour continue de briller et d'inspirer tous ceux qui vous entourent. Nous serons là pour faire la fête avec vous !",
+        date: "2026-06-05",
+      },
+    ],
+    [],
+  );
 
   useEffect(() => {
-    const t = setTimeout(() => setMessages(getMessages(defaultMessages)), 0);
-    return () => clearTimeout(t);
-  }, [refreshTrigger]);
+    let isCancelled = false;
+    setLoading(true);
+
+    fetch(GOOGLE_SCRIPT_URL)
+      .then((res) => res.json())
+      .then((sheetMessages) => {
+        if (isCancelled) return;
+        // Les plus récents en premier
+        const sorted = [...sheetMessages].reverse();
+        setMessages([...sorted, ...defaultMessages]);
+      })
+      .catch((err) => {
+        console.error("Erreur de chargement des messages :", err);
+        if (!isCancelled) setMessages(defaultMessages);
+      })
+      .finally(() => {
+        if (!isCancelled) setLoading(false);
+      });
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [refreshTrigger, defaultMessages]);
 
   return (
     <div
       className="w-full select-none z-20 relative"
-      style={{
-        backgroundImage: "url(/images/bg_primary.jpg)",
-        // padding: "clamp(24px, 6vw, 56px) 0",
-      }}
+      style={{ backgroundImage: "url(/images/bg_primary.jpg)" }}
     >
       <div
         className="w-full mx-auto"
         style={{
           maxWidth: "clamp(280px, 88%, 560px)",
-          padding: "clamp(16px, 4vw, 36px) clamp(12px, 4vw, 28px)",
+          padding: "clamp(16px, 4vw, 36px) clamp(12px, 4vw, 20px)",
         }}
       >
-        {/* Header */}
-        <div className="text-center" style={{ marginBottom: "clamp(20px, 5vw, 44px)" }}>
+        <div
+          className="text-center"
+          style={{ marginBottom: "clamp(20px, 5vw, 44px)" }}
+        >
           <h3
             className="font-script font-medium text-olive-dark"
-            style={{ fontSize: "clamp(32px, 7vw, 72px)", marginBottom: "clamp(2px, 0.5vw, 6px)" }}
+            style={{
+              fontSize: "clamp(36px, 7vw, 72px)",
+              marginBottom: "clamp(2px, 0.5vw, 6px)",
+            }}
           >
             Livre d'Or <span className="font-roundhand font-thin">&</span> Vœux
           </h3>
@@ -73,15 +79,31 @@ export default function Guestbook({ refreshTrigger }) {
           </p>
           <div
             className="bg-gold mx-auto"
-            style={{ height: "1px", width: "clamp(32px, 5vw, 56px)", marginTop: "clamp(6px, 1.5vw, 12px)" }}
+            style={{
+              height: "1px",
+              width: "clamp(32px, 5vw, 56px)",
+              marginTop: "clamp(6px, 1.5vw, 12px)",
+            }}
           />
         </div>
 
-        {/* Messages */}
-        {messages.length === 0 ? (
+        {loading ? (
           <p
             className="text-center text-gray-500 italic"
-            style={{ fontSize: "clamp(11px, 2.2vw, 14px)", padding: "clamp(20px, 5vw, 36px) 0" }}
+            style={{
+              fontSize: "clamp(11px, 2.2vw, 14px)",
+              padding: "clamp(20px, 5vw, 36px) 0",
+            }}
+          >
+            Chargement des messages...
+          </p>
+        ) : messages.length === 0 ? (
+          <p
+            className="text-center text-gray-500 italic"
+            style={{
+              fontSize: "clamp(11px, 2.2vw, 14px)",
+              padding: "clamp(20px, 5vw, 36px) 0",
+            }}
           >
             Aucun message pour le moment.
           </p>
@@ -102,20 +124,24 @@ export default function Guestbook({ refreshTrigger }) {
                 className="bg-[#fdfbf7]/70 backdrop-blur-sm border border-cream-dark rounded-lg shadow-sm relative group hover:border-burgundy/20 hover:shadow-md transition-all duration-300"
                 style={{ padding: "clamp(14px, 2.5vw, 20px)" }}
               >
-                {/* Coins dorés */}
                 {[
                   "top-1.5 left-1.5 border-t border-l",
                   "top-1.5 right-1.5 border-t border-r",
                   "bottom-1.5 left-1.5 border-b border-l",
                   "bottom-1.5 right-1.5 border-b border-r",
                 ].map((cls, i) => (
-                  <div key={i} className={`absolute w-1.5 h-1.5 border-gold ${cls}`} />
+                  <div
+                    key={i}
+                    className={`absolute w-1.5 h-1.5 border-gold ${cls}`}
+                  />
                 ))}
 
-                {/* En-tête */}
                 <div
                   className="flex items-start justify-between"
-                  style={{ marginBottom: "clamp(4px, 1vw, 8px)", gap: "clamp(4px, 1vw, 8px)" }}
+                  style={{
+                    marginBottom: "clamp(4px, 1vw, 8px)",
+                    gap: "clamp(4px, 1vw, 8px)",
+                  }}
                 >
                   <span
                     className="font-title text-burgundy font-semibold"
@@ -127,11 +153,16 @@ export default function Guestbook({ refreshTrigger }) {
                     className="text-gray-400 font-sans shrink-0"
                     style={{ fontSize: "clamp(7px, 1.3vw, 9px)" }}
                   >
-                    {msg.date}
+                    {msg?.date
+                      ? new Date(msg.date).toLocaleDateString("fr-FR", {
+                          day: "numeric",
+                          month: "long",
+                          year: "numeric",
+                        })
+                      : ""}
                   </span>
                 </div>
 
-                {/* Message */}
                 <p
                   className="text-gray-600 leading-relaxed font-sans italic text-left"
                   style={{ fontSize: "clamp(9px, 1.9vw, 13px)" }}
@@ -139,7 +170,6 @@ export default function Guestbook({ refreshTrigger }) {
                   "{msg.message}"
                 </p>
 
-                {/* Présence */}
                 {msg.attendance === "yes" && (
                   <span
                     className="absolute bottom-2 right-2 text-olive font-semibold font-sans tracking-wider uppercase opacity-60"
@@ -153,10 +183,12 @@ export default function Guestbook({ refreshTrigger }) {
           </div>
         )}
 
-        {/* Message de fin */}
-        <div className="text-center" style={{ marginTop: "clamp(14px, 3vw, 28px)" }}>
+        <div
+          className="text-center"
+          style={{ marginTop: "clamp(14px, 3vw, 28px)" }}
+        >
           <p
-            className="text-gray-400 font-sans tracking-widest uppercase"
+            className="text-gray-700 font-sans tracking-widest uppercase"
             style={{ fontSize: "clamp(7px, 1.4vw, 9px)" }}
           >
             — Que l'amour soit toujours votre guide —

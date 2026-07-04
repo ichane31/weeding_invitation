@@ -1,7 +1,7 @@
 export default function ContactInfo() {
   const CONTACTS = [
-    { name: "Mairama",  family: "Famille de la Mariée", phone: "+212600000001" },
     { name: "Ousmanou", family: "Famille du Marié",     phone: "+212600000002" },
+    { name: "Mairama",  family: "Famille de la Mariée", phone: "+212600000001" },
   ];
 
   return (
@@ -16,7 +16,7 @@ export default function ContactInfo() {
       <h2
         className="text-olive-dark font-script text-center relative z-10"
         style={{
-          fontSize: "clamp(32px, 7vw, 72px)",
+          fontSize: "clamp(36px, 7vw, 72px)",
           marginBottom: "clamp(20px, 5vw, 48px)",
         }}
       >

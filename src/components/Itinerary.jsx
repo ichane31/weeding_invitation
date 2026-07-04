@@ -17,7 +17,7 @@ export default function Itinerary() {
         padding: "clamp(40px, 6vw, 66px) clamp(12px, 4vw, 32px)",
       }}
     >
-      <Butterflies size={{ min: 20, max: 30 }}/>
+      <Butterflies count={5} size={{ min: 20, max: 30 }}/>
       <div
         className="relative w-full"
         style={{ maxWidth: "clamp(280px, 89%, 520px)" }}

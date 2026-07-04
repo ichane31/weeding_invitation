@@ -23,7 +23,7 @@ export default function GiftSection() {
       }}
     >
       <Butterflies
-        count={8}
+        count={5}
         size={{ min: 20, max: 32 }}
         speed={{ min: 16, max: 26 }}
         opacity={0.85}
@@ -32,7 +32,7 @@ export default function GiftSection() {
       />
 
       {/* Titre */}
-      <h2
+      {/* <h2
         className="text-olive-dark font-script text-center relative z-10"
         style={{
           fontSize: "clamp(32px, 7vw, 72px)",
@@ -40,17 +40,16 @@ export default function GiftSection() {
         }}
       >
         Cadeau pour les mariés !
-      </h2>
+      </h2> */}
 
       {/* ── Carte cadeau ── */}
-      <div
+      {/* <div
         className="relative w-full mx-auto flex flex-col items-center"
         style={{
           maxWidth: "clamp(280px, 85vw, 640px)",
           marginBottom: "clamp(16px, 4vw, 40px)",
         }}
       >
-        {/* Rose gauche */}
         <img
           src="/images/rose1.png"
           alt=""
@@ -63,7 +62,7 @@ export default function GiftSection() {
           }}
           loading="lazy"
         />
-        {/* Rose droite */}
+
         <img
           src="/images/rose1.png"
           alt=""
@@ -77,7 +76,6 @@ export default function GiftSection() {
           loading="lazy"
         />
 
-        {/* Lien carte */}
         <a
           href={GIFT_LINK}
           target="_blank"
@@ -106,11 +104,11 @@ export default function GiftSection() {
             Cliquer ici
           </p>
         </a>
-      </div>
+      </div> */}
 
       {/* ── Enveloppe + lettre ── */}
       <div
-        className="relative w-full mx-auto"
+        className="relative w-full lg:mx-auto -mr-8"
         style={{
           maxWidth: "clamp(280px, 85vw, 640px)",
           marginTop: "clamp(32px, 8vw, 64px)",

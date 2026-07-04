@@ -7,6 +7,11 @@ export default {
   theme: {
     extend: {
       colors: {
+        taupe: '#8b7355',   // brun chaud — élégant sur lin
+        mocha: '#6b4c3b',   // brun profond — très lisible
+        sage: '#7a8c6e',   // vert doux — harmonie avec l'olive sans être trop foncé
+        moka: '#5c4a3a',   // chocolat chaud — raffiné
+        basmala: '#8a7a45', 
         burgundy: {
           light: '#a23e48',
           DEFAULT: '#800020',
@@ -16,6 +21,7 @@ export default {
           light: '#a9ba9d',
           DEFAULT: '#556b2f',
           dark: '#3e4f22',
+          yellow: '#4f4e02',
         },
         cream: {
           light: '#fdfbf7',
@@ -32,11 +38,12 @@ export default {
         'rsvp-offset': 'clamp(-100px, -8vw, -80px)'
       },
       fontFamily: {
+        arabic: ['Amiri', 'serif'],
         script: ['"Pinyon Script"', 'cursive'],
         title: ['"Playfair Display"', 'serif'],
         roundhand: ['Roundhand', 'cursive'],
         bogue: ['Bogue', 'serif'],
-        
+
         // Variantes de Bogue par poids
         'bogue-normal': ['Bogue', 'serif'],
         'bogue-medium': ['Bogue', 'serif'],

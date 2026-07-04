@@ -9,7 +9,7 @@ export default function InvitationCard({ animateCard = false }) {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
-const musicUrl = "/music/music1.mp3";
+  const musicUrl = "/music/music1.mp3";
 
   useEffect(() => {
     if (!animateCard) {
@@ -31,46 +31,47 @@ const musicUrl = "/music/music1.mp3";
 
   // Lance la musique dès que animateCard passe à true
   useEffect(() => {
-  if (!animateCard || !audioRef.current) return;
-  audioRef.current.play()
-    .then(() => setIsPlaying(true))
-    .catch(() => setIsPlaying(false));
-}, [animateCard]);
+    if (!animateCard || !audioRef.current) return;
+    audioRef.current
+      .play()
+      .then(() => setIsPlaying(true))
+      .catch(() => setIsPlaying(false));
+  }, [animateCard]);
 
   // Gestion play/pause directe sans useEffect
   const togglePlay = () => {
-  const audio = audioRef.current;
-  if (!audio) {
-    console.log("pas d'audio ref");
-    return;
-  }
+    const audio = audioRef.current;
+    if (!audio) {
+      console.log("pas d'audio ref");
+      return;
+    }
 
-
-  if (!audio.paused) {
-    audio.pause();
-    setIsPlaying(false);
-  } else {
-    audio.play()
-      .then(() => {
-        console.log("play ok");
-        setIsPlaying(true);
-      })
-      .catch((e) => {
-        console.error("play error:", e);
-        setIsPlaying(false);
-      });
-  }
-};
+    if (!audio.paused) {
+      audio.pause();
+      setIsPlaying(false);
+    } else {
+      audio
+        .play()
+        .then(() => {
+          console.log("play ok");
+          setIsPlaying(true);
+        })
+        .catch((e) => {
+          console.error("play error:", e);
+          setIsPlaying(false);
+        });
+    }
+  };
 
   return (
-    <section 
+    <section
       id="invitation"
       className="relative flex flex-col items-center w-full select-none"
       style={{ backgroundImage: "url(/images/bg_primary.jpg)" }}
     >
       <audio ref={audioRef} src={musicUrl} loop preload="auto" />
 
-      <Butterflies count={6} size={{ min: 20, max: 30 }} />
+      <Butterflies count={5} size={{ min: 20, max: 30 }} />
 
       {/* ── Enveloppe ouverte ── */}
       <div
@@ -120,7 +121,8 @@ const musicUrl = "/music/music1.mp3";
             <div
               className="absolute rounded-full z-0"
               style={{
-                left: "4%", right: "4%",
+                left: "4%",
+                right: "4%",
                 bottom: "clamp(8px, 3%, 20px)",
                 height: "clamp(10px, 3%, 20px)",
                 background: "rgba(0,0,0,0.10)",
@@ -156,7 +158,11 @@ const musicUrl = "/music/music1.mp3";
                 />
                 <div
                   className="absolute top-0 w-full h-full flex flex-col items-center justify-start"
-                  style={{ paddingTop: "20%", paddingLeft: "18%", paddingRight: "18%" }}
+                  style={{
+                    paddingTop: "20%",
+                    paddingLeft: "18%",
+                    paddingRight: "18%",
+                  }}
                 >
                   <p
                     className="text-olive font-script leading-tight"
@@ -184,10 +190,11 @@ const musicUrl = "/music/music1.mp3";
             <div
               className="absolute rounded-full flex items-center justify-center z-40"
               style={{
-                top: "72%", left: "49%",
+                top: "72%",
+                left: "49%",
                 transform: "translate(-50%, -50%)",
                 width: "clamp(80px, 22%, 130px)",
-                aspectRatio: '1'
+                aspectRatio: "1",
               }}
             >
               <div className="absolute inset-[-3px] rounded-full border border-olive/30 animate-ping opacity-45" />
@@ -218,10 +225,11 @@ const musicUrl = "/music/music1.mp3";
               />
               <div className="absolute inset-0 flex items-center justify-center z-10">
                 <div className="bg-black/80 rounded-full p-3 backdrop-blur-sm group-hover:scale-110 transition-all duration-300">
-                  {isPlaying
-                    ? <Pause size={28} color="white" fill="white" />
-                    : <Play  size={32} color="white" fill="white" />
-                  }
+                  {isPlaying ? (
+                    <Pause size={28} color="white" fill="white" />
+                  ) : (
+                    <Play size={32} color="white" fill="white" />
+                  )}
                 </div>
               </div>
               <svg
@@ -235,8 +243,15 @@ const musicUrl = "/music/music1.mp3";
                     d="M 100,100 m -60,0 a 60,60 0 1,1 120,0 a 60,60 0 1,1 -120,0"
                   />
                 </defs>
-                <text style={{ fontSize: 13 }} className="tracking-wider fill-white">
-                  <textPath href="#curved-text-path" startOffset="20%" textAnchor="middle">
+                <text
+                  style={{ fontSize: 13 }}
+                  className="tracking-wider fill-white"
+                >
+                  <textPath
+                    href="#curved-text-path"
+                    startOffset="20%"
+                    textAnchor="middle"
+                  >
                     {isPlaying ? "En lecture..." : "Cliquez pour jouer"}
                   </textPath>
                 </text>
@@ -251,78 +266,170 @@ const musicUrl = "/music/music1.mp3";
         className="relative w-full flex flex-col lg:flex-row items-center lg:items-start justify-center gap-6 lg:gap-0 pb-8 lg:pb-16 overflow-visible"
         style={{ backgroundImage: "url(/images/bg_primary.jpg)" }}
       >
-        <Butterflies count={8} size={{ min: 20, max: 30 }} />
+        <Butterflies count={5} size={{ min: 20, max: 30 }} />
 
         {/* Carte invitation */}
         <div
           className={`relative w-full flex items-center justify-center transition-all duration-1000 ease-out z-30 ${
-            cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
+            cardVisible
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-20"
           }`}
-          style={{ maxWidth: "clamp(280px, 85vw, 480px)" }}
+          style={{ maxWidth: "clamp(290px, 85vw, 490px)" }}
         >
           <div
             className="relative w-full flex items-center justify-center"
             style={{ aspectRatio: "1 / 1.45" }}
           >
             <img
-              src="/images/bg_5.png"
+              // src="/images/cadre_dentelle2.png"
+              src="/images/cadre_dentelle2.png"
               alt="Fleurs fond"
-              className="absolute inset-0 w-full h-full pointer-events-none z-20"
+              className="absolute inset-0 w-full h-full pointer-events-none opacity-90 z-20"
+              style={{ filter: "drop-shadow(0px 4px 6px rgba(0,0,0,0.5))" }}
               loading="lazy"
             />
 
             <div
-              className="relative z-30 flex flex-col items-center justify-center text-center gap-2"
-              style={{ width: "70%", height: "75%" }}
+              className="relative z-30 flex flex-col items-center justify-center text-center"
+              style={{
+                width: "70%",
+                height: "77%",
+                gap: "clamp(6px, 1.5vh, 14px)",
+              }}
             >
-              <div className="w-full flex flex-col items-center gap-1">
-                <span
-                  className="font-script text-olive tracking-widest font-semibold block"
-                  style={{ fontSize: "clamp(14px, 3.5vw, 32px)" }}
-                >
-                  بِسْماللَّهِالرَّحْمَٰنِالرَّحِيمِ
-                </span>
-                <span
-                  className="font-title text-olive/80 tracking-wide"
-                  style={{ fontSize: "clamp(9px, 1.8vw, 13px)" }}
-                >
-                  Au nom d'Allah SWT, le Très Miséricordieux, le Tout Miséricordieux
-                </span>
-              </div>
-
-              <p
-                className="font-title text-olive/80 tracking-wide leading-relaxed"
-                style={{ fontSize: "clamp(9px, 1.8vw, 13px)", maxWidth: "240px" }}
+              {/* Basmala arabe */}
+              <span
+                className="font-script tracking-widest font-semibold block"
+                dir="rtl"
+                style={{
+                  fontSize: "clamp(18px, 4.5vw, 38px)",
+                  lineHeight: 1.3,
+                  color: "#5c4a3a", // moka — foncé, bon contraste
+                }}
               >
-                Nous avons l'honneur de vous inviter à célébrer le mariage de
-              </p>
-
-              <div className="flex flex-col items-center font-title gap-1">
-                <h2 className="font-script text-olive-dark leading-none" style={{ fontSize: "clamp(18px, 4.5vw, 36px)" }}>
-                  Ousmanou SALIHOU
-                </h2>
-                <p className="text-olive font-medium tracking-wider flex flex-col items-center gap-0.5" style={{ fontSize: "clamp(8px, 1.6vw, 12px)" }}>
-                  <span>Fils de</span>
-                  <span className="uppercase">Salihou Ousmanou Sambo</span>
-                  <span>❀</span>
-                  <span className="uppercase">Salihou Ousmanou Sambo</span>
-                </p>
-              </div>
-
-              <span className="font-roundhand font-thin text-gold-dark" style={{ fontSize: "clamp(20px, 4vw, 36px)" }}>
-                &amp;
+                بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
               </span>
 
-              <div className="flex flex-col items-center font-title gap-1">
-                <h2 className="font-script text-olive-dark leading-none" style={{ fontSize: "clamp(18px, 4.5vw, 36px)" }}>
+              {/* Basmala française */}
+              <p
+                className="font-title tracking-wide leading-snug"
+                style={{
+                  fontSize: "clamp(10px, 1.7vw, 14px)",
+                  color: "#583a29", // mocha
+                }}
+              >
+                Au nom d'Allah Le Tout Miséricordieux
+                <br />
+                et le Très Miséricordieux
+              </p>
+
+              {/* Les grandes familles */}
+              <div
+                className="w-full flex flex-col items-center"
+                style={{ gap: "clamp(2px, 0.6vh, 5px)" }}
+              >
+                <span
+                  className="font-script italic text-olive-dark tracking-wide"
+                  style={{
+                    fontSize: "clamp(16px, 3vw, 24px)",
+                    // color: "#3e4f22", // olive.dark — plus foncé que olive DEFAULT
+                  }}
+                >
+                  Les grandes familles
+                </span>
+                <span
+                  className="font-title font-semibold uppercase"
+                  style={{
+                    fontSize: "clamp(10px, 1.8vw, 16px)",
+                    letterSpacing: "0.12em",
+                    color: "#3e4f22", // olive.dark
+                  }}
+                >
+                  Alhadji Salihou Ousmanou Sambo
+                </span>
+                <span
+                  className="font-title font-semibold uppercase"
+                  style={{
+                    fontSize: "clamp(10px, 1.8vw, 16px)",
+                    letterSpacing: "0.12em",
+                    color: "#3e4f22", // olive.dark
+                  }}
+                >
+                  Alhadji Souaibou Idrissou
+                </span>
+              </div>
+
+              {/* Séparateur décoratif */}
+              <span
+                style={{
+                  fontSize: "clamp(10px, 1.5vw, 14px)",
+                  color: "#800020", // burgundy — accent, cohérent avec les mariés
+                  opacity: 0.75,
+                  letterSpacing: "0.3em",
+                }}
+              >
+                ❀ ❀ ❀
+              </span>
+
+              {/* Texte d'invitation */}
+              <div
+                className="flex flex-col items-center"
+                style={{ gap: "clamp(2px, 0.6vh, 5px)" }}
+              >
+                <p
+                  className="font-title tracking-wide leading-relaxed"
+                  style={{
+                    fontSize: "clamp(9px, 1.6vw, 12px)",
+                    maxWidth: "260px",
+                    color: "#6b4c3b", // mocha
+                  }}
+                >
+                  Ont l'immense honneur de vous convier au
+                </p>
+                <h3
+                  className="font-script leading-snug"
+                  style={{
+                    fontSize: "clamp(15px, 3.2vw, 24px)",
+                    color: "#800020", // burgundy — annonce la couleur des mariés
+                  }}
+                >
+                  Mariage de leur Fils et Fille,
+                </h3>
+              </div>
+
+              {/* Noms des mariés */}
+              <div
+                className="flex flex-col items-center"
+                style={{ gap: "clamp(0px, 0.3vh, 2px)" }}
+              >
+                <h2
+                  className="font-script leading-none"
+                  style={{
+                    fontSize: "clamp(22px, 5.5vw, 42px)",
+                    color: "#5a0016", // burgundy.dark — point focal, très lisible
+                  }}
+                >
+                  Ousmanou SALIHOU
+                </h2>
+                <span
+                  className="font-title leading-none"
+                  style={{
+                    fontSize: "clamp(14px, 3vw, 21px)",
+                    color: "#8b6914", // gold assombri — accent contrasté
+                  }}
+                >
+                  &
+                </span>
+                <h2
+                  className="font-script leading-none"
+                  style={{
+                    fontSize: "clamp(22px, 5.5vw, 42px)",
+                    color: "#5a0016", // burgundy.dark
+                  }}
+                >
                   Mairama SOUAIBOU
                 </h2>
-                <p className="text-olive font-medium tracking-wider flex flex-col items-center gap-0.5" style={{ fontSize: "clamp(8px, 1.6vw, 12px)" }}>
-                  <span>Fille de</span>
-                  <span className="uppercase">SOUAIBOU Idrissou</span>
-                  <span>❀</span>
-                  <span className="uppercase">SOUAIBOU Idrissou</span>
-                </p>
               </div>
             </div>
 
@@ -331,8 +438,8 @@ const musicUrl = "/music/music1.mp3";
               alt="Fleurs décoratives"
               className="absolute pointer-events-none z-40"
               style={{
-                left: "clamp(2px, 1%, 10px)",
-                bottom: "-2%",
+                left: "clamp(-4px, -1%, -10px)",
+                bottom: "-6%",
                 width: "clamp(80px, 45%, 210px)",
                 transform: "rotate(300deg)",
               }}
@@ -344,33 +451,43 @@ const musicUrl = "/music/music1.mp3";
         {/* Carte date */}
         <div
           className={`relative transition-all duration-1000 ease-out z-30 lg:ml-[-50px] ${
-            cardVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"
+            cardVisible
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-20"
           }`}
           style={{ width: "clamp(200px, 55vw, 280px)" }}
         >
           <div className="lg:mt-[34%]">
             <div
-              className="absolute pointer-events-none z-40 flex items-center justify-center"
-              style={{
-                width: "clamp(100px, 70%, 180px)",
-                top: "clamp(-70px, -30%, -45px)",
+                className="absolute top-[clamp(-100px,_-34%,_-85px)] lg:top-[clamp(-30px,_-20%,_-25px)] pointer-events-none z-40 flex items-center justify-center"              style={{
+                width: "clamp(80px, 60%, 180px)",
                 left: "20%",
                 transform: "rotate(-90deg)",
               }}
             >
-              <img src="/images/rose_secondary1.png" alt="" className="w-full h-full object-contain" loading="lazy" />
+              <img
+                src="/images/rose_secondary1.png"
+                alt=""
+                className="w-full h-full object-contain"
+                loading="lazy"
+              />
             </div>
 
             <div
               className="absolute pointer-events-none z-40 flex items-center justify-center"
               style={{
-                width: "clamp(100px, 70%, 180px)",
-                bottom: "clamp(-85px, -30%, -65px)",
+                width: "clamp(80px, 60%, 180px)",
+                bottom: "clamp(-90px, -30%, -75px)",
                 left: "-20%",
-                transform: "rotate(-40deg)",
+                transform: "rotate(-60deg)",
               }}
             >
-              <img src="/images/rose_secondary1.png" alt="" className="w-full h-full object-contain" loading="lazy" />
+              <img
+                src="/images/rose_secondary1.png"
+                alt=""
+                className="w-full h-full object-contain"
+                loading="lazy"
+              />
             </div>
 
             <div
@@ -384,13 +501,22 @@ const musicUrl = "/music/music1.mp3";
                 loading="lazy"
               />
               <div className="relative z-10 w-full h-full flex flex-col items-center justify-center gap-2 py-3 px-3">
-                <span className="font-script font-medium text-olive tracking-widest" style={{ fontSize: "clamp(20px, 5vw, 36px)" }}>
+                <span
+                  className="font-script font-medium text-olive tracking-widest"
+                  style={{ fontSize: "clamp(34px, 7.5vw, 48px)" }}
+                >
                   Vendredi
                 </span>
-                <span className="font-script text-olive-dark font-semibold leading-none" style={{ fontSize: "clamp(30px, 7vw, 50px)" }}>
+                <span
+                  className="font-script text-olive-dark font-semibold leading-none"
+                  style={{ fontSize: "clamp(36px, 8vw, 50px)" }}
+                >
                   21
                 </span>
-                <span className="font-script font-medium text-olive tracking-widest" style={{ fontSize: "clamp(20px, 5vw, 36px)" }}>
+                <span
+                  className="font-script font-medium text-olive tracking-widest"
+                  style={{ fontSize: "clamp(28px, 6vw, 36px)" }}
+                >
                   Août 2026
                 </span>
               </div>
@@ -401,10 +527,10 @@ const musicUrl = "/music/music1.mp3";
 
       {/* ── Countdown ── */}
       <div
-        className="relative w-full flex items-center justify-center py-2"
+        className="relative w-full flex items-center justify-center py-4"
         style={{ backgroundImage: "url(/images/bg_4.jpg)" }}
       >
-        <div className="w-[90%] max-w-3xl">
+        <div className="w-[95%] max-w-3xl">
           <Countdown />
         </div>
       </div>

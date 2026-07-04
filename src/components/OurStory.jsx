@@ -29,7 +29,7 @@ export default function OurStory() {
         <h2
           className="font-script font-medium text-olive-dark"
           style={{
-            fontSize: "clamp(32px, 7vw, 72px)",
+            fontSize: "clamp(33px, 7vw, 72px)",
             textShadow: "0 2px 8px rgba(0,0,0,0.06)",
             padding: "0 clamp(8px, 3vw, 24px)",
           }}
@@ -42,7 +42,7 @@ export default function OurStory() {
           <div className="h-px bg-olive" style={{ width: "clamp(32px, 5vw, 64px)" }} />
         </div>
       </div>
-      <Butterflies size={{ min: 20, max: 30 }} />
+      <Butterflies count={6} size={{ min: 20, max: 30 }} />
 
       {/* Paragraphes */}
       <div
