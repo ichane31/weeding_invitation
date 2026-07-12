@@ -38,7 +38,7 @@ export default function Navigation({ activeTab, setActiveTab, resetEnvelope }) {
             )}
           </button>
 
-          <button
+          {/* <button
             onClick={() => scrollTo("gift")}
             className={`relative py-1 transition-colors duration-300 hover:text-burgundy ${
               activeTab === "gift" ? "text-burgundy font-medium" : ""
@@ -49,7 +49,7 @@ export default function Navigation({ activeTab, setActiveTab, resetEnvelope }) {
             {activeTab === "gift" && (
               <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-burgundy rounded-full animate-fade-in-up" />
             )}
-          </button>
+          </button> */}
         </div>
       </div>
     </nav>

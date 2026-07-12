@@ -105,7 +105,7 @@ export default function Countdown() {
       <div
         className="relative"
         style={{
-          width: "clamp(280px, 88%, 620px)",
+          width: "clamp(280px, 100%, 620px)",
           marginTop: "clamp(12px, 2vw, 18px)",
         }}
       >

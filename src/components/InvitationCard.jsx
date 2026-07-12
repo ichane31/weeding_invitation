@@ -276,7 +276,7 @@ export default function InvitationCard({ animateCard = false }) {
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-20"
           }`}
-          style={{ maxWidth: "clamp(290px, 85vw, 490px)" }}
+          style={{ maxWidth: "clamp(290px, 90vw, 490px)" }}
         >
           <div
             className="relative w-full flex items-center justify-center"
@@ -456,7 +456,7 @@ export default function InvitationCard({ animateCard = false }) {
               ? "opacity-100 translate-y-0"
               : "opacity-0 translate-y-20"
           }`}
-          style={{ width: "clamp(200px, 55vw, 280px)" }}
+          style={{ width: "clamp(200px, 57vw, 280px)" }}
         >
           <div className="lg:mt-[34%]">
             <div
@@ -516,7 +516,7 @@ export default function InvitationCard({ animateCard = false }) {
                 </span>
                 <span
                   className="font-script font-medium text-olive tracking-widest"
-                  style={{ fontSize: "clamp(28px, 6vw, 36px)" }}
+                  style={{ fontSize: "clamp(30px, 6.5vw, 36px)" }}
                 >
                   Août 2026
                 </span>

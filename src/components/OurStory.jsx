@@ -48,7 +48,7 @@ export default function OurStory() {
       <div
         className="relative z-20 text-center w-full mx-auto"
         style={{
-          maxWidth: "clamp(280px, 88%, 600px)",
+          maxWidth: "clamp(280px, 96%, 600px)",
           display: "flex",
           flexDirection: "column",
           gap: "clamp(10px, 2.5vw, 24px)",
@@ -58,7 +58,7 @@ export default function OurStory() {
           <p
             key={i}
             className="italic font-title text-olive-dark leading-relaxed"
-            style={{ fontSize: "clamp(12px, 2.2vw, 18px)", margin: 0 }}
+            style={{ fontSize: "clamp(13px, 2.2vw, 18px)", margin: 0 }}
           >
             {p}
           </p>

@@ -179,7 +179,7 @@ export default function Itinerary() {
                         <p
                           className="font-title font-medium text-olive-dark leading-snug"
                           style={{
-                            fontSize: "clamp(11px, 2.2vw, 15px)",
+                            fontSize: "clamp(12px, 2.2vw, 15px)",
                             margin: 0,
                           }}
                         >
@@ -207,17 +207,19 @@ export default function Itinerary() {
                           //   {e.location}
                           // </p>
                           <p
-                            className="italic font-medium text-black flex items-center justify-center gap-1"
+                            className="italic font-medium text-black text-center"
                             style={{
-                              fontSize: "clamp(9px, 1.8vw, 14px)",
+                              fontSize: "clamp(10px, 1.8vw, 14px)",
                               margin: "clamp(1px, 0.3vw, 3px) 0 0",
                             }}
                           >
                             <MapPin
-                              className="flex-shrink-0"
+                              className="inline-block flex-shrink-0"
                               style={{
                                 width: "clamp(9px, 1.8vw, 13px)",
                                 height: "clamp(9px, 1.8vw, 13px)",
+                                verticalAlign: "-2px",
+                                marginRight: "3px",
                               }}
                             />
                             {e.location}
