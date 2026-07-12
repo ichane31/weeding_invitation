@@ -114,6 +114,7 @@ export default function Countdown() {
           alt="Cadre décoratif"
           className="w-full pointer-events-none z-10 aspect-[1.4] sm:aspect-[1.5]"
           loading="lazy"
+          style={{ filter: "drop-shadow(0 8px 14px rgba(0,0,0,0.12))" }}
         />
 
         <div
@@ -123,7 +124,7 @@ export default function Countdown() {
           <h2
             className="font-script text-olive-dark"
             style={{
-              fontSize: "clamp(24px, 5vw, 48px)",
+              fontSize: "clamp(26px, 5.2vw, 50px)",
               marginBottom: "clamp(4px, 1.5vw, 20px)",
             }}
           >
@@ -137,15 +138,14 @@ export default function Countdown() {
               marginBottom: "clamp(4px, 1vw, 12px)",
             }}
           >
-            VILLA RIMBA FLORA GOMBAK
+            Quartier Marouaré
           </p>
 
           <p
             className="font-title text-olive-dark leading-relaxed"
-            style={{ fontSize: "clamp(11px, 2.5vw, 20px)" }}
+            style={{ fontSize: "clamp(12px, 2.5vw, 20px)", maxWidth: "75%" }}
           >
-            9381, Jalan Gombak, Ulu Gombak,{" "}
-            <span className="block">53100 Selangor</span>
+            Marouaré-Domicile Alhadji SOUAIBOU Idrissou
           </p>
 
           <div
@@ -156,7 +156,7 @@ export default function Countdown() {
             }}
           >
             <a
-              href="https://maps.google.com/?q=9381+Jalan+Gombak+Ulu+Gombak+53100+Selangor"
+              href="https://maps.app.goo.gl/yzimYD84XA75e5b88"
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-full border-2 border-olive-dark italic transition-all duration-300 hover:bg-olive-dark hover:text-cream hover:scale-105"
@@ -167,8 +167,9 @@ export default function Countdown() {
             >
               Google Maps
             </a>
+
             <a
-              href="https://waze.com/ul?q=9381+Jalan+Gombak+Ulu+Gombak+53100+Selangor"
+              href="https://waze.com/ul?ll=9.337959,13.402541&navigate=yes"
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-full border-2 border-olive-dark italic transition-all duration-300 hover:bg-olive-dark hover:text-cream hover:scale-105"

@@ -463,7 +463,7 @@ export default function RSVP({ onResponseSubmitted }) {
               <div
                 className="absolute left-[15%] md:left-[15%] lg:left-[35%] flex items-center justify-center z-20 pointer-events-none bg-cream rounded-lg shadow-lg border border-olive/10"
                 style={{
-                  width: "clamp(120px, 44%, 200px)",
+                  width: "clamp(120px, 48%, 220px)",
                   aspectRatio: "1.4",
                   top: "30%",
                   transform: "rotate(15deg)",

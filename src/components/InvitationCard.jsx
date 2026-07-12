@@ -136,6 +136,7 @@ export default function InvitationCard({ animateCard = false }) {
               alt="Enveloppe ouverte"
               className="w-full h-full object-contain relative z-0"
               loading="lazy"
+              style={{ filter: "drop-shadow(0 8px 14px rgba(0,0,0,0.12))" }}
             />
 
             {/* Carte qui sort */}
@@ -303,7 +304,7 @@ export default function InvitationCard({ animateCard = false }) {
                 className="font-script tracking-widest font-semibold block"
                 dir="rtl"
                 style={{
-                  fontSize: "clamp(18px, 4.5vw, 38px)",
+                  fontSize: "clamp(20px, 4.8vw, 38px)",
                   lineHeight: 1.3,
                   color: "#5c4a3a", // moka — foncé, bon contraste
                 }}
@@ -315,7 +316,7 @@ export default function InvitationCard({ animateCard = false }) {
               <p
                 className="font-title tracking-wide leading-snug"
                 style={{
-                  fontSize: "clamp(10px, 1.7vw, 14px)",
+                  fontSize: "clamp(11.5px, 1.7vw, 15px)",
                   color: "#583a29", // mocha
                 }}
               >
@@ -332,7 +333,7 @@ export default function InvitationCard({ animateCard = false }) {
                 <span
                   className="font-script italic text-olive-dark tracking-wide"
                   style={{
-                    fontSize: "clamp(16px, 3vw, 24px)",
+                    fontSize: "clamp(17px, 3.2vw, 26px)",
                     // color: "#3e4f22", // olive.dark — plus foncé que olive DEFAULT
                   }}
                 >
@@ -363,7 +364,7 @@ export default function InvitationCard({ animateCard = false }) {
               {/* Séparateur décoratif */}
               <span
                 style={{
-                  fontSize: "clamp(10px, 1.5vw, 14px)",
+                  fontSize: "clamp(12px, 1.8vw, 16px)",
                   color: "#800020", // burgundy — accent, cohérent avec les mariés
                   opacity: 0.75,
                   letterSpacing: "0.3em",
@@ -380,7 +381,7 @@ export default function InvitationCard({ animateCard = false }) {
                 <p
                   className="font-title tracking-wide leading-relaxed"
                   style={{
-                    fontSize: "clamp(9px, 1.6vw, 12px)",
+                    fontSize: "clamp(10px, 1.6vw, 13px)",
                     maxWidth: "260px",
                     color: "#6b4c3b", // mocha
                   }}
@@ -478,7 +479,7 @@ export default function InvitationCard({ animateCard = false }) {
               style={{
                 width: "clamp(80px, 60%, 180px)",
                 bottom: "clamp(-90px, -30%, -75px)",
-                left: "-20%",
+                left: "-10%",
                 transform: "rotate(-60deg)",
               }}
             >
@@ -503,13 +504,13 @@ export default function InvitationCard({ animateCard = false }) {
               <div className="relative z-10 w-full h-full flex flex-col items-center justify-center gap-2 py-3 px-3">
                 <span
                   className="font-script font-medium text-olive tracking-widest"
-                  style={{ fontSize: "clamp(34px, 7.5vw, 48px)" }}
+                  style={{ fontSize: "clamp(35px, 7.5vw, 48px)" }}
                 >
                   Vendredi
                 </span>
                 <span
                   className="font-script text-olive-dark font-semibold leading-none"
-                  style={{ fontSize: "clamp(36px, 8vw, 50px)" }}
+                  style={{ fontSize: "clamp(38px, 8vw, 50px)" }}
                 >
                   21
                 </span>

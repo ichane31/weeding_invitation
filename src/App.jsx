@@ -68,7 +68,7 @@ export default function App() {
         </main>
 
         <footer className="w-full py-6 text-center text-[10px] text-gray-400 font-sans tracking-widest uppercase border-t border-cream-dark/50 bg-[#fdfbf7]/40 relative z-20 mt-auto">
-          <p>© 2026 Mariam & Ousmanou. Made with ♥</p>
+          <p>© 2026 Ousmanou & Mairama. Made with ♥</p>
         </footer>
       </div>
     )}

@@ -13,7 +13,7 @@ export default function EnvelopeHero({ onOpen }) {
     setPulled(false);
     setTimeout(() => setPulled(true), 1000); // ← 600 → 1300ms
     onOpen();
-  }, 500);
+  }, 100);
 };
 
   const isOpen = phase === "open";
@@ -40,7 +40,7 @@ export default function EnvelopeHero({ onOpen }) {
           style={{
             aspectRatio: "1.55",
             opacity: isOpening ? 0 : 1,
-            transition: "opacity 400ms ease",
+            transition: "opacity 300ms ease",
           }}
         >
 
@@ -75,24 +75,13 @@ export default function EnvelopeHero({ onOpen }) {
             loading="lazy"
           />
 
-          {/* Ombre */}
-          {/* <div
-            className="absolute rounded-full z-0"
-            style={{
-              left: "4%", right: "4%",
-              bottom: "clamp(8px, 3%, 20px)",
-              height: "clamp(10px, 3%, 20px)",
-              background: "rgba(0,0,0,0.10)",
-              filter: "blur(10px)",
-            }}
-          /> */}
-
           {/* Enveloppe fermée → ouverte */}
           <img
             src={isOpen ? "/images/envelop_open1.png" : "/images/envelop_close2.png"}
             alt="Enveloppe"
             className="w-full h-full object-contain relative z-0"
             loading="lazy"
+             style={{ filter: "drop-shadow(0 8px 14px rgba(0,0,0,0.12))" }}
           />
 
           {/* Carte qui sort (état ouvert uniquement) */}

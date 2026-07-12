@@ -1,10 +1,77 @@
+import { MapPin } from "lucide-react";
 import Butterflies from "./Butterflies";
 
-const EVENTS = [
-  { title: "Accueil des invités", time: "18h00 – 19h00" },
-  { title: "L'amour commence son merveilleux voyage", time: "19h30" },
-  { title: "Dîner pour célébrer l'amour", time: "20h30" },
-  { title: "La soirée s'éteindra, mais notre amour vivra", time: "22h00" },
+const PROGRAM = [
+  {
+    day: "Mercredi 19 août",
+    events: [
+      {
+        title: "Bangourdé (présentation du trousseau de la mariée)",
+        time: "16h00",
+        location: "Marouaré - Domicile Alhadji Souaibou Idrissou",
+      },
+    ],
+  },
+  {
+    day: "Jeudi 20 août",
+    events: [
+      {
+        title: "Dambordou (cérémonie du henné)",
+        time: "20h00",
+        location: "Marouaré - Domicile Alhadji Souaibou Idrissou",
+      },
+    ],
+  },
+  {
+    day: "Vendredi 21 août",
+    events: [
+      {
+        title: "DOA et Tégal (mariage religieux)",
+        time: "13h30",
+        location: "Marouaré - Domicile Alhadji Souaibou Idrissou",
+      },
+      {
+        title: "Yiwordou (lavage du henné de la mariée)",
+        time: "15h30",
+        location: "Marouaré - Domicile Alhadji Souaibou Idrissou",
+      },
+      {
+        title: "Soudditordou (présentation de la mariée à sa belle famille)",
+        time: "16h30",
+        location: "Marouaré - Domicile Alhadji Sali Ousman Sambo (ASOS)",
+      },
+      {
+        title: "Accompagnement de la mariée au domicile conjugal",
+        time: "17h30",
+        location: "Garoua - Marouaré",
+      },
+    ],
+  },
+  {
+    day: "Samedi 22 août",
+    events: [
+      {
+        title: "Mariage civil",
+        time: "10h00",
+        location: "Garoua - Mairie Garoua 2",
+      },
+      {
+        title: "Walima",
+        time: "20h00",
+        location: "",
+      },
+    ],
+  },
+  {
+    day: "Dimanche 23 août",
+    events: [
+      {
+        title: "Retour définitif",
+        time: "10h00",
+        location: "Garoua - Marouaré",
+      },
+    ],
+  },
 ];
 
 export default function Itinerary() {
@@ -17,20 +84,20 @@ export default function Itinerary() {
         padding: "clamp(40px, 6vw, 66px) clamp(12px, 4vw, 32px)",
       }}
     >
-      <Butterflies count={5} size={{ min: 20, max: 30 }}/>
+      <Butterflies count={5} size={{ min: 20, max: 30 }} />
       <div
         className="relative w-full"
-        style={{ maxWidth: "clamp(280px, 89%, 520px)" }}
+        style={{ maxWidth: "clamp(300px, 99%, 600px)" }}
       >
         {/* Cadre */}
         <div
           className="relative flex items-center justify-center w-full shadow-2xl"
           style={{
             aspectRatio: "0.85",
-            backgroundImage: "url(/images/bg_8.png)",
+            backgroundImage: "url(/images/cadre_itinerary.png)",
             backgroundSize: "100% 100%",
             backgroundPosition: "center",
-            padding: "clamp(32px, 8%, 72px) clamp(28px, 7%, 48px)",
+            padding: "clamp(30px, 16%, 80px) clamp(24px, 6.5%, 36px)",
           }}
         >
           {/* Rose haut droite */}
@@ -62,45 +129,106 @@ export default function Itinerary() {
           />
 
           {/* Contenu */}
-          <div className="relative z-10 w-full flex flex-col items-center justify-center" style={{ gap: "clamp(2px, 3vw, 20px)" }}>
-
+          <div
+            className="relative z-10 w-full flex flex-col items-center justify-center"
+            style={{ gap: "clamp(2px, 3vw, 10px)" }}
+          >
             {/* Titre */}
             <h2
               className="font-script text-olive-dark"
-              style={{ fontSize: "clamp(32px, 7vw, 64px)" }}
+              style={{ fontSize: "clamp(32px, 7vw, 64px)", marginTop: "-10px" }}
             >
               Programme
             </h2>
 
-            {/* Événements */}
-            <ul
-              className="list-none w-full"
+            {/* Jours + événements */}
+            <div
+              className="w-full"
               style={{
-                maxWidth: "clamp(200px, 85%, 380px)",
+                maxWidth: "clamp(260px, 95%, 680px)",
                 display: "flex",
                 flexDirection: "column",
-                gap: "clamp(12px, 3vw, 28px)",
+                gap: "clamp(6px, 2vw, 14px)",
                 margin: "0 auto",
-                padding: 0,
               }}
             >
-              {EVENTS.map((e, i) => (
-                <li key={i} className="relative text-center">
+              {PROGRAM.map((day, dayIndex) => (
+                <div key={dayIndex} className="text-center">
+                  {/* Nom du jour : souligné, gras, vert foncé */}
                   <p
-                    className="font-title text-olive-dark leading-snug"
-                    style={{ fontSize: "clamp(11px, 2.4vw, 18px)", margin: 0 }}
+                    className="font-title text-burgundy-dark font-bold underline"
+                    style={{
+                      fontSize: "clamp(15px, 3vw, 23px)",
+                      margin: "0 0 clamp(6px, 1vw, 8px)",
+                    }}
                   >
-                    {e.title}
+                    {day.day}
                   </p>
-                  <p
-                    className="font-title text-burgundy font-medium"
-                    style={{ fontSize: "clamp(10px, 2.2vw, 16px)", margin: "clamp(2px, 0.5vw, 6px) 0 0" }}
+
+                  {/* Liste des événements du jour */}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "clamp(6px, 2vw, 10px)",
+                    }}
                   >
-                    {e.time}
-                  </p>
-                </li>
+                    {day.events.map((e, eventIndex) => (
+                      <div key={eventIndex}>
+                        {/* Titre de l'événement */}
+                        <p
+                          className="font-title font-medium text-olive-dark leading-snug"
+                          style={{
+                            fontSize: "clamp(11px, 2.2vw, 15px)",
+                            margin: 0,
+                          }}
+                        >
+                          {e.title}
+                        </p>
+                        {/* Heure : doré, gras */}
+                        <p
+                          className="font-bogue font-medium text-gold uppercase"
+                          style={{
+                            fontSize: "clamp(14px, 2.5vw, 18px)",
+                            margin: "clamp(2px, 0.5vw, 4px) 0 0",
+                          }}
+                        >
+                          {e.time}
+                        </p>
+                        {/* Lieu : italique, plus petit, avec pin */}
+                        {e.location && (
+                          // <p
+                          //   className="italic text-black"
+                          //   style={{
+                          //     fontSize: "clamp(9.5px, 1.8vw, 13px)",
+                          //     margin: "clamp(1px, 0.3vw, 3px) 0 0",
+                          //   }}
+                          // >
+                          //   {e.location}
+                          // </p>
+                          <p
+                            className="italic font-medium text-black flex items-center justify-center gap-1"
+                            style={{
+                              fontSize: "clamp(9px, 1.8vw, 14px)",
+                              margin: "clamp(1px, 0.3vw, 3px) 0 0",
+                            }}
+                          >
+                            <MapPin
+                              className="flex-shrink-0"
+                              style={{
+                                width: "clamp(9px, 1.8vw, 13px)",
+                                height: "clamp(9px, 1.8vw, 13px)",
+                              }}
+                            />
+                            {e.location}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
       </div>

@@ -43,6 +43,7 @@ export default {
         title: ['"Playfair Display"', 'serif'],
         roundhand: ['Roundhand', 'cursive'],
         bogue: ['Bogue', 'serif'],
+        'great': ['Great Vibes', 'cursive'],
 
         // Variantes de Bogue par poids
         'bogue-normal': ['Bogue', 'serif'],

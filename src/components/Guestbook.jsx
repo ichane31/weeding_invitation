@@ -5,7 +5,8 @@ const GOOGLE_SCRIPT_URL =
 
 export default function Guestbook({ refreshTrigger }) {
   const [messages, setMessages] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loadedTrigger, setLoadedTrigger] = useState(null);
+
 
   const defaultMessages = useMemo(
     () => [
@@ -21,24 +22,25 @@ export default function Guestbook({ refreshTrigger }) {
     [],
   );
 
+  const loading = loadedTrigger !== refreshTrigger;
+
   useEffect(() => {
     let isCancelled = false;
-    setLoading(true);
 
     fetch(GOOGLE_SCRIPT_URL)
       .then((res) => res.json())
       .then((sheetMessages) => {
         if (isCancelled) return;
-        // Les plus récents en premier
         const sorted = [...sheetMessages].reverse();
         setMessages([...sorted, ...defaultMessages]);
+        setLoadedTrigger(refreshTrigger);
       })
       .catch((err) => {
         console.error("Erreur de chargement des messages :", err);
-        if (!isCancelled) setMessages(defaultMessages);
-      })
-      .finally(() => {
-        if (!isCancelled) setLoading(false);
+        if (!isCancelled) {
+          setMessages(defaultMessages);
+          setLoadedTrigger(refreshTrigger);
+        }
       });
 
     return () => {
