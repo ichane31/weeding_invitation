@@ -21,7 +21,7 @@ export default function EnvelopeHero({ onOpen }) {
 
   return (
     <div
-      className="relative flex items-center justify-center h-screen w-full"
+      className="relative flex items-center justify-center h-[96vh] max-h-screen w-full"
       style={{
         backgroundImage: "url(/images/bg_primary.jpg)",
         padding: "clamp(48px, 10vw, 80px) 0",
