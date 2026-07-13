@@ -7,23 +7,26 @@ export default function EnvelopeHero({ onOpen }) {
   const [pulled, setPulled] = useState(false);
 
   const handleOpen = () => {
-  setPhase("opening");
-  setTimeout(() => {
-    setPhase("open");
+    if (phase !== "closed") return;
+    setPhase("opening");
     setPulled(false);
-    setTimeout(() => setPulled(true), 1000); // ← 600 → 1300ms
-    onOpen();
-  }, 100);
-};
+
+    setTimeout(() => {
+      setPhase("open");
+      setTimeout(() => setPulled(true), 650);
+      onOpen();
+    }, 260);
+  };
 
   const isOpen = phase === "open";
   const isOpening = phase === "opening";
 
   return (
     <div
-      className="relative flex items-center justify-center h-[96vh] max-h-screen w-full"
+      className="relative flex items-center justify-center h-[96vh] w-full"
       style={{
         backgroundImage: "url(/images/bg_primary.jpg)",
+        minHeight: "96svh",
         padding: "clamp(48px, 10vw, 80px) 0",
       }}
     >
@@ -39,8 +42,9 @@ export default function EnvelopeHero({ onOpen }) {
           className="relative w-full flex items-center justify-center select-none"
           style={{
             aspectRatio: "1.55",
-            opacity: isOpening ? 0 : 1,
-            transition: "opacity 300ms ease",
+            opacity: 1,
+            transform: isOpening ? "scale(0.986)" : "scale(1)",
+            transition: "transform 260ms ease",
           }}
         >
 
@@ -56,7 +60,6 @@ export default function EnvelopeHero({ onOpen }) {
                 : "clamp(-80px, -30%, -40px)",
               left: "clamp(-90px, -28%, -60px)",
               transform: "rotate(-40deg)",
-              // transition: "top 900ms cubic-bezier(0.22,1,0.36,1)",
             }}
             loading="lazy"
           />
@@ -81,7 +84,7 @@ export default function EnvelopeHero({ onOpen }) {
             alt="Enveloppe"
             className="w-full h-full object-contain relative z-0"
             loading="lazy"
-             style={{ filter: "drop-shadow(0 8px 14px rgba(0,0,0,0.12))" }}
+             style={{ filter: "drop-shadow(0 8px 14px rgba(0,0,0,0.12))", position: 'relative' }}
           />
 
           {/* Carte qui sort (état ouvert uniquement) */}
@@ -94,7 +97,9 @@ export default function EnvelopeHero({ onOpen }) {
                 className="will-change-transform"
                 style={{
                   transition: "transform 1600ms cubic-bezier(0.22,1,0.36,1)",
-                  transform: pulled ? "translateY(12%)" : "translateY(200%)",
+                  transform: pulled ? "translate3d(0, 12%, 0)" : "translate3d(0, 200%, 0)",
+                  backfaceVisibility: "hidden",
+                  WebkitBackfaceVisibility: "hidden",
                 }}
               >
                 <img

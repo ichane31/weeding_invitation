@@ -148,7 +148,9 @@ export default function InvitationCard({ animateCard = false }) {
                 className="will-change-transform"
                 style={{
                   transition: "transform 1600ms cubic-bezier(0.22,1,0.36,1)",
-                  transform: pulled ? "translateY(12%)" : "translateY(75%)",
+                  transform: pulled ? "translate3d(0, 12%, 0)" : "translate3d(0, 75%, 0)",
+                  backfaceVisibility: "hidden",
+                  WebkitBackfaceVisibility: "hidden",
                 }}
               >
                 <img
