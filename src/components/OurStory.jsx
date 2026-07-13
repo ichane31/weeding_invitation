@@ -1,14 +1,10 @@
 import Butterflies from "./Butterflies";
 
 const PARAGRAPHS = [
-  "Peut-être étions-nous écrits l'un dans l'histoire de l'autre bien avant de savoir que l'autre existait.",
-  "Deux âmes qui se croisaient silencieusement, comme des étrangers, sans jamais savoir qu'un jour l'autre deviendrait maison.",
-  "Ce qui commença par de simples moments, des cercles partagés, du temps qui passe, devint lentement quelque chose de plus profond, de plus doux, de plus vrai.",
-  "Et quelque part, à travers les rires et les jours ordinaires, l'amour arriva si naturellement que nous remarquâmes à peine sa première lueur.",
-  "La vie nous apprit aussi la tendresse — combien les cœurs peuvent être fragiles. Certains que nous aimions ont quitté ce monde, pourtant leur présence reste doucement parmi nous.",
-  "C'est peut-être pour cela que nous nous tenons différemment l'un à l'autre — avec patience, avec compréhension, avec une empathie silencieuse.",
-  "À travers le deuil et le réconfort, à travers chaque sommet et chaque creux, nous avons appris que l'amour ne se trouve pas seulement — il se construit à deux.",
-  "D'étrangers à refuge, du hasard à la certitude.",
+  "Peut-être étions-nous écrits l'un dans l'histoire de l'autre bien avant de le savoir. Deux âmes qui se croisaient sans savoir qu'un jour l'autre deviendrait maison.",
+  "Ce qui commença par de simples moments devint lentement quelque chose de plus profond. L'amour arriva si naturellement que nous en remarquâmes à peine la première lueur.",
+  "La vie nous apprit aussi la tendresse, et combien les cœurs peuvent être fragiles. Certains que nous aimions nous ont quittés, mais leur présence reste doucement parmi nous.",
+  "À travers chaque sommet et chaque creux, nous avons appris que l'amour ne se trouve pas — il se construit à deux. D'étrangers à refuge, du hasard à la certitude.",
   "Et ceci n'est que le début de toutes les vies que nous vivrons encore ensemble.",
 ];
 

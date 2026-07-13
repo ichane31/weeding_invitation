@@ -87,7 +87,7 @@ export default function InvitationCard({ animateCard = false }) {
         >
           <div
             className="relative w-full flex items-center justify-center select-none"
-            style={{ aspectRatio: "1.55" }}
+            // style={{ aspectRatio: "1.55" }}
           >
             {/* Fleur gauche */}
             <img
@@ -404,13 +404,13 @@ export default function InvitationCard({ animateCard = false }) {
               {/* Noms des mariés */}
               <div
                 className="flex flex-col items-center"
-                style={{ gap: "clamp(0px, 0.3vh, 2px)" }}
+                style={{ gap: "clamp(4px, 0.8vh, 9px)" }}
               >
                 <h2
-                  className="font-script leading-none"
+                  className="font-title italic font-semibold leading-none tracking-[0.12em]"
                   style={{
-                    fontSize: "clamp(22px, 5.5vw, 42px)",
-                    color: "#5a0016", // burgundy.dark — point focal, très lisible
+                    fontSize: "clamp(18px, 3.5vw, 22px)",
+                    color: "#5a0016",
                   }}
                 >
                   Ousmanou SALIHOU
@@ -419,16 +419,16 @@ export default function InvitationCard({ animateCard = false }) {
                   className="font-title leading-none"
                   style={{
                     fontSize: "clamp(14px, 3vw, 21px)",
-                    color: "#8b6914", // gold assombri — accent contrasté
+                    color: "#8b6914",
                   }}
                 >
                   &
                 </span>
                 <h2
-                  className="font-script leading-none"
+                  className="font-title italic font-semibold leading-none tracking-[0.12em]"
                   style={{
-                    fontSize: "clamp(22px, 5.5vw, 42px)",
-                    color: "#5a0016", // burgundy.dark
+                    fontSize: "clamp(18px, 3.5vw, 22px)",
+                    color: "#5a0016",
                   }}
                 >
                   Mairama SOUAIBOU

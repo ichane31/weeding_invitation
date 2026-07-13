@@ -7,9 +7,7 @@ const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw9yPUp-p7RDt
 export default function RSVP({ onResponseSubmitted }) {
   const [formData, setFormData] = useState({
     name: "",
-    phone: "",
     attendance: "yes",
-    companions: 1,
     message: "",
   });
 
@@ -32,10 +30,7 @@ export default function RSVP({ onResponseSubmitted }) {
 
     const payload = {
       name: formData.name,
-      phone: formData.phone,
       attendance: formData.attendance,
-      companions:
-        formData.attendance === "yes" ? parseInt(formData.companions) || 1 : 0,
       message: formData.message,
     };
 
@@ -95,9 +90,6 @@ export default function RSVP({ onResponseSubmitted }) {
           style={{ fontSize: "clamp(11px, 2.2vw, 16px)" }}
         >
           Votre présence à notre mariage nous ferait un immense honneur.
-          <br />
-          En raison de la capacité du lieu, nous avons réservé une place
-          spécialement pour vous.
         </p>
       </div>
 
@@ -216,35 +208,6 @@ export default function RSVP({ onResponseSubmitted }) {
                   />
                 </div>
 
-                {/* Téléphone */}
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "clamp(4px, 1vw, 8px)",
-                  }}
-                >
-                  <label
-                    className="font-title tracking-wider text-olive-dark font-medium text-left"
-                    style={{ fontSize: "clamp(10px, 2vw, 14px)" }}
-                  >
-                    Numéro de Téléphone <span className="text-burgundy">*</span>
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    required
-                    placeholder="06 12 34 56 78"
-                    className="w-full bg-[#fdfbf7] border border-cream-dark focus:border-burgundy rounded-lg outline-none transition-all duration-300 shadow-inner focus:shadow-lg"
-                    style={{
-                      fontSize: "clamp(10px, 2vw, 14px)",
-                      padding: "clamp(8px, 1.5vw, 12px) clamp(10px, 2vw, 16px)",
-                    }}
-                  />
-                </div>
-
                 {/* Présence */}
                 <div
                   style={{
@@ -271,7 +234,7 @@ export default function RSVP({ onResponseSubmitted }) {
                         className={`rounded-lg font-title uppercase tracking-widest border transition-all duration-300 ${
                           formData.attendance === val
                             ? "bg-burgundy text-cream border-burgundy shadow-lg shadow-burgundy/20"
-                            : "bg-transparent text-gray-500 border-cream-dark hover:border-burgundy hover:text-burgundy hover:bg-burgundy/5"
+                            : "bg-transparent text-gray-700 border-cream-dark hover:border-burgundy hover:text-burgundy hover:bg-burgundy/5"
                         }`}
                         style={{
                           fontSize: "clamp(9px, 1.8vw, 12px)",
@@ -283,42 +246,6 @@ export default function RSVP({ onResponseSubmitted }) {
                     ))}
                   </div>
                 </div>
-
-                {/* Nombre */}
-                {formData.attendance === "yes" && (
-                  <div
-                    className="animate-fade-in-up"
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "clamp(4px, 1vw, 8px)",
-                    }}
-                  >
-                    <label
-                      className="font-title tracking-wider text-olive-dark font-medium text-left"
-                      style={{ fontSize: "clamp(10px, 2vw, 14px)" }}
-                    >
-                      Nombre de personnes (vous inclus)
-                    </label>
-                    <select
-                      name="companions"
-                      value={formData.companions}
-                      onChange={handleChange}
-                      className="w-full bg-[#fdfbf7] border border-cream-dark focus:border-burgundy rounded-lg outline-none transition-all duration-300 focus:shadow-lg"
-                      style={{
-                        fontSize: "clamp(10px, 2vw, 14px)",
-                        padding:
-                          "clamp(8px, 1.5vw, 12px) clamp(10px, 2vw, 16px)",
-                      }}
-                    >
-                      {[1, 2, 3, 4, 5].map((n) => (
-                        <option key={n} value={n}>
-                          {n} Personne{n > 1 ? "s" : ""}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                )}
 
                 {/* Message */}
                 <div
@@ -403,7 +330,7 @@ export default function RSVP({ onResponseSubmitted }) {
             marginTop: "clamp(0px, 2vw, 0px)",
           }}
         >
-          <div className="lg:mt-[32%]">
+          <div className="lg:mt-[20%]">
             <div
               className="relative w-full pointer-events-none lg:ml-rsvp-offset"
               style={{ height: "clamp(260px, 45vw, 360px)" }}

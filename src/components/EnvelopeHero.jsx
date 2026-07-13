@@ -39,9 +39,9 @@ export default function EnvelopeHero({ onOpen }) {
       >
         {/* Envelope container */}
         <div
-          className="relative w-full flex items-center justify-center select-none"
+          className="relative w-full  flex items-center justify-center select-none"
           style={{
-            aspectRatio: "1.55",
+            // aspectRatio: isOpening ? null : "1.55",
             opacity: 1,
             transform: isOpening ? "scale(0.986)" : "scale(1)",
             transition: "transform 260ms ease",

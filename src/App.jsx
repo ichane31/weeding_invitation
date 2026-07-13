@@ -59,8 +59,8 @@ export default function App() {
           <div ref={invitationCardRef} className="w-full">
             <InvitationCard animateCard={shouldAnimateCard} />
           </div>
-          <OurStory />
           <Itinerary />
+          <OurStory />
           <RSVP onResponseSubmitted={handleRsvpSubmitted} />
           <Guestbook refreshTrigger={guestbookTrigger} />
           <GiftSection />
