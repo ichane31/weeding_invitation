@@ -135,7 +135,7 @@ export default function InvitationCard({ animateCard = false }) {
               src="/images/envelop_open1.png"
               alt="Enveloppe ouverte"
               className="w-full h-full object-contain relative z-0"
-              loading="lazy"
+              loading="eager"
               style={{ filter: "drop-shadow(0 8px 14px rgba(0,0,0,0.12))" }}
             />
 
@@ -157,7 +157,7 @@ export default function InvitationCard({ animateCard = false }) {
                   src="/images/cadre41.png"
                   alt="Contenu enveloppe"
                   className="w-full h-auto object-contain relative"
-                  loading="lazy"
+                  loading="eager"
                 />
                 <div
                   className="absolute top-0 w-full h-full flex flex-col items-center justify-start"
@@ -186,7 +186,7 @@ export default function InvitationCard({ animateCard = false }) {
                 filter: "drop-shadow(0 6px 10px rgba(0,0,0,0.08))",
                 maxHeight: "100%",
               }}
-              loading="lazy"
+              loading="eager"
             />
 
             {/* Sceau */}
@@ -205,7 +205,7 @@ export default function InvitationCard({ animateCard = false }) {
                 src="/images/sceau1.png"
                 alt="Sceau de cire OM"
                 className="w-full h-full rounded-full object-cover"
-                loading="lazy"
+                loading="eager"
               />
             </div>
 
@@ -224,7 +224,7 @@ export default function InvitationCard({ animateCard = false }) {
                 src="/images/disque.png"
                 alt="Disque vinyle"
                 className="w-full relative z-0 transition-transform duration-300 group-hover:scale-105"
-                loading="lazy"
+                loading="eager"
               />
               <div className="absolute inset-0 flex items-center justify-center z-10">
                 <div className="bg-black/80 rounded-full p-3 backdrop-blur-sm group-hover:scale-110 transition-all duration-300">
@@ -290,7 +290,7 @@ export default function InvitationCard({ animateCard = false }) {
               alt="Fleurs fond"
               className="absolute inset-0 w-full h-full pointer-events-none opacity-90 z-20"
               style={{ filter: "drop-shadow(0px 4px 6px rgba(0,0,0,0.5))" }}
-              loading="lazy"
+              loading="eager"
             />
 
             <div
@@ -501,7 +501,7 @@ export default function InvitationCard({ animateCard = false }) {
                 src="/images/cadre2.png"
                 alt="Cadre décoratif"
                 className="absolute inset-0 w-full h-full object-contain pointer-events-none"
-                loading="lazy"
+                loading="eager"
               />
               <div className="relative z-10 w-full h-full flex flex-col items-center justify-center gap-2 py-3 px-3">
                 <span

@@ -113,7 +113,7 @@ export default function Countdown() {
           src="/images/cadre10.png"
           alt="Cadre décoratif"
           className="w-full pointer-events-none z-10 aspect-[1.4] sm:aspect-[1.5]"
-          loading="lazy"
+          loading="eager"
           style={{ filter: "drop-shadow(0 8px 14px rgba(0,0,0,0.12))" }}
         />
 
@@ -168,7 +168,7 @@ export default function Countdown() {
               Google Maps
             </a>
 
-            <a
+            {/* <a
               href="https://waze.com/ul?ll=9.337959,13.402541&navigate=yes"
               target="_blank"
               rel="noopener noreferrer"
@@ -179,7 +179,7 @@ export default function Countdown() {
               }}
             >
               Waze
-            </a>
+            </a> */}
           </div>
         </div>
 

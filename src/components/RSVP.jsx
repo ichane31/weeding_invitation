@@ -323,7 +323,7 @@ export default function RSVP({ onResponseSubmitted }) {
         </div>
 
         {/* Déco droite */}
-        <div
+        {/* <div
           className="relative z-30 lg:ml-[-5%]"
           style={{
             width: "clamp(200px, 60vw, 360px)",
@@ -335,7 +335,6 @@ export default function RSVP({ onResponseSubmitted }) {
               className="relative w-full pointer-events-none lg:ml-rsvp-offset"
               style={{ height: "clamp(260px, 45vw, 360px)" }}
             >
-              {/* Rose haut */}
               <div
                 className="absolute lg:left-[20%] pointer-events-none flex items-center justify-center"
                 style={{
@@ -352,7 +351,6 @@ export default function RSVP({ onResponseSubmitted }) {
                 />
               </div>
 
-              {/* Rose bas inversée */}
               <div
                 className="absolute lg:left-[18%] pointer-events-none flex items-center justify-center"
                 style={{
@@ -369,7 +367,6 @@ export default function RSVP({ onResponseSubmitted }) {
                 />
               </div>
 
-              {/* Sceau */}
               <div
                 className="absolute z-40 left-[13%] lg:left-[33%]"
                 style={{
@@ -386,7 +383,6 @@ export default function RSVP({ onResponseSubmitted }) {
                 />
               </div>
 
-              {/* Carte message */}
               <div
                 className="absolute left-[15%] md:left-[15%] lg:left-[35%] flex items-center justify-center z-20 pointer-events-none bg-cream rounded-lg shadow-lg border border-olive/10"
                 style={{
@@ -407,7 +403,7 @@ export default function RSVP({ onResponseSubmitted }) {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

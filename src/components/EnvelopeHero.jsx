@@ -31,7 +31,7 @@ export default function EnvelopeHero({ onOpen }) {
       }}
     >
       {/* {isOpen && <PetalsRain />} */}
-      <Butterflies size={{ min: 20, max: 30 }}/>
+      <Butterflies size={{ min: 20, max: 30 }} />
 
       <div
         className="relative flex flex-col items-center text-center w-full"
@@ -47,7 +47,6 @@ export default function EnvelopeHero({ onOpen }) {
             transition: "transform 260ms ease",
           }}
         >
-
           {/* Fleur gauche */}
           <img
             src="/images/rose_primary.png"
@@ -61,7 +60,7 @@ export default function EnvelopeHero({ onOpen }) {
               left: "clamp(-90px, -28%, -60px)",
               transform: "rotate(-40deg)",
             }}
-            loading="lazy"
+            loading="eager"
           />
 
           {/* Fleur droite */}
@@ -75,16 +74,23 @@ export default function EnvelopeHero({ onOpen }) {
               right: "clamp(-70px, -24%, -30px)",
               transform: "scaleX(-1)",
             }}
-            loading="lazy"
+            loading="eager"
           />
 
           {/* Enveloppe fermée → ouverte */}
           <img
-            src={isOpen ? "/images/envelop_open1.png" : "/images/envelop_close2.png"}
+            src={
+              isOpen
+                ? "/images/envelop_open1.png"
+                : "/images/envelop_close2.png"
+            }
             alt="Enveloppe"
             className="w-full h-full object-contain relative z-0"
-            loading="lazy"
-             style={{ filter: "drop-shadow(0 8px 14px rgba(0,0,0,0.12))", position: 'relative' }}
+            loading="eager"
+            style={{
+              filter: "drop-shadow(0 8px 14px rgba(0,0,0,0.12))",
+              position: "relative",
+            }}
           />
 
           {/* Carte qui sort (état ouvert uniquement) */}
@@ -97,30 +103,35 @@ export default function EnvelopeHero({ onOpen }) {
                 className="will-change-transform"
                 style={{
                   transition: "transform 1600ms cubic-bezier(0.22,1,0.36,1)",
-                  transform: pulled ? "translate3d(0, 12%, 0)" : "translate3d(0, 200%, 0)",
+                  transform: pulled
+                    ? "translate3d(0, 12%, 0)"
+                    : "translate3d(0, 200%, 0)",
                   backfaceVisibility: "hidden",
                   WebkitBackfaceVisibility: "hidden",
                 }}
               >
                 <img
-                  // src="/images/bg_5.png"
                   src="/images/cadre_dentelle2.png"
                   alt="Contenu de l'enveloppe"
                   className="w-full h-auto object-contain relative opacity-90"
                   style={{ marginBottom: "-30%", opacity: pulled ? 1 : 0 }}
-                  loading="lazy"
+                  loading="eager"
                 />
                 <div
                   className="absolute top-0 left-0 right-0 w-full h-full flex flex-col items-center"
                   style={{
                     padding: "clamp(12%, 16%, 20%) clamp(6px, 4%, 14px) 0",
                     gap: "clamp(2px, 0.5vw, 6px)",
-                    opacity:  pulled ? 1 : 0
+                    opacity: pulled ? 1 : 0,
                   }}
                 >
                   <p
                     className="text-olive font-bogue font-title capitalize"
-                    style={{ fontSize: "clamp(13px, 3.2vw, 22px)", margin: 0, paddingBottom: "0.2em" }}
+                    style={{
+                      fontSize: "clamp(13px, 3.2vw, 22px)",
+                      margin: 0,
+                      paddingBottom: "0.2em",
+                    }}
                   >
                     Le mariage de
                   </p>
@@ -132,7 +143,10 @@ export default function EnvelopeHero({ onOpen }) {
                   </p>
                   <p
                     className="text-olive font-roundhand"
-                    style={{ fontSize: "clamp(18px, 4.5vw, 32px)", margin: "clamp(-16px, -1.2vw, -10px) 0" }}
+                    style={{
+                      fontSize: "clamp(18px, 4.5vw, 32px)",
+                      margin: "clamp(-16px, -1.2vw, -10px) 0",
+                    }}
                   >
                     &amp;
                   </p>
@@ -144,7 +158,11 @@ export default function EnvelopeHero({ onOpen }) {
                   </p>
                   <p
                     className="text-olive font-bogue font-semibold"
-                    style={{ fontSize: "clamp(14px, 3.5vw, 28px)", margin: 0, paddingTop: "0.1em" }}
+                    style={{
+                      fontSize: "clamp(14px, 3.5vw, 28px)",
+                      margin: 0,
+                      paddingTop: "0.1em",
+                    }}
                   >
                     <time dateTime="2026-08-21">21 . 08 . 2026</time>
                   </p>
@@ -166,7 +184,7 @@ export default function EnvelopeHero({ onOpen }) {
                 opacity: pulled ? 1 : 0,
                 transition: "opacity 600ms ease",
               }}
-              loading="lazy"
+              loading="eager"
             />
           )}
 
@@ -194,12 +212,13 @@ export default function EnvelopeHero({ onOpen }) {
               src="/images/sceau1.png"
               alt="Sceau de cire OM"
               className={`w-full h-full rounded-full object-cover ${
-                !isOpen ? "group-hover:scale-110 transition-transform duration-300" : ""
+                !isOpen
+                  ? "group-hover:scale-110 transition-transform duration-300"
+                  : ""
               }`}
-              loading="lazy"
+              loading="eager"
             />
           </button>
-
         </div>
 
         {/* CTA — visible seulement état fermé */}
@@ -207,7 +226,8 @@ export default function EnvelopeHero({ onOpen }) {
           style={{
             transition: "opacity 400ms ease, transform 400ms ease",
             opacity: isOpen || isOpening ? 0 : 1,
-            transform: isOpen || isOpening ? "translateY(10px)" : "translateY(0)",
+            transform:
+              isOpen || isOpening ? "translateY(10px)" : "translateY(0)",
             pointerEvents: isOpen ? "none" : "auto",
             marginTop: "clamp(12px, 3vw, 24px)",
           }}
@@ -221,7 +241,6 @@ export default function EnvelopeHero({ onOpen }) {
             <span className="h-[1px] w-8 bg-olive-dark group-hover:w-20 group-hover:bg-burgundy transition-all duration-300" />
           </button>
         </div>
-
       </div>
     </div>
   );
