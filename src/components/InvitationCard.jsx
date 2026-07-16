@@ -318,7 +318,7 @@ export default function InvitationCard({ animateCard = false }) {
               <p
                 className="font-title tracking-wide leading-snug"
                 style={{
-                  fontSize: "clamp(11.5px, 1.7vw, 15px)",
+                  fontSize: "clamp(11px, 1.7vw, 15px)",
                   color: "#583a29", // mocha
                 }}
               >
@@ -409,7 +409,7 @@ export default function InvitationCard({ animateCard = false }) {
                 <h2
                   className="font-title italic font-semibold leading-none tracking-[0.12em]"
                   style={{
-                    fontSize: "clamp(18px, 3.5vw, 22px)",
+                    fontSize: "clamp(15px, 3.5vw, 22px)",
                     color: "#5a0016",
                   }}
                 >
@@ -427,7 +427,7 @@ export default function InvitationCard({ animateCard = false }) {
                 <h2
                   className="font-title italic font-semibold leading-none tracking-[0.12em]"
                   style={{
-                    fontSize: "clamp(18px, 3.5vw, 22px)",
+                    fontSize: "clamp(15px, 3.5vw, 22px)",
                     color: "#5a0016",
                   }}
                 >

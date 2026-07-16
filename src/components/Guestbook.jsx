@@ -56,7 +56,7 @@ export default function Guestbook({ refreshTrigger }) {
       <div
         className="w-full mx-auto"
         style={{
-          maxWidth: "clamp(280px, 88%, 560px)",
+          maxWidth: "clamp(280px, 98%, 560px)",
           padding: "clamp(16px, 4vw, 36px) clamp(12px, 4vw, 20px)",
         }}
       >
@@ -74,8 +74,8 @@ export default function Guestbook({ refreshTrigger }) {
             Livre d'Or <span className="font-roundhand font-thin">&</span> Vœux
           </h3>
           <p
-            className="text-gray-400 font-sans tracking-widest uppercase"
-            style={{ fontSize: "clamp(7px, 1.4vw, 10px)" }}
+            className="text-black/90 font-sans tracking-widest uppercase"
+            style={{ fontSize: "clamp(10px, 3vw, 14px)" }}
           >
             Les messages de nos invités
           </p>
@@ -147,13 +147,13 @@ export default function Guestbook({ refreshTrigger }) {
                 >
                   <span
                     className="font-title text-burgundy font-semibold"
-                    style={{ fontSize: "clamp(10px, 2.2vw, 14px)" }}
+                    style={{ fontSize: "clamp(10.5px, 2.2vw, 14px)" }}
                   >
                     {msg.name}
                   </span>
                   <span
                     className="text-gray-400 font-sans shrink-0"
-                    style={{ fontSize: "clamp(7px, 1.3vw, 9px)" }}
+                    style={{ fontSize: "clamp(8px, 1.3vw, 9px)" }}
                   >
                     {msg?.date
                       ? new Date(msg.date).toLocaleDateString("fr-FR", {
@@ -166,8 +166,8 @@ export default function Guestbook({ refreshTrigger }) {
                 </div>
 
                 <p
-                  className="text-gray-600 leading-relaxed font-sans italic text-left"
-                  style={{ fontSize: "clamp(9px, 1.9vw, 13px)" }}
+                  className="text-gray-700 leading-relaxed font-sans italic text-left"
+                  style={{ fontSize: "clamp(9.5px, 1.9vw, 13px)" }}
                 >
                   "{msg.message}"
                 </p>
@@ -175,7 +175,7 @@ export default function Guestbook({ refreshTrigger }) {
                 {msg.attendance === "yes" && (
                   <span
                     className="absolute bottom-2 right-2 text-olive font-semibold font-sans tracking-wider uppercase opacity-60"
-                    style={{ fontSize: "clamp(6px, 1.2vw, 8px)" }}
+                    style={{ fontSize: "clamp(7px, 1.2vw, 8px)" }}
                   >
                     ✦ Sera présent(e)
                   </span>
@@ -190,8 +190,8 @@ export default function Guestbook({ refreshTrigger }) {
           style={{ marginTop: "clamp(14px, 3vw, 28px)" }}
         >
           <p
-            className="text-gray-700 font-sans tracking-widest uppercase"
-            style={{ fontSize: "clamp(7px, 1.4vw, 9px)" }}
+            className="text-black/90 font-sans tracking-widest uppercase"
+            style={{ fontSize: "clamp(8.5px, 2.8vw, 11px)" }}
           >
             — Que l'amour soit toujours votre guide —
           </p>

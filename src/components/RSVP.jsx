@@ -87,7 +87,7 @@ export default function RSVP({ onResponseSubmitted }) {
         </h2>
         <p
           className="font-title text-olive text-center"
-          style={{ fontSize: "clamp(11px, 2.2vw, 16px)" }}
+          style={{ fontSize: "clamp(13px, 2.2vw, 18px)" }}
         >
           Votre présence à notre mariage nous ferait un immense honneur.
         </p>
@@ -154,7 +154,7 @@ export default function RSVP({ onResponseSubmitted }) {
                 onClick={() => setIsSubmitted(false)}
                 className="font-title uppercase tracking-widest text-olive hover:text-burgundy transition-colors duration-300 border-b border-transparent hover:border-burgundy"
                 style={{
-                  fontSize: "clamp(9px, 1.8vw, 12px)",
+                  fontSize: "clamp(10px, 1.8vw, 13px)",
                   marginTop: "clamp(16px, 4vw, 28px)",
                   paddingBottom: "2px",
                 }}
@@ -282,7 +282,7 @@ export default function RSVP({ onResponseSubmitted }) {
                 disabled={loading}
                 className="w-full bg-olive text-cream-light font-title tracking-widest rounded-lg hover:bg-olive-dark transition-all duration-300 flex items-center justify-center gap-2 shadow-lg shadow-olive/20 hover:shadow-xl hover:shadow-olive/30 transform hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed"
                 style={{
-                  fontSize: "clamp(10px, 2vw, 14px)",
+                  fontSize: "clamp(10.5px, 2vw, 14px)",
                   padding: "clamp(10px, 2vw, 14px)",
                 }}
               >

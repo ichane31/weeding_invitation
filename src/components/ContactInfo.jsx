@@ -24,7 +24,7 @@ export default function ContactInfo() {
         className="text-olive text-center relative z-10"
         style={{
           fontFamily: "'Cinzel', serif",
-          fontSize: "clamp(10px, 2vw, 15px)",
+          fontSize: "clamp(12px, 3vw, 16px)",
           letterSpacing: "0.06em",
           maxWidth: "clamp(240px, 70vw, 480px)",
           lineHeight: 1.6,
