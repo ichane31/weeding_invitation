@@ -1,17 +1,13 @@
-import { useState } from "react";
 import Butterflies from "./Butterflies";
 
 export default function GiftSection() {
-  const [giftHovered, setGiftHovered] = useState(false);
 
-  const GIFT_LINK = "https://ton-lien-cadeau.com";
 
   const DUA_PARAGRAPHS = [
-    "Ya Allah, benis ce mariage et accorde Ta baraka et Ta miséricorde à ce couple.",
-    "Accorde-leur bonheur, compréhension mutuelle, et un amour durable.",
-    "Bénis-les avec de vertueux enfants, et remplis leur foyer de paix, d'amour et de baraka.",
-    "Ameen ya Rabbal Alamin",
-  ];
+  "Ya Allah, bénis ce mariage et accorde Ta baraka et Ta miséricorde à ce couple.",
+  "Accorde-leur bonheur, compréhension mutuelle et un amour durable, et bénis-les avec de vertueux enfants.",
+  "Ameen ya Rabbal Alamin",
+];
 
   return (
     <section
@@ -189,7 +185,7 @@ export default function GiftSection() {
                 className={`font-title text-olive-dark leading-relaxed text-center ${
                   i === DUA_PARAGRAPHS.length - 1 ? "font-semibold" : "font-medium"
                 }`}
-                style={{ fontSize: "clamp(8px, 1.8vw, 14px)", margin: 0 }}
+                style={{ fontSize: "clamp(9px, 1.8vw, 14px)", margin: 0 }}
               >
                 {p}
               </p>
