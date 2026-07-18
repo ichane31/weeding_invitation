@@ -23,13 +23,14 @@
 }
 
 .shadow-premium {
-  box-shadow: 0 10px 30px -15px rgba(128, 0, 32, 0.15), 
-              0 4px 6px -2px rgba(85, 107, 47, 0.05);
+  box-shadow:
+    0 10px 30px -15px rgba(128, 0, 32, 0.15),
+    0 4px 6px -2px rgba(85, 107, 47, 0.05);
 }
 
 .lace-border {
   border: 15px solid transparent;
-  border-image: url('/images/card_frame.png') 30 stretch;
+  border-image: url("/images/card_frame.png") 30 stretch;
 }
 
 /* Custom fade in animation delay utilities */
@@ -48,7 +49,8 @@
 
 /* Floating animation */
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0) rotate(0deg);
   }
   50% {
@@ -68,44 +70,121 @@
 
 /* Custom Font Faces */
 @font-face {
-  font-family: 'Roundhand';
-  src: url('/fonts/roundHand.otf') format('opentype'),
-       url('/fonts/roundHand.ttf') format('truetype');
+  font-family: "Roundhand";
+  src:
+    url("/fonts/roundHand.otf") format("opentype"),
+    url("/fonts/roundHand.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
-
 @font-face {
-  font-family: 'Bogue';
-  src: url('/fonts/bogue-regular.otf') format('opentype');
+  font-family: "Bogue";
+  src: url("/fonts/bogue-regular.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Bogue';
-  src: url('/fonts/bogue-medium.otf') format('opentype');
+  font-family: "Bogue";
+  src: url("/fonts/bogue-medium.otf") format("opentype");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
-
 @font-face {
-  font-family: 'Bogue';
-  src: url('/fonts/bogue-semibold.otf') format('opentype');
+  font-family: "Bogue";
+  src: url("/fonts/bogue-semibold.otf") format("opentype");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Bogue';
-  src: url('/fonts/bogue-bold.otf') format('opentype');
+  font-family: "Bogue";
+  src: url("/fonts/bogue-bold.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
+}
+
+@keyframes bounceHint {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(6px);
+    opacity: 1;
+  }
+}
+
+@keyframes tapRipple {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.6;
+  }
+  70% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+@keyframes tapPress {
+  0%,
+  20% {
+    transform: scale(1) translate(0, 0);
+  }
+  35% {
+    transform: scale(0.88) translate(-2%, 2%);
+  }
+  50%,
+  100% {
+    transform: scale(1) translate(0, 0);
+  }
+}
+
+@keyframes handTap {
+  0%,
+  15% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(3px);
+  }
+  45%,
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes scrollBtnPulse {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.5;
+  }
+  70% {
+    transform: scale(1.25);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.25);
+    opacity: 0;
+  }
+}
+@keyframes scrollBtnBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
 }

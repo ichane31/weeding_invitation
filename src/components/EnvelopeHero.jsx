@@ -41,7 +41,6 @@ export default function EnvelopeHero({ onOpen }) {
         <div
           className="relative w-full  flex items-center justify-center select-none"
           style={{
-            // aspectRatio: isOpening ? null : "1.55",
             opacity: 1,
             transform: isOpening ? "scale(0.986)" : "scale(1)",
             transition: "transform 260ms ease",
@@ -198,15 +197,22 @@ export default function EnvelopeHero({ onOpen }) {
               top: isOpen ? "clamp(68%, 71%, 73%)" : "55%",
               left: "49%",
               transform: "translate(-50%, -50%)",
-              width: "clamp(80px, 22%, 130px)",
+              width: "clamp(60px, 22%, 100px)",
               aspectRatio: "1",
-              // transition: "top 900ms cubic-bezier(0.22,1,0.36,1)",
             }}
           >
+            {/* Léger halo doux (gardé discret en fond) */}
             <div
-              className={`absolute inset-[-3px] rounded-full border border-olive/30 animate-ping opacity-45 ${
-                pulled || isOpening ? "opacity-0" : ""
+              className={`absolute inset-[-3px] rounded-full border-2 border-olive/50 animate-ping ${
+                pulled || isOpening ? "opacity-0" : "opacity-60"
               } ${!isOpen ? "group-hover:animate-none" : ""}`}
+              style={{ animationDuration: "1.5s" }}
+            />
+            <div
+              className={`absolute inset-[-12px] rounded-full border border-olive/25 animate-ping ${
+                pulled || isOpening ? "opacity-0" : "opacity-40"
+              }`}
+              style={{ animationDuration: "1.5s", animationDelay: "0.4s" }}
             />
             <img
               src="/images/sceau1.png"
@@ -218,6 +224,37 @@ export default function EnvelopeHero({ onOpen }) {
               }`}
               loading="eager"
             />
+
+            {/* Icône "cliquez ici" animée, superposée sur le sceau */}
+            {!isOpen && (
+              <div
+                className="absolute pointer-events-none"
+                style={{
+                  right: "-6%",
+                  bottom: "-6%",
+                  width: "42%",
+                  aspectRatio: "1",
+                  opacity: isOpening ? 0 : 1,
+                  transition: "opacity 200ms ease",
+                }}
+              >
+                {/* Onde de clic (ripple) */}
+                <span
+                  className="absolute inset-0 rounded-full bg-olive-dark/25"
+                  style={{ animation: "tapRipple 1.5s ease-out infinite" }}
+                />
+                {/* Icône main (image réelle), avec léger effet de "tap" */}
+                <img
+                  src="/images/tap_hand.png"
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-contain"
+                  style={{
+                    animation: "handTap 1.6s ease-in-out infinite",
+                    filter: "drop-shadow(0 1px 2px rgba(0,0,0,0.15))",
+                  }}
+                />
+              </div>
+            )}
           </button>
         </div>
 
@@ -234,7 +271,7 @@ export default function EnvelopeHero({ onOpen }) {
         >
           <button
             onClick={handleOpen}
-            className="font-bogue text-olive-dark tracking-[0.25em] uppercase hover:text-burgundy transition-all duration-300 flex flex-col items-center gap-1.5 group focus:outline-none"
+            className="font-bogue text-olive-dark tracking-[0.25em] outline-none uppercase hover:text-burgundy transition-all duration-300 flex flex-col items-center gap-1.5 group focus:outline-none"
             style={{ fontSize: "clamp(10px, 2vw, 14px)" }}
           >
             <span>Ouvrir l'invitation</span>

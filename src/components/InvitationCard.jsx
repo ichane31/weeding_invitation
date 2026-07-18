@@ -196,11 +196,10 @@ export default function InvitationCard({ animateCard = false }) {
                 top: "72%",
                 left: "49%",
                 transform: "translate(-50%, -50%)",
-                width: "clamp(80px, 22%, 130px)",
+                width: "clamp(60px, 22%, 100px)",
                 aspectRatio: "1",
               }}
             >
-              <div className="absolute inset-[-3px] rounded-full border border-olive/30 animate-ping opacity-45" />
               <img
                 src="/images/sceau1.png"
                 alt="Sceau de cire OM"

@@ -21,7 +21,7 @@ export default function ContactInfo() {
       </h2>
 
       <p
-        className="text-olive text-center relative z-10"
+        className="text-olive-dark text-center relative z-10"
         style={{
           fontFamily: "'Cinzel', serif",
           fontSize: "clamp(12px, 3vw, 16px)",
