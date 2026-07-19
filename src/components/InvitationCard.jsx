@@ -9,7 +9,7 @@ export default function InvitationCard({ animateCard = false }) {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const musicUrl = "/music/music1.mp3";
+  const musicUrl = "/music/music.mp4";
 
   useEffect(() => {
     if (!animateCard) {
