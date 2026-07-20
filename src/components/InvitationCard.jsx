@@ -281,7 +281,7 @@ export default function InvitationCard({ animateCard = false }) {
         >
           <div
             className="relative w-full flex items-center justify-center"
-            style={{ aspectRatio: "1 / 1.5" }}
+            style={{ aspectRatio: "1 / 1.52" }}
           >
             <img
               // src="/images/cadre_dentelle2.png"
@@ -352,7 +352,7 @@ export default function InvitationCard({ animateCard = false }) {
                   <br />
                   Colonel oumarou saly
                 </span>
-                <span className="font-title" 
+                <span className="font-title -my-1" 
                 style={{
                     fontSize: "clamp(14px, 3vw, 21px)",
                     color: "#8b6914",

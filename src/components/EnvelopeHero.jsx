@@ -95,7 +95,7 @@ export default function EnvelopeHero({ onOpen }) {
           {/* Carte qui sort (état ouvert uniquement) */}
           {isOpen && (
             <div
-              className="absolute h-[96%] sm:h-[98%] md:h-[100%] bottom-[8%] md:bottom-[12%] left-1/2 -translate-x-1/2 z-20 overflow-hidden"
+              className="absolute h-[96%] sm:h-[98%] md:h-[100%] bottom-[7%] md:bottom-[12%] left-1/2 -translate-x-1/2 z-20 overflow-hidden"
               style={{ width: "78%" }}
             >
               <div
@@ -147,7 +147,7 @@ export default function EnvelopeHero({ onOpen }) {
                     className="text-olive font-roundhand"
                     style={{
                       fontSize: "clamp(18px, 4.5vw, 32px)",
-                      marginBottom: "clamp(-16px, -1.2vw, -10px)",
+                      marginBottom: "clamp(-10px, -1vw, -6px)",
                     }}
                   >
                     &amp;
