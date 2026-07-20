@@ -95,8 +95,8 @@ export default function EnvelopeHero({ onOpen }) {
           {/* Carte qui sort (état ouvert uniquement) */}
           {isOpen && (
             <div
-              className="absolute h-[96%] sm:h-[98%] md:h-[100%] left-1/2 -translate-x-1/2 z-20 overflow-hidden"
-              style={{ bottom: "6%", width: "78%" }}
+              className="absolute h-[96%] sm:h-[98%] md:h-[100%] bottom-[8%] md:bottom-[12%] left-1/2 -translate-x-1/2 z-20 overflow-hidden"
+              style={{ width: "78%" }}
             >
               <div
                 className="will-change-transform"
@@ -135,16 +135,19 @@ export default function EnvelopeHero({ onOpen }) {
                     Le mariage de
                   </p>
                   <p
-                    className="text-olive font-script leading-tight"
+                    className="flex flex-col text-olive font-script leading-tight"
                     style={{ fontSize: "clamp(26px, 7vw, 44px)", margin: 0 }}
                   >
                     Ousmanou
+                    <span className='font-title -mt-1'
+                    style={{ fontSize: "clamp(12px, 3vw, 16px)" }}
+                    >(Abba ASOS)</span>
                   </p>
                   <p
                     className="text-olive font-roundhand"
                     style={{
                       fontSize: "clamp(18px, 4.5vw, 32px)",
-                      margin: "clamp(-16px, -1.2vw, -10px) 0",
+                      marginBottom: "clamp(-16px, -1.2vw, -10px)",
                     }}
                   >
                     &amp;
@@ -160,7 +163,7 @@ export default function EnvelopeHero({ onOpen }) {
                     style={{
                       fontSize: "clamp(14px, 3.5vw, 28px)",
                       margin: 0,
-                      paddingTop: "0.1em",
+                      // paddingTop: "0.1em",
                     }}
                   >
                     <time dateTime="2026-08-21">21 . 08 . 2026</time>

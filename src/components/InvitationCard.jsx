@@ -281,7 +281,7 @@ export default function InvitationCard({ animateCard = false }) {
         >
           <div
             className="relative w-full flex items-center justify-center"
-            style={{ aspectRatio: "1 / 1.45" }}
+            style={{ aspectRatio: "1 / 1.5" }}
           >
             <img
               // src="/images/cadre_dentelle2.png"
@@ -296,7 +296,7 @@ export default function InvitationCard({ animateCard = false }) {
               className="relative z-30 flex flex-col items-center justify-center text-center"
               style={{
                 width: "70%",
-                height: "77%",
+                height: "87%",
                 gap: "clamp(6px, 1.5vh, 14px)",
               }}
             >
@@ -349,7 +349,15 @@ export default function InvitationCard({ animateCard = false }) {
                   }}
                 >
                   Alhadji Salihou Ousmanou Sambo
+                  <br />
+                  Colonel oumarou saly
                 </span>
+                <span className="font-title" 
+                style={{
+                    fontSize: "clamp(14px, 3vw, 21px)",
+                    color: "#8b6914",
+                  }}
+                >&</span>
                 <span
                   className="font-title font-semibold uppercase"
                   style={{
@@ -359,6 +367,8 @@ export default function InvitationCard({ animateCard = false }) {
                   }}
                 >
                   Alhadji Souaibou Idrissou
+                  <br />
+                  Alhadji Kabirou Nadoukou
                 </span>
               </div>
 
@@ -383,7 +393,6 @@ export default function InvitationCard({ animateCard = false }) {
                   className="font-title tracking-wide leading-relaxed"
                   style={{
                     fontSize: "clamp(10px, 1.6vw, 13px)",
-                    maxWidth: "260px",
                     color: "#6b4c3b", // mocha
                   }}
                 >
