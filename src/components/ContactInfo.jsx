@@ -26,7 +26,7 @@ export default function ContactInfo() {
           fontFamily: "'Cinzel', serif",
           fontSize: "clamp(12px, 3vw, 16px)",
           letterSpacing: "0.06em",
-          maxWidth: "clamp(240px, 70vw, 480px)",
+          maxWidth: "clamp(280px, 90vw, 480px)",
           lineHeight: 1.6,
           marginBottom: "clamp(24px, 6vw, 48px)",
         }}
