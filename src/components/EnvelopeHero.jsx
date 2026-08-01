@@ -120,7 +120,7 @@ export default function EnvelopeHero({ onOpen, startOpen = false }) {
                   className="w-full h-auto object-contain relative opacity-90"
                   style={{
                     marginBottom: "-30%",
-                    opacity: pulled && cadreLoaded ? 0.9 : 0,
+                    opacity: pulled ? 0.9 : 0,
                     transition: "opacity 300ms ease",
                   }}
                   loading="eager"

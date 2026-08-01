@@ -1,23 +1,13 @@
 import { useEffect, useState } from "react";
 
-/**
- * Bouton unique flottant, fixé en bas à droite de l'écran.
- * - Par défaut : flèche vers le bas, invite à continuer le scroll vers la section suivante.
- * - Une fois arrivé à la dernière section : flèche vers le haut, ramène en haut de la page.
- *
- * Props:
- * - sections: [{ id: string, label: string, ref: React.RefObject }]
- * - visible: bool — n'affiche le bouton que si true (ex: après ouverture de l'enveloppe)
- */
 export default function ProgressDots({ sections, visible }) {
-  const [activeId, setActiveId] = useState(sections[0]?.id);
+  const [isAtBottom, setIsAtBottom] = useState(false);
 
   useEffect(() => {
     if (!visible) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
-        // Choisit la section la plus visible à l'écran parmi celles qui intersectent
         const visibleEntries = entries.filter((e) => e.isIntersecting);
         if (visibleEntries.length === 0) return;
 
@@ -26,10 +16,9 @@ export default function ProgressDots({ sections, visible }) {
         );
 
         const match = sections.find((s) => s.ref.current === mostVisible.target);
-        if (match) setActiveId(match.id);
+        if (match) return;
       },
       {
-        // Fenêtre d'observation centrée sur le viewport pour un résultat plus stable
         rootMargin: "-35% 0px -35% 0px",
         threshold: [0, 0.25, 0.5, 0.75, 1],
       }
@@ -42,16 +31,36 @@ export default function ProgressDots({ sections, visible }) {
     return () => observer.disconnect();
   }, [visible, sections]);
 
-  if (!visible) return null;
+  // Détection directe du "vraiment tout en bas", indépendante de l'observer,
+  // pour couvrir le cas où la dernière section est trop courte pour occuper
+  // la zone centrale du viewport.
+  useEffect(() => {
+    if (!visible) return;
 
-  const currentIndex = sections.findIndex((s) => s.id === activeId);
-  const isAtBottom = currentIndex === sections.length - 1;
+    const checkBottom = () => {
+      const scrollY = window.scrollY;
+      const viewportHeight = window.innerHeight;
+      const fullHeight = document.documentElement.scrollHeight;
+      // marge de tolérance de 8px pour les arrondis de sous-pixels
+      const atBottom = scrollY + viewportHeight >= fullHeight - 8;
+      setIsAtBottom(atBottom);
+    };
+
+    checkBottom();
+    window.addEventListener("scroll", checkBottom, { passive: true });
+    window.addEventListener("resize", checkBottom);
+    return () => {
+      window.removeEventListener("scroll", checkBottom);
+      window.removeEventListener("resize", checkBottom);
+    };
+  }, [visible]);
+
+  if (!visible) return null;
 
   const handleClick = () => {
     if (isAtBottom) {
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
-      // Scroll naturel d'environ une hauteur d'écran, plutôt qu'un saut direct à la section
       window.scrollBy({ top: window.innerHeight * 0.85, behavior: "smooth" });
     }
   };
@@ -70,7 +79,6 @@ export default function ProgressDots({ sections, visible }) {
         border: "1px solid rgba(138,109,59,0.35)",
       }}
     >
-      {/* Halo discret */}
       <span
         className="absolute rounded-full border border-burgundy/40"
         style={{
