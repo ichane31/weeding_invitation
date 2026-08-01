@@ -15,7 +15,7 @@ export default function Guestbook({ refreshTrigger }) {
         name: "Amine & Yasmine",
         attendance: "yes",
         message:
-          "Félicitations Mairama et Ousmanou ! Que votre amour continue de briller et d'inspirer tous ceux qui vous entourent. Nous serons là pour faire la fête avec vous !",
+          "Félicitations Maïrama et Ousmanou ! Que votre amour continue de briller et d'inspirer tous ceux qui vous entourent. Nous serons là pour faire la fête avec vous !",
         date: "2026-06-05",
       },
     ],

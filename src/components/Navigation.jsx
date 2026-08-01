@@ -17,7 +17,7 @@ export default function Navigation({ activeTab, setActiveTab, resetEnvelope }) {
           className="font-title text-burgundy font-semibold tracking-wide hover:opacity-80 transition-opacity duration-300 shrink-0"
           style={{ fontSize: "clamp(13px, 2.5vw, 20px)" }}
         >
-          Ousmanou &amp; Mairama
+          Ousmanou &amp; Maïrama
         </button>
 
         {/* Navigation Links */}

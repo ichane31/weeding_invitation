@@ -53,13 +53,8 @@ const PROGRAM = [
       {
         title: "Mariage civil",
         time: "10h00",
-        location: "Garoua - Mairie Garoua 2",
-      },
-      {
-        title: "Walima",
-        time: "20h00",
-        location: "",
-      },
+        location: "Motel plazza",
+      }
     ],
   },
   {

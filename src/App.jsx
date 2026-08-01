@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Navigation from "./components/Navigation";
 import InvitationCard from "./components/InvitationCard";
 import OurStory from "./components/OurStory";
@@ -11,10 +11,18 @@ import EnvelopeHero from "./components/EnvelopeHero";
 import ProgressDots from "./components/ProgressDots";
 
 export default function App() {
-  const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState("invitation");
+  const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(
+    () => sessionStorage.getItem("envelopeOpen") === "true"
+  );
+  const [activeTab, setActiveTab] = useState(
+    () => sessionStorage.getItem("activeTab") || "invitation"
+  );
   const [guestbookTrigger, setGuestbookTrigger] = useState(0);
-  const [shouldAnimateCard, setShouldAnimateCard] = useState(false);
+  // Si on restaure une session déjà ouverte (ex: retour depuis Google Maps),
+  // on affiche directement la carte sans rejouer l'animation d'ouverture.
+  const [shouldAnimateCard, setShouldAnimateCard] = useState(
+    () => sessionStorage.getItem("envelopeOpen") === "true"
+  );
 
   const invitationCardRef = useRef(null);
   const itineraryRef = useRef(null);
@@ -35,6 +43,35 @@ export default function App() {
     { id: "contact", label: "Contact", ref: contactRef },
   ];
 
+  // Persiste l'état d'ouverture pour survivre à un rechargement mobile
+  // (ex: retour depuis Google Maps/Waze qui décharge souvent l'onglet)
+  useEffect(() => {
+    sessionStorage.setItem("envelopeOpen", isEnvelopeOpen ? "true" : "false");
+  }, [isEnvelopeOpen]);
+
+  useEffect(() => {
+    sessionStorage.setItem("activeTab", activeTab);
+  }, [activeTab]);
+
+  // Restaure la position de scroll si la page a été rechargée
+  useEffect(() => {
+    if (isEnvelopeOpen) {
+      const savedScroll = sessionStorage.getItem("scrollY");
+      if (savedScroll) {
+        // petit délai pour laisser le DOM se peindre avant de scroller
+        requestAnimationFrame(() => {
+          window.scrollTo(0, parseInt(savedScroll, 10));
+        });
+      }
+    }
+    const savePosition = () => {
+      sessionStorage.setItem("scrollY", window.scrollY);
+    };
+    // pagehide est plus fiable que beforeunload sur mobile (Safari iOS notamment)
+    window.addEventListener("pagehide", savePosition);
+    return () => window.removeEventListener("pagehide", savePosition);
+  }, [isEnvelopeOpen]);
+
   const handleOpenEnvelope = () => {
     setIsEnvelopeOpen(true);
 
@@ -54,6 +91,9 @@ export default function App() {
     setIsEnvelopeOpen(false);
     setActiveTab("invitation");
     setShouldAnimateCard(false);
+    sessionStorage.removeItem("envelopeOpen");
+    sessionStorage.removeItem("activeTab");
+    sessionStorage.removeItem("scrollY");
   };
 
   const handleRsvpSubmitted = () => {
@@ -66,7 +106,7 @@ export default function App() {
     <Navigation activeTab={activeTab} setActiveTab={setActiveTab} resetEnvelope={handleResetEnvelope} />
 
     {/* Hero unique — fermé puis ouvert */}
-    <EnvelopeHero onOpen={handleOpenEnvelope} />
+    <EnvelopeHero onOpen={handleOpenEnvelope} startOpen={isEnvelopeOpen} />
 
     {/* Points de progression — visibles seulement une fois l'invitation ouverte */}
     <ProgressDots sections={sections} visible={isEnvelopeOpen} />
@@ -101,7 +141,7 @@ export default function App() {
         </main>
 
         <footer className="w-full py-6 text-center text-[10px] text-black/90 font-sans tracking-widest uppercase border-t border-cream-dark/50 bg-[#fdfbf7]/40 relative z-20 mt-auto">
-          <p>© 2026 Ousmanou & Mairama. Made with ♥</p>
+          <p>© 2026 Ousmanou & Maïrama. Made with ♥</p>
         </footer>
       </div>
     )}

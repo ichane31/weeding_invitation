@@ -2,9 +2,12 @@ import { useState } from "react";
 // import PetalsRain from "./PetalsRain";
 import Butterflies from "./Butterflies";
 
-export default function EnvelopeHero({ onOpen }) {
-  const [phase, setPhase] = useState("closed"); // "closed" | "opening" | "open"
-  const [pulled, setPulled] = useState(false);
+export default function EnvelopeHero({ onOpen, startOpen = false }) {
+  // Si on restaure une session déjà ouverte, on démarre directement
+  // en phase "open" avec la carte déjà sortie (pas d'animation à rejouer).
+  const [phase, setPhase] = useState(startOpen ? "open" : "closed"); // "closed" | "opening" | "open"
+  const [pulled, setPulled] = useState(startOpen);
+  const [cadreLoaded, setCadreLoaded] = useState(false);
 
   const handleOpen = () => {
     if (phase !== "closed") return;
@@ -107,14 +110,21 @@ export default function EnvelopeHero({ onOpen }) {
                     : "translate3d(0, 200%, 0)",
                   backfaceVisibility: "hidden",
                   WebkitBackfaceVisibility: "hidden",
+                  backgroundColor: cadreLoaded ? "transparent" : "#dad0c0",
+                  borderRadius: "8px",
                 }}
               >
                 <img
                   src="/images/cadre_dentelle2.png"
                   alt="Contenu de l'enveloppe"
                   className="w-full h-auto object-contain relative opacity-90"
-                  style={{ marginBottom: "-30%", opacity: pulled ? 1 : 0 }}
+                  style={{
+                    marginBottom: "-30%",
+                    opacity: pulled && cadreLoaded ? 0.9 : 0,
+                    transition: "opacity 300ms ease",
+                  }}
                   loading="eager"
+                  onLoad={() => setCadreLoaded(true)}
                 />
                 <div
                   className="absolute top-0 left-0 right-0 w-full h-full flex flex-col items-center"
@@ -139,9 +149,12 @@ export default function EnvelopeHero({ onOpen }) {
                     style={{ fontSize: "clamp(26px, 7vw, 44px)", margin: 0 }}
                   >
                     Ousmanou
-                    <span className='font-title -mt-1'
-                    style={{ fontSize: "clamp(12px, 3vw, 16px)" }}
-                    >(Abba ASOS)</span>
+                    <span
+                      className="font-title -mt-1"
+                      style={{ fontSize: "clamp(12px, 3vw, 16px)" }}
+                    >
+                      (Abba ASOS)
+                    </span>
                   </p>
                   <p
                     className="text-olive font-roundhand"
@@ -156,7 +169,7 @@ export default function EnvelopeHero({ onOpen }) {
                     className="text-olive font-script leading-tight"
                     style={{ fontSize: "clamp(26px, 7vw, 44px)", margin: 0 }}
                   >
-                    Mairama
+                    Maïrama
                   </p>
                   <p
                     className="text-olive font-bogue font-semibold"

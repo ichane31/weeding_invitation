@@ -8,8 +8,9 @@ export default function InvitationCard({ animateCard = false }) {
   const [cardVisible, setCardVisible] = useState(false);
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [cadreLoaded, setCadreLoaded] = useState(false);
 
-  const musicUrl = "/music/music.mp4";
+  const musicUrl = "/music/music_f.mp4";
 
   useEffect(() => {
     if (!animateCard) {
@@ -151,6 +152,8 @@ export default function InvitationCard({ animateCard = false }) {
                   transform: pulled ? "translate3d(0, 12%, 0)" : "translate3d(0, 75%, 0)",
                   backfaceVisibility: "hidden",
                   WebkitBackfaceVisibility: "hidden",
+                  backgroundColor: cadreLoaded ? "transparent" : "#f5efe3",
+                  borderRadius: "8px",
                 }}
               >
                 <img
@@ -158,6 +161,7 @@ export default function InvitationCard({ animateCard = false }) {
                   alt="Contenu enveloppe"
                   className="w-full h-auto object-contain relative"
                   loading="eager"
+                  onLoad={() => setCadreLoaded(true)}
                 />
                 <div
                   className="absolute top-0 w-full h-full flex flex-col items-center justify-start"
@@ -357,7 +361,7 @@ export default function InvitationCard({ animateCard = false }) {
                     fontSize: "clamp(14px, 3vw, 21px)",
                     color: "#8b6914",
                   }}
-                >&</span>
+                >&amp;</span>
                 <span
                   className="font-title font-semibold uppercase"
                   style={{
@@ -421,7 +425,7 @@ export default function InvitationCard({ animateCard = false }) {
                     color: "#5a0016",
                   }}
                 >
-                  Ousmanou SALIHOU
+                  Ousmanou
                 </h2>
                 <span
                   className="font-title leading-none"
@@ -430,7 +434,7 @@ export default function InvitationCard({ animateCard = false }) {
                     color: "#8b6914",
                   }}
                 >
-                  &
+                  &amp;
                 </span>
                 <h2
                   className="font-title italic font-semibold leading-none tracking-[0.12em]"
@@ -439,7 +443,7 @@ export default function InvitationCard({ animateCard = false }) {
                     color: "#5a0016",
                   }}
                 >
-                  Mairama SOUAIBOU
+                  Maïrama
                 </h2>
               </div>
             </div>
