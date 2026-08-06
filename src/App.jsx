@@ -2,13 +2,13 @@ import { useState, useRef, useEffect } from "react";
 import Navigation from "./components/Navigation";
 import InvitationCard from "./components/InvitationCard";
 import OurStory from "./components/OurStory";
-import Rsvp from "./components/Rsvp";
 import Guestbook from "./components/Guestbook";
 import GiftSection from "./components/GiftSection";
 import Itinerary from "./components/Itinerary";
 import ContactInfo from "./components/ContactInfo";
 import EnvelopeHero from "./components/EnvelopeHero";
 import ProgressDots from "./components/ProgressDots";
+import Rsvp from "./components/Rsvp"
 
 export default function App() {
   const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(
