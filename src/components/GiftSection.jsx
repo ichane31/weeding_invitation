@@ -12,7 +12,7 @@ export default function GiftSection() {
   return (
     <section
       id="gift"
-      className="relative w-full overflow-visible flex flex-col items-center"
+      className="hero-section relative w-full overflow-visible flex flex-col items-center"
       style={{
         backgroundImage: "url(/images/bg_primary.jpg)",
         padding: "clamp(24px, 6vw, 56px) clamp(12px, 4vw, 32px)",

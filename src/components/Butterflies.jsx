@@ -96,6 +96,22 @@ function ButterflyItem({ data, wingSpeed, opacity }) {
 
     let startTime = null;
 
+      function updateWings(img, type, rotation, wingOpen, ws) {
+    if (type === "flat") {
+      img.style.transform  = `rotate(${rotation}deg) scaleX(${wingOpen ? 1 : 0.2})`;
+      img.style.transition = `transform ${ws * 0.75}ms ease-in-out`;
+    } else {
+      const goLeft = type === "fly-left";
+      const suffix = wingOpen ? "butterfly1.png" : "butterfly2.png";
+      if (!img.src.endsWith(suffix)) {
+        img.src = wingOpen ? IMGS.right : IMGS.left;
+      }
+      img.style.transform  = `rotate(${rotation}deg) scaleX(${goLeft ? -1 : 1})`;
+      img.style.transition = "none";
+    }
+  }
+
+
     function animate(timestamp) {
       const d  = dataRef.current;
       const ws = wingSpeedRef.current;
@@ -134,18 +150,7 @@ function ButterflyItem({ data, wingSpeed, opacity }) {
       // ── Battement d'ailes ──
       const wingOpen = ((timestamp) % (ws * 2)) < ws;
 
-      if (d.type === "flat") {
-        img.style.transform  = `rotate(${d.rotation}deg) scaleX(${wingOpen ? 1 : 0.2})`;
-        img.style.transition = `transform ${ws * 0.75}ms ease-in-out`;
-      } else {
-        const goLeft = d.type === "fly-left";
-        const suffix = wingOpen ? "butterfly1.png" : "butterfly2.png";
-        if (!img.src.endsWith(suffix)) {
-          img.src = wingOpen ? IMGS.right : IMGS.left;
-        }
-        img.style.transform  = `rotate(${d.rotation}deg) scaleX(${goLeft ? -1 : 1})`;
-        img.style.transition = "none";
-      }
+      updateWings(img, d.type, d.rotation, wingOpen, ws);
 
       frameRef.current = requestAnimationFrame(animate);
     }

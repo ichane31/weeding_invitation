@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import Navigation from "./components/Navigation";
 import InvitationCard from "./components/InvitationCard";
 import OurStory from "./components/OurStory";
-import RSVP from "./components/RSVP";
+import Rsvp from "./components/Rsvp";
 import Guestbook from "./components/Guestbook";
 import GiftSection from "./components/GiftSection";
 import Itinerary from "./components/Itinerary";
@@ -60,7 +60,7 @@ export default function App() {
       if (savedScroll) {
         // petit délai pour laisser le DOM se peindre avant de scroller
         requestAnimationFrame(() => {
-          window.scrollTo(0, parseInt(savedScroll, 10));
+          window.scrollTo(0, Number.parseInt(savedScroll, 10));
         });
       }
     }
@@ -116,7 +116,7 @@ export default function App() {
       <div className="flex-grow flex flex-col animate-fade-in-up duration-1000"
         style={{ backgroundImage: "url(/images/bg_primary.jpg)" }}
       >
-        <main className="flex-grow flex flex-col items-center justify-start pb-2 relative">
+        <main className="flex-grow flex flex-col items-center justify-start relative">
           <div ref={invitationCardRef} id="invitation" className="w-full">
             <InvitationCard animateCard={shouldAnimateCard} />
           </div>
@@ -127,7 +127,7 @@ export default function App() {
             <OurStory />
           </div>
           <div ref={rsvpRef} id="rsvp" className="w-full">
-            <RSVP onResponseSubmitted={handleRsvpSubmitted} />
+            <Rsvp onResponseSubmitted={handleRsvpSubmitted} />
           </div>
           <div ref={guestbookRef} id="guestbook" className="w-full">
             <Guestbook refreshTrigger={guestbookTrigger} />
@@ -140,7 +140,8 @@ export default function App() {
           </div>
         </main>
 
-        <footer className="w-full py-6 text-center text-[10px] text-black/90 font-sans tracking-widest uppercase border-t border-cream-dark/50 bg-[#fdfbf7]/40 relative z-20 mt-auto">
+        <footer className="w-full py-6 text-center text-[10px] text-black/90 font-sans tracking-widest uppercase border-t border-cream-dark/50 bg-[#fdfbf7]/40 relative z-20 mt-auto"
+        style={{ backgroundImage: "url(/images/bg_primary.jpg)" }}>
           <p>© 2026 Ousmanou & Maïrama. Made with ♥</p>
         </footer>
       </div>

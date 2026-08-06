@@ -13,7 +13,7 @@ export default function Countdown() {
 
   useEffect(() => {
     const calculateTimeLeft = () => {
-      const now = new Date().getTime();
+      const now = Date.now();
       const difference = targetDate - now;
       if (difference <= 0) {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -87,7 +87,7 @@ export default function Countdown() {
             </div>
             {i < units.length - 1 && (
               <span
-                key={`sep-${i}`}
+                key={`sep-${i}-${i}`}
                 className="font-title text-burgundy-dark leading-none"
                 style={{
                   fontSize: "clamp(32px, 9vw, 72px)",

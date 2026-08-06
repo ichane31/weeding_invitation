@@ -4,7 +4,7 @@ import { Send, CheckCircle2 } from "lucide-react";
 
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw9yPUp-p7RDtjItUIUkHL-9VZp_hw-t9ZKUMBJx41wK43N_rBNGweBZa6__6w6GWwy/exec";
 
-export default function RSVP({ onResponseSubmitted }) {
+export default function Rsvp({ onResponseSubmitted }) {
   const [formData, setFormData] = useState({
     name: "",
     attendance: "yes",
@@ -63,7 +63,7 @@ export default function RSVP({ onResponseSubmitted }) {
 
   return (
     <div
-      className="relative flex flex-col items-center w-full overflow-visible"
+      className="hero-section relative flex flex-col items-center w-full overflow-visible"
       style={{
         backgroundImage: "url(/images/bg_primary.jpg)",
         paddingBottom: "clamp(20px, 6vw, 30px)",
@@ -151,6 +151,7 @@ export default function RSVP({ onResponseSubmitted }) {
                   : "Nous vous remercions d'avoir pris le temps de nous répondre. Vos pensées nous touchent beaucoup."}
               </p>
               <button
+                type='button'
                 onClick={() => setIsSubmitted(false)}
                 className="font-title uppercase tracking-widest text-olive hover:text-burgundy transition-colors duration-300 border-b border-transparent hover:border-burgundy"
                 style={{
@@ -188,6 +189,7 @@ export default function RSVP({ onResponseSubmitted }) {
                   }}
                 >
                   <label
+htmlFor="name"
                     className="font-title tracking-wider text-olive-dark font-medium text-left"
                     style={{ fontSize: "clamp(10px, 2vw, 14px)" }}
                   >
@@ -195,6 +197,7 @@ export default function RSVP({ onResponseSubmitted }) {
                   </label>
                   <input
                     type="text"
+                    id='name'
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
@@ -217,12 +220,14 @@ export default function RSVP({ onResponseSubmitted }) {
                   }}
                 >
                   <label
+                  htmlFor="attendance"
                     className="font-title tracking-wider text-olive-dark font-medium text-left"
                     style={{ fontSize: "clamp(10px, 2vw, 14px)" }}
                   >
                     Serez-vous présent(e) ?
                   </label>
                   <div
+                  id="attendance"
                     className="grid grid-cols-2"
                     style={{ gap: "clamp(6px, 1.5vw, 16px)" }}
                   >
@@ -256,12 +261,14 @@ export default function RSVP({ onResponseSubmitted }) {
                   }}
                 >
                   <label
+                  htmlFor="message"
                     className="font-title tracking-wider text-olive-dark font-medium text-left"
                     style={{ fontSize: "clamp(10px, 2vw, 14px)" }}
                   >
                     Message pour les mariés
                   </label>
                   <textarea
+                  htmlFor="message"
                     name="message"
                     value={formData.message}
                     onChange={handleChange}

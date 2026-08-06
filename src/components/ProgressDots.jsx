@@ -11,17 +11,22 @@ export default function ProgressDots({ sections, visible }) {
         const visibleEntries = entries.filter((e) => e.isIntersecting);
         if (visibleEntries.length === 0) return;
 
-        const mostVisible = visibleEntries.reduce((best, entry) =>
-          entry.intersectionRatio > best.intersectionRatio ? entry : best
+        const mostVisible = visibleEntries.reduce(
+          (best, entry) =>
+            entry.intersectionRatio > best.intersectionRatio ? entry : best,
+          visibleEntries[0],
         );
 
-        const match = sections.find((s) => s.ref.current === mostVisible.target);
-        if (match) return;
+                const hasMatch = sections.some(
+          (s) => s.ref.current === mostVisible.target,
+        );
+        if (hasMatch) return;
+
       },
       {
         rootMargin: "-35% 0px -35% 0px",
         threshold: [0, 0.25, 0.5, 0.75, 1],
-      }
+      },
     );
 
     sections.forEach((s) => {
@@ -67,8 +72,13 @@ export default function ProgressDots({ sections, visible }) {
 
   return (
     <button
+      type="button"
       onClick={handleClick}
-      aria-label={isAtBottom ? "Revenir en haut de la page" : "Défiler vers la section suivante"}
+      aria-label={
+        isAtBottom
+          ? "Revenir en haut de la page"
+          : "Défiler vers la section suivante"
+      }
       className="fixed z-50 flex items-center justify-center rounded-full shadow-md focus:outline-none group"
       style={{
         right: "clamp(6px, 3vw, 20px)",

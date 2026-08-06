@@ -67,16 +67,23 @@ export default function InvitationCard({ animateCard = false }) {
   return (
     <section
       id="invitation"
-      className="relative flex flex-col items-center w-full select-none"
+      className="hero-section relative flex flex-col items-center w-full select-none"
       style={{ backgroundImage: "url(/images/bg_primary.jpg)" }}
     >
-      <audio ref={audioRef} src={musicUrl} loop preload="auto" />
+      <audio ref={audioRef} src={musicUrl} loop preload="auto">
+        <track
+          kind="captions"
+          src="/captions/music_f.vtt"
+          srcLang="fr"
+          label="Français"
+        />
+      </audio>
 
       <Butterflies count={5} size={{ min: 20, max: 30 }} />
 
       {/* ── Enveloppe ouverte ── */}
       <div
-        className="w-full flex items-center justify-center !pb-6"
+        className="hero-section w-full flex items-center justify-center !pb-6"
         style={{
           backgroundImage: "url(/images/bg_primary.jpg)",
           padding: "clamp(32px, 6vw, 64px) 0",
@@ -149,7 +156,9 @@ export default function InvitationCard({ animateCard = false }) {
                 className="will-change-transform"
                 style={{
                   transition: "transform 1600ms cubic-bezier(0.22,1,0.36,1)",
-                  transform: pulled ? "translate3d(0, 12%, 0)" : "translate3d(0, 75%, 0)",
+                  transform: pulled
+                    ? "translate3d(0, 12%, 0)"
+                    : "translate3d(0, 75%, 0)",
                   backfaceVisibility: "hidden",
                   WebkitBackfaceVisibility: "hidden",
                   backgroundColor: cadreLoaded ? "transparent" : "#f5efe3",
@@ -214,6 +223,7 @@ export default function InvitationCard({ animateCard = false }) {
 
             {/* Disque vinyle */}
             <button
+              type='button'
               className="absolute pointer-events-auto z-30 cursor-pointer group bg-transparent border-0 p-0"
               style={{
                 left: "clamp(-5%, -10%, -15%)",
@@ -269,7 +279,7 @@ export default function InvitationCard({ animateCard = false }) {
 
       {/* ── Cartes invitation + date ── */}
       <div
-        className="relative w-full flex flex-col lg:flex-row items-center lg:items-start justify-center gap-6 lg:gap-0 pb-8 lg:pb-16 overflow-visible"
+        className="hero-section relative w-full flex flex-col lg:flex-row items-center lg:items-start justify-center gap-6 lg:gap-0 pb-8 lg:pb-16 overflow-visible"
         style={{ backgroundImage: "url(/images/bg_primary.jpg)" }}
       >
         <Butterflies count={5} size={{ min: 20, max: 30 }} />
@@ -356,12 +366,15 @@ export default function InvitationCard({ animateCard = false }) {
                   <br />
                   Colonel oumarou saly
                 </span>
-                <span className="font-title -my-1" 
-                style={{
+                <span
+                  className="font-title -my-1"
+                  style={{
                     fontSize: "clamp(14px, 3vw, 21px)",
                     color: "#8b6914",
                   }}
-                >&amp;</span>
+                >
+                  &amp;
+                </span>
                 <span
                   className="font-title font-semibold uppercase"
                   style={{
@@ -474,7 +487,8 @@ export default function InvitationCard({ animateCard = false }) {
         >
           <div className="lg:mt-[34%]">
             <div
-                className="absolute top-[clamp(-100px,_-34%,_-85px)] lg:top-[clamp(-30px,_-20%,_-25px)] pointer-events-none z-40 flex items-center justify-center"              style={{
+              className="absolute top-[clamp(-100px,_-34%,_-85px)] lg:top-[clamp(-30px,_-20%,_-25px)] pointer-events-none z-40 flex items-center justify-center"
+              style={{
                 width: "clamp(80px, 60%, 180px)",
                 left: "20%",
                 transform: "rotate(-90deg)",
@@ -542,7 +556,7 @@ export default function InvitationCard({ animateCard = false }) {
 
       {/* ── Countdown ── */}
       <div
-        className="relative w-full flex items-center justify-center py-4"
+        className="hero-section relative w-full flex items-center justify-center py-4"
         style={{ backgroundImage: "url(/images/bg_4.jpg)" }}
       >
         <div className="w-[95%] max-w-3xl">

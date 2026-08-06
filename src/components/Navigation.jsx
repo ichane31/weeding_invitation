@@ -13,6 +13,7 @@ export default function Navigation({ activeTab, setActiveTab, resetEnvelope }) {
       <div className="flex items-center justify-between w-full">
         {/* Brand logo */}
         <button
+          type='button'
           onClick={resetEnvelope}
           className="font-title text-burgundy font-semibold tracking-wide hover:opacity-80 transition-opacity duration-300 shrink-0"
           style={{ fontSize: "clamp(13px, 2.5vw, 20px)" }}
@@ -26,6 +27,7 @@ export default function Navigation({ activeTab, setActiveTab, resetEnvelope }) {
           style={{ gap: "clamp(12px, 4vw, 32px)" }}
         >
           <button
+            type='button'
             onClick={() => scrollTo("invitation")}
             className={`relative py-1 transition-colors duration-300 hover:text-burgundy ${
               activeTab === "invitation" ? "text-burgundy font-medium" : ""

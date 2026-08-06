@@ -12,7 +12,7 @@ export default function OurStory() {
 
   return (
     <div
-      className="w-full flex flex-col items-center justify-center mx-auto select-none relative overflow-hidden"
+      className="hero-section w-full flex flex-col items-center justify-center mx-auto select-none relative overflow-hidden"
       style={{
         backgroundImage: "url(/images/bg_4.jpg)",
         padding: "clamp(30px, 8vw, 76px) clamp(12px, 4vw, 32px)",

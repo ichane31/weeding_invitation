@@ -26,12 +26,13 @@ export default function EnvelopeHero({ onOpen, startOpen = false }) {
 
   return (
     <div
-      className="relative flex items-center justify-center h-[96vh] w-full"
+      className="hero-section relative flex items-center justify-center h-[96vh] w-full"
       style={{
-        backgroundImage: "url(/images/bg_primary.jpg)",
-        minHeight: "96svh",
-        padding: "clamp(48px, 10vw, 80px) 0",
-      }}
+  backgroundImage: "url(/images/bg_primary.jpg)",
+    // évite la répétition si l'image est trop petite
+  minHeight: "96svh",
+  padding: "clamp(48px, 10vw, 80px) 0",
+}}
     >
       {/* {isOpen && <PetalsRain />} */}
       <Butterflies size={{ min: 20, max: 30 }} />
@@ -205,6 +206,7 @@ export default function EnvelopeHero({ onOpen, startOpen = false }) {
 
           {/* Sceau */}
           <button
+            type='button'
             onClick={!isOpen ? handleOpen : undefined}
             className={`absolute rounded-full flex items-center justify-center z-40 group transition-transform duration-300 focus:outline-none ${
               !isOpen ? "cursor-pointer" : "cursor-default"

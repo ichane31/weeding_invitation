@@ -188,3 +188,16 @@
     transform: translateY(4px);
   }
 }
+
+.hero-section {
+  background-size: contain;
+  
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}

@@ -3,7 +3,7 @@ export default function ContactInfo() {
 
   return (
     <section
-      className="relative w-full overflow-visible flex flex-col items-center"
+      className="hero-section relative w-full overflow-visible flex flex-col items-center"
       style={{
         backgroundImage: "url(/images/bg_primary.jpg)",
         padding: "clamp(28px, 7vw, 60px) clamp(12px, 4vw, 32px)",

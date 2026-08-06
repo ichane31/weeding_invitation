@@ -54,7 +54,7 @@ const PROGRAM = [
         title: "Mariage civil",
         time: "10h00",
         location: "Motel plazza",
-      }
+      },
     ],
   },
   {
@@ -73,7 +73,7 @@ export default function Itinerary() {
   return (
     <section
       id="itinerary"
-      className="relative w-full flex items-center justify-center"
+      className="hero-section relative w-full flex items-center justify-center"
       style={{
         backgroundImage: "url(/images/bg_4.jpg)",
         padding: "clamp(40px, 6vw, 66px) clamp(12px, 4vw, 32px)",
@@ -148,7 +148,10 @@ export default function Itinerary() {
               }}
             >
               {PROGRAM.map((day, dayIndex) => (
-                <div key={dayIndex} className="text-center">
+                <div
+                  key={`day-${dayIndex}-${dayIndex}`}
+                  className="text-center"
+                >
                   {/* Nom du jour : souligné, gras, vert foncé */}
                   <p
                     className="font-title text-burgundy-dark font-bold underline"
@@ -169,7 +172,7 @@ export default function Itinerary() {
                     }}
                   >
                     {day.events.map((e, eventIndex) => (
-                      <div key={eventIndex}>
+                      <div key={`${e.time}-${e.title}-${eventIndex}`}>
                         {/* Titre de l'événement */}
                         <p
                           className="font-title font-medium text-olive-dark leading-snug"
