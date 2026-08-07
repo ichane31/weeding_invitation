@@ -40,13 +40,66 @@ const MessagesList = ({ messages }) => (
     }}
   >
     {messages.map((msg) => (
-      <div
-        key={msg.id}
-        className="bg-[#fdfbf7]/70 backdrop-blur-sm border border-cream-dark rounded-lg shadow-sm relative group hover:border-burgundy/20 hover:shadow-md transition-all duration-300"
-        style={{ padding: "clamp(14px, 2.5vw, 20px)" }}
-      >
-        {/* Message content */}
-      </div>
+        <div
+                key={msg.id}
+                className="bg-[#fdfbf7]/70 backdrop-blur-sm border border-cream-dark rounded-lg shadow-sm relative group hover:border-burgundy/20 hover:shadow-md transition-all duration-300"
+                style={{ padding: "clamp(14px, 2.5vw, 20px)" }}
+              >
+                {[
+                  "top-1.5 left-1.5 border-t border-l",
+                  "top-1.5 right-1.5 border-t border-r",
+                  "bottom-1.5 left-1.5 border-b border-l",
+                  "bottom-1.5 right-1.5 border-b border-r",
+                ].map((cls, i) => (
+                  <div
+                    key={i}
+                    className={`absolute w-1.5 h-1.5 border-gold ${cls}`}
+                  />
+                ))}
+
+                <div
+                  className="flex items-start justify-between"
+                  style={{
+                    marginBottom: "clamp(4px, 1vw, 8px)",
+                    gap: "clamp(4px, 1vw, 8px)",
+                  }}
+                >
+                  <span
+                    className="font-title text-burgundy font-semibold"
+                    style={{ fontSize: "clamp(10.5px, 2.2vw, 14px)" }}
+                  >
+                    {msg.name}
+                  </span>
+                  <span
+                    className="text-gray-400 font-sans shrink-0"
+                    style={{ fontSize: "clamp(8px, 1.3vw, 9px)" }}
+                  >
+                    {msg?.date
+                      ? new Date(msg.date).toLocaleDateString("fr-FR", {
+                          day: "numeric",
+                          month: "long",
+                          year: "numeric",
+                        })
+                      : ""}
+                  </span>
+                </div>
+
+                <p
+                  className="text-gray-700 leading-relaxed font-sans italic text-left"
+                  style={{ fontSize: "clamp(9.5px, 1.9vw, 13px)" }}
+                >
+                  "{msg.message}"
+                </p>
+
+                {msg.attendance === "yes" && (
+                  <span
+                    className="absolute bottom-2 right-2 text-olive font-semibold font-sans tracking-wider uppercase opacity-60"
+                    style={{ fontSize: "clamp(7px, 1.2vw, 8px)" }}
+                  >
+                    ✦ Sera présent(e)
+                  </span>
+                )}
+              </div>
     ))}
   </div>
 );
