@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // ─────────────────────────────────────────────────────────
 // 🦋 Butterflies Component — réutilisable
@@ -76,10 +76,11 @@ function buildButterflies(count, size, speed, zone) {
 }
 
 // ── Papillon individuel ──
-function ButterflyItem({ data, wingSpeed, opacity }) {
+function ButterflyItem({ data, wingSpeed, opacity, loading }) {
   const wrapRef  = useRef(null);
   const imgRef   = useRef(null);
   const frameRef = useRef(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   // Position courante — persistée entre frames via ref
   const posRef = useRef({ x: data.startX, y: data.startY });
@@ -176,9 +177,10 @@ function ButterflyItem({ data, wingSpeed, opacity }) {
         height:        data.size,
         left:          `${data.startX}%`,
         top:           `${data.startY}%`,
-        opacity,
-        willChange:    "left, top, transform",
+        opacity:       isLoaded ? opacity : 0,
+        willChange:    "left, top, transform, opacity",
         pointerEvents: "none",
+        transition:    "opacity 400ms ease-in-out",
       }}
     >
       <img
@@ -194,7 +196,8 @@ function ButterflyItem({ data, wingSpeed, opacity }) {
           filter:          "drop-shadow(0 2px 4px rgba(0,0,0,0.12))",
           userSelect:      "none",
         }}
-        loading="eager"
+        loading={loading}
+        onLoad={() => setIsLoaded(true)}
       />
     </div>
   );
@@ -209,6 +212,7 @@ export default function Butterflies({
   opacity   = 0.9,
   zone      = "full",
   className = "absolute inset-0 pointer-events-none overflow-hidden",
+  loading   = "eager",
 }) {
   const butterflies = buildButterflies(count, size, speed, zone);
 
@@ -220,6 +224,7 @@ export default function Butterflies({
           data={b}
           wingSpeed={wingSpeed}
           opacity={opacity}
+          loading={loading}
         />
       ))}
     </div>

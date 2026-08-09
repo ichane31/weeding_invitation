@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { MapPin } from "lucide-react";
 import Butterflies from "./Butterflies";
 
@@ -70,6 +71,8 @@ const PROGRAM = [
 ];
 
 export default function Itinerary() {
+  const [frameLoaded, setFrameLoaded] = useState(false);
+
   return (
     <section
       id="itinerary"
@@ -79,22 +82,35 @@ export default function Itinerary() {
         padding: "clamp(40px, 6vw, 66px) clamp(12px, 4vw, 32px)",
       }}
     >
-      <Butterflies count={5} size={{ min: 20, max: 30 }} />
+      <Butterflies count={5} size={{ min: 20, max: 30 }} loading="lazy" />
       <div
         className="relative w-full"
         style={{ maxWidth: "clamp(300px, 99%, 600px)" }}
       >
         {/* Cadre */}
-        <div
-          className="relative flex items-center justify-center w-full shadow-2xl"
-          style={{
-            aspectRatio: "0.85",
-            backgroundImage: "url(/images/cadre_itinerary.png)",
-            backgroundSize: "100% 100%",
-            backgroundPosition: "center",
-            padding: "clamp(30px, 16%, 80px) clamp(24px, 6.5%, 36px)",
-          }}
-        >
+        <div className="relative w-full shadow-2xl">
+          {/* Placeholder pour le cadre */}
+          <div
+            className="absolute inset-0 z-0"
+            style={{
+              backgroundColor: "#fdfbf7",
+              opacity: frameLoaded ? 0 : 1,
+              transition: "opacity 300ms ease-in-out",
+            }}
+          />
+          <img
+            src="/images/cadre_itinerary.png"
+            alt="Cadre du programme"
+            className="absolute inset-0 w-full h-full z-0 object-fill"
+            loading="lazy"
+            onLoad={() => setFrameLoaded(true)}
+          />
+
+          {/* Conteneur pour le contenu, superposé sur l'image */}
+          <div
+            className="relative z-10 w-full h-full flex items-center justify-center"
+            style={{ padding: "clamp(30px, 16%, 80px) clamp(24px, 6.5%, 36px)" }}
+          >
           {/* Rose haut droite */}
           <img
             src="/images/rose_primary.png"
@@ -106,7 +122,7 @@ export default function Itinerary() {
               right: "clamp(-50px, -18%, -24px)",
               transform: "rotate(-30deg) scaleX(-1)",
             }}
-            loading="lazy"
+            loading="lazy" // Cette image est décorative et peut être chargée paresseusement
           />
 
           {/* Rose bas gauche */}
@@ -120,12 +136,12 @@ export default function Itinerary() {
               left: "clamp(-40px, -12%, -16px)",
               transform: "rotate(-30deg) scaleY(-1)",
             }}
-            loading="lazy"
+            loading="lazy" // Idem pour celle-ci
           />
 
           {/* Contenu */}
           <div
-            className="relative z-10 w-full flex flex-col items-center justify-center"
+            className="w-full flex flex-col items-center justify-center"
             style={{ gap: "clamp(2px, 3vw, 10px)" }}
           >
             {/* Titre */}
@@ -229,6 +245,7 @@ export default function Itinerary() {
                 </div>
               ))}
             </div>
+          </div>
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ export default function InvitationCard({ animateCard = false }) {
   const [cardVisible, setCardVisible] = useState(false);
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [invitationCardBgLoaded, setInvitationCardBgLoaded] = useState(false); // Nouveau state pour le fond de la carte
   const [cadreLoaded, setCadreLoaded] = useState(false);
 
   const musicUrl = "/music/music_f.mp4";
@@ -79,7 +80,7 @@ export default function InvitationCard({ animateCard = false }) {
         />
       </audio>
 
-      <Butterflies count={5} size={{ min: 20, max: 30 }} />
+      <Butterflies count={5} size={{ min: 20, max: 30 }} loading="lazy" />
 
       {/* ── Enveloppe ouverte ── */}
       <div
@@ -282,7 +283,7 @@ export default function InvitationCard({ animateCard = false }) {
         className="hero-section relative w-full flex flex-col lg:flex-row items-center lg:items-start justify-center gap-6 lg:gap-0 pb-8 lg:pb-16 overflow-visible"
         style={{ backgroundImage: "url(/images/bg_primary.jpg)" }}
       >
-        <Butterflies count={5} size={{ min: 20, max: 30 }} />
+        <Butterflies count={5} size={{ min: 20, max: 30 }} loading="lazy" />
 
         {/* Carte invitation */}
         <div
@@ -297,14 +298,29 @@ export default function InvitationCard({ animateCard = false }) {
             className="relative w-full flex items-center justify-center"
             style={{ aspectRatio: "1 / 1.52" }}
           >
+          {/* Placeholder pour cadre_dentelle4.png */}
+          <div
+            className="absolute inset-0 z-10" // z-index inférieur à l'image réelle
+            style={{
+              backgroundColor: "#fdfbf7", // Couleur de fond du placeholder
+              filter: "drop-shadow(0px 4px 6px rgba(0,0,0,0.5))", // Ombre gérée par le placeholder
+              maskImage: "url(/images/cadre_dentelle4.png)",
+              maskSize: "100% 100%", // Pour remplir l'élément
+              maskRepeat: "no-repeat",
+              opacity: invitationCardBgLoaded ? 0 : 1,
+              transition: "opacity 300ms ease-in-out",
+            }}
+          />
             <img
               // src="/images/cadre_dentelle2.png"
               src="/images/cadre_dentelle4.png"
               alt="Fleurs fond"
               className="absolute inset-0 w-full h-full pointer-events-none opacity-90 z-20"
-              style={{ filter: "drop-shadow(0px 4px 6px rgba(0,0,0,0.5))" }}
+            style={{ filter: "drop-shadow(0px 4px 6px rgba(0,0,0,0.0))" }} // Ombre retirée de l'image, gérée par le placeholder
               loading="eager"
+            onLoad={() => setInvitationCardBgLoaded(true)}
             />
+
 
             <div
               className="relative z-30 flex flex-col items-center justify-center text-center"

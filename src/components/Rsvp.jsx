@@ -119,8 +119,8 @@ export default function Rsvp({ onResponseSubmitted }) {
                   width: "clamp(48px, 10vw, 64px)",
                   height: "clamp(48px, 10vw, 64px)",
                 }}
-                className="text-olive animate-bounce"
-                style2={{ marginBottom: "clamp(10px, 2vw, 18px)" }}
+                className="text-olive animate-bounce" // className déjà appliquée
+                style={{ marginBottom: "clamp(10px, 2vw, 18px)" }} // Correction de style2 en style
               />
               <h4
                 className="font-title text-burgundy-dark font-semibold"

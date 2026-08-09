@@ -1,7 +1,9 @@
 import Butterflies from "./Butterflies";
+import { useState } from "react";
 
 export default function GiftSection() {
 
+  const [envelopeLoaded, setEnvelopeLoaded] = useState(false);
 
   const DUA_PARAGRAPHS = [
   "Ya Allah, bénis ce mariage et accorde Ta baraka et Ta miséricorde à ce couple.",
@@ -24,6 +26,7 @@ export default function GiftSection() {
         speed={{ min: 16, max: 26 }}
         opacity={0.85}
         zone="full"
+        loading="lazy"
         className="absolute inset-0 pointer-events-none overflow-hidden"
       />
 
@@ -122,7 +125,7 @@ export default function GiftSection() {
             transform: "rotate(10deg)",
           }}
           loading="lazy"
-        />
+        /> 
         {/* Rose droite enveloppe */}
         <img
           src="/images/rose2.png"
@@ -135,10 +138,26 @@ export default function GiftSection() {
             transform: "rotate(-7deg)",
           }}
           loading="lazy"
-        />
+        /> 
 
         {/* Enveloppe */}
         <div className="relative flex justify-center items-center">
+          {/* Placeholder pour l'enveloppe */}
+          <div
+            className="absolute z-0 rounded-lg"
+            style={{
+              backgroundColor: "#fdfbf7", // Couleur de fond du placeholder
+              filter: "drop-shadow(0 8px 20px rgba(0,0,0,0.15))", // Ombre gérée par le placeholder
+              maskImage: "url(/images/envelop_close2.png)",
+              maskSize: "100% 100%", // Pour remplir l'élément
+              maskRepeat: "no-repeat",
+              opacity: envelopeLoaded ? 0 : 1,
+              transition: "opacity 300ms ease-in-out",
+              // Assurez-vous que le placeholder correspond à la taille et à la transformation de l'image
+              width: "clamp(190px, 80%, 420px)",
+              transform: "rotate(4deg)",
+            }}
+          />
           <img
             src="/images/envelop_close2.png"
             alt="Enveloppe"
@@ -146,9 +165,10 @@ export default function GiftSection() {
             style={{
               width: "clamp(190px, 80%, 420px)",
               transform: "rotate(4deg)",
-              filter: "drop-shadow(0 8px 20px rgba(0,0,0,0.15))",
+              filter: "drop-shadow(0 8px 20px rgba(0,0,0,0.0))", // Ombre retirée de l'image, gérée par le placeholder
             }}
             loading="lazy"
+            onLoad={() => setEnvelopeLoaded(true)}
           />
         </div>
 

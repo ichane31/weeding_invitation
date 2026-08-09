@@ -38,7 +38,7 @@ export default function OurStory() {
           <div className="h-px bg-olive" style={{ width: "clamp(32px, 5vw, 64px)" }} />
         </div>
       </div>
-      <Butterflies count={6} size={{ min: 20, max: 30 }} />
+      <Butterflies count={6} size={{ min: 20, max: 30 }} loading="lazy" />
 
       {/* Paragraphes */}
       <div

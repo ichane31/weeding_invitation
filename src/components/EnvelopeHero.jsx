@@ -8,6 +8,7 @@ export default function EnvelopeHero({ onOpen, startOpen = false }) {
   const [phase, setPhase] = useState(startOpen ? "open" : "closed"); // "closed" | "opening" | "open"
   const [pulled, setPulled] = useState(startOpen);
   const [cadreLoaded, setCadreLoaded] = useState(false);
+  const [envelopeImageLoaded, setEnvelopeImageLoaded] = useState(false);
 
   const handleOpen = () => {
     if (phase !== "closed") return;
@@ -23,6 +24,7 @@ export default function EnvelopeHero({ onOpen, startOpen = false }) {
 
   const isOpen = phase === "open";
   const isOpening = phase === "opening";
+  const envelopeSrc = isOpen ? "/images/envelop_open1.png" : "/images/envelop_close2.png";
 
   return (
     <div
@@ -80,20 +82,29 @@ export default function EnvelopeHero({ onOpen, startOpen = false }) {
             loading="eager"
           />
 
+          {/* Placeholder pour l'enveloppe */}
+          <div
+            className="absolute inset-0 z-[-1]"
+            style={{
+              backgroundColor: "#fdfbf7",
+              filter: "drop-shadow(0 8px 14px rgba(0,0,0,0.12))",
+              maskImage: `url(${envelopeSrc})`,
+              maskSize: "contain",
+              maskRepeat: "no-repeat",
+              maskPosition: "center",
+              opacity: envelopeImageLoaded ? 0 : 1,
+              transition: "opacity 300ms ease-in-out",
+            }}
+          />
           {/* Enveloppe fermée → ouverte */}
           <img
-            src={
-              isOpen
-                ? "/images/envelop_open1.png"
-                : "/images/envelop_close2.png"
-            }
+            key={envelopeSrc} // Réinitialise l'élément quand la source change
+            src={envelopeSrc}
             alt="Enveloppe"
             className="w-full h-full object-contain relative z-0"
             loading="eager"
-            style={{
-              filter: "drop-shadow(0 8px 14px rgba(0,0,0,0.12))",
-              position: "relative",
-            }}
+            onLoad={() => setEnvelopeImageLoaded(true)}
+            style={{ filter: "drop-shadow(0 8px 14px rgba(0,0,0,0.0))" }}
           />
 
           {/* Carte qui sort (état ouvert uniquement) */}

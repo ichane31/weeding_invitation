@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
+import Butterflies from "./Butterflies";
 
 const GOOGLE_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbw9yPUp-p7RDtjItUIUkHL-9VZp_hw-t9ZKUMBJx41wK43N_rBNGweBZa6__6w6GWwy/exec";
@@ -153,6 +154,8 @@ export default function Guestbook({ refreshTrigger }) {
       className="hero-section w-full select-none z-20 relative"
       style={{ backgroundImage: "url(/images/bg_primary.jpg)" }}
     >
+      <Butterflies count={4} size={{ min: 20, max: 30 }} />
+      
       <div
         className="w-full mx-auto"
         style={{

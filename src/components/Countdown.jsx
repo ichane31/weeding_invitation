@@ -4,6 +4,7 @@ import Butterflies from "./Butterflies";
 export default function Countdown() {
   const targetDate = new Date("2026-08-21T15:30:00").getTime();
 
+  const [imageLoaded, setImageLoaded] = useState(false);
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -109,26 +110,41 @@ export default function Countdown() {
           marginTop: "clamp(12px, 2vw, 18px)",
         }}
       >
+        <div
+          className="absolute inset-0 z-0 rounded-lg"
+          style={{
+            backgroundColor: "#fdfbf7", // Placeholder color
+            filter: "drop-shadow(0 8px 14px rgba(0,0,0,0.12))",
+            maskImage: "url(/images/cadre10.png)",
+            maskSize: "contain",
+            maskRepeat: "no-repeat",
+            opacity: imageLoaded ? 0 : 1,
+            transition: "opacity 300ms ease-in-out",
+          }}
+        />
         <img
           src="/images/cadre10.png"
           alt="Cadre décoratif"
           className="w-full pointer-events-none z-10 aspect-[1.4] sm:aspect-[1.5]"
-          loading="eager"
-          style={{ filter: "drop-shadow(0 8px 14px rgba(0,0,0,0.12))" }}
+          loading="lazy"
+          onLoad={() => setImageLoaded(true)}
+          // L'ombre est maintenant gérée par le placeholder, on peut la retirer ici
+          // style={{ filter: "drop-shadow(0 8px 14px rgba(0,0,0,0.0))" }}
         />
 
         <div
           className="absolute inset-0 w-full h-full flex flex-col items-center justify-center"
-          style={{ padding: "clamp(16px, 6%, 56px) clamp(16px, 5%, 40px)" }}
+          style={{ padding: "clamp(16px, 6%, 56px) clamp(26px, 7%, 50px)" }}
         >
           <h2
             className="font-script text-olive-dark"
             style={{
               fontSize: "clamp(26px, 5.2vw, 50px)",
-              marginBottom: "clamp(4px, 1.5vw, 20px)",
+              marginBottom: "clamp(4px, 1.5vw, 16px)",
+              lineHeight: "1", // Ajout d'une hauteur de ligne plus compacte
             }}
           >
-            Lieu de la Réception
+            Lieu de la Cérémonie religieuse
           </h2>
 
           <p
@@ -143,7 +159,7 @@ export default function Countdown() {
 
           <p
             className="font-title text-olive-dark leading-relaxed"
-            style={{ fontSize: "clamp(12px, 2.5vw, 20px)", maxWidth: "75%" }}
+            style={{ fontSize: "clamp(12px, 2.5vw, 20px)", maxWidth: "80%" }}
           >
             Marouaré-Domicile Alhadji SOUAIBOU Idrissou
           </p>
@@ -152,7 +168,7 @@ export default function Countdown() {
             className="flex flex-wrap justify-center relative z-10"
             style={{
               gap: "clamp(6px, 2vw, 12px)",
-              marginTop: "clamp(8px, 2.5vw, 24px)",
+              marginTop: "clamp(8px, 2.5vw, 16px)",
             }}
           >
             <a
