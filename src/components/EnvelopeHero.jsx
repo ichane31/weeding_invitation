@@ -122,7 +122,7 @@ export default function EnvelopeHero({ onOpen, startOpen = false }) {
                     : "translate3d(0, 200%, 0)",
                   backfaceVisibility: "hidden",
                   WebkitBackfaceVisibility: "hidden",
-                  backgroundColor: cadreLoaded ? "transparent" : "#e8e2d5",
+                  backgroundColor: cadreLoaded ? "transparent" : "#f5f2eb",
                   borderRadius: "8px",
                 }}
               >
