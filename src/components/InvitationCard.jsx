@@ -299,7 +299,7 @@ export default function InvitationCard({ animateCard = false }) {
           >
             <img
               // src="/images/cadre_dentelle2.png"
-              src="/images/cadre_dentelle2.png"
+              src="/images/cadre_dentelle4.png"
               alt="Fleurs fond"
               className="absolute inset-0 w-full h-full pointer-events-none opacity-90 z-20"
               style={{ filter: "drop-shadow(0px 4px 6px rgba(0,0,0,0.5))" }}
@@ -332,7 +332,7 @@ export default function InvitationCard({ animateCard = false }) {
                 className="font-title tracking-wide leading-snug"
                 style={{
                   fontSize: "clamp(11px, 1.7vw, 15px)",
-                  color: "#583a29", // mocha
+                  color: "#583622", // mocha
                 }}
               >
                 Au nom d'Allah Le Tout Miséricordieux
@@ -346,16 +346,16 @@ export default function InvitationCard({ animateCard = false }) {
                 style={{ gap: "clamp(2px, 0.6vh, 5px)" }}
               >
                 <span
-                  className="font-script italic text-olive-dark tracking-wide"
+                  className="font-script italic font-medium tracking-wide"
                   style={{
                     fontSize: "clamp(17px, 3.2vw, 26px)",
-                    // color: "#3e4f22", // olive.dark — plus foncé que olive DEFAULT
+                    color: "#8b6914", // olive.dark — plus foncé que olive DEFAULT
                   }}
                 >
                   Les grandes familles
                 </span>
                 <span
-                  className="font-title font-semibold uppercase"
+                  className="font-title font-bold uppercase"
                   style={{
                     fontSize: "clamp(10px, 1.8vw, 16px)",
                     letterSpacing: "0.12em",
@@ -376,7 +376,7 @@ export default function InvitationCard({ animateCard = false }) {
                   &amp;
                 </span>
                 <span
-                  className="font-title font-semibold uppercase"
+                  className="font-title font-bold uppercase"
                   style={{
                     fontSize: "clamp(10px, 1.8vw, 16px)",
                     letterSpacing: "0.12em",
@@ -391,6 +391,7 @@ export default function InvitationCard({ animateCard = false }) {
 
               {/* Séparateur décoratif */}
               <span
+              className='font-semibold'
                 style={{
                   fontSize: "clamp(12px, 1.8vw, 16px)",
                   color: "#800020", // burgundy — accent, cohérent avec les mariés
@@ -407,7 +408,7 @@ export default function InvitationCard({ animateCard = false }) {
                 style={{ gap: "clamp(2px, 0.6vh, 5px)" }}
               >
                 <p
-                  className="font-title tracking-wide leading-relaxed"
+                  className="font-title font-medium tracking-wide leading-relaxed"
                   style={{
                     fontSize: "clamp(10px, 1.6vw, 13px)",
                     color: "#6b4c3b", // mocha
@@ -416,7 +417,7 @@ export default function InvitationCard({ animateCard = false }) {
                   Ont l'immense honneur de vous convier au
                 </p>
                 <h3
-                  className="font-script leading-snug"
+                  className="font-script font-medium leading-snug"
                   style={{
                     fontSize: "clamp(15px, 3.2vw, 24px)",
                     color: "#800020", // burgundy — annonce la couleur des mariés

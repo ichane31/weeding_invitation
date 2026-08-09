@@ -20,7 +20,7 @@ export default {
         olive: {
           light: '#a9ba9d',
           DEFAULT: '#556b2f',
-          dark: '#3e4f22',
+          dark: '#394e18',
           yellow: '#4f4e02',
         },
         cream: {

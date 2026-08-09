@@ -116,9 +116,9 @@ export default function EnvelopeHero({ onOpen, startOpen = false }) {
                 }}
               >
                 <img
-                  src="/images/cadre_dentelle2.png"
+                  src="/images/cadre_dentelle4.png"
                   alt="Contenu de l'enveloppe"
-                  className="w-full h-auto object-contain relative opacity-90"
+                  className="w-full h-auto object-contain relative"
                   style={{
                     marginBottom: "-30%",
                     opacity: pulled ? 0.9 : 0,
@@ -288,6 +288,7 @@ export default function EnvelopeHero({ onOpen, startOpen = false }) {
           }}
         >
           <button
+            type="button"
             onClick={handleOpen}
             className="font-bogue text-olive-dark tracking-[0.25em] outline-none uppercase hover:text-burgundy transition-all duration-300 flex flex-col items-center gap-1.5 group focus:outline-none"
             style={{ fontSize: "clamp(10px, 2vw, 14px)" }}

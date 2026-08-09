@@ -175,7 +175,7 @@ export default function Itinerary() {
                       <div key={`${e.time}-${e.title}-${eventIndex}`}>
                         {/* Titre de l'événement */}
                         <p
-                          className="font-title font-medium text-olive-dark leading-snug"
+                          className="font-title font-semibold text-olive-dark leading-snug"
                           style={{
                             fontSize: "clamp(12px, 2.2vw, 15px)",
                             margin: 0,
@@ -205,7 +205,7 @@ export default function Itinerary() {
                           //   {e.location}
                           // </p>
                           <p
-                            className="italic font-medium text-black text-center"
+                            className="italic font-semibold text-black text-center"
                             style={{
                               fontSize: "clamp(10px, 1.8vw, 14px)",
                               margin: "clamp(1px, 0.3vw, 3px) 0 0",
