@@ -1,5 +1,5 @@
 export default function ContactInfo() {
-  const WHATSAPP_GROUP_LINK = "https://chat.whatsapp.com/FknDOQ4jRCF0djfOqLhiP3";
+  const WHATSAPP_GROUP_LINK = "https://chat.whatsapp.com/C4XNCQCzFXFLvH394Te9oD?mode=gi_t";
 
   return (
     <section
